@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag-1 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/tag-1/</link>
+    <description>Recent content in tag-1 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 30 Aug 2017 01:37:56 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/tag-1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《长恨歌》</title>
+      <link>http://localhost:1313/post/cpu/cpu%E5%86%85%E5%AD%98%E9%87%8D%E6%8E%92/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpu/cpu%E5%86%85%E5%AD%98%E9%87%8D%E6%8E%92/</guid>
+      <description>从 Memory Reordering 说起 下面这段代码会有怎样的输出 1 2 3 4 5 6 7 8 9 var x, y int go func() { x = 1 // A1 fmt.Print(&amp;#34;y:&amp;#34;, y, &amp;#34; &amp;#34;) // A2 }() go func() { y = 1 // B1 fmt.Print(&amp;#34;x:&amp;#34;, x, &amp;#34; &amp;#34;) // B2 }() 显而易见的几种结果</description>
+    </item>
+    
+  </channel>
+</rss>
