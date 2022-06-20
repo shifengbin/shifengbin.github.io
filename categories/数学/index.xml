@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>数学 on Blog Zone</title>
+    <link>https://shifengbin.github.io/categories/%E6%95%B0%E5%AD%A6/</link>
+    <description>Recent content in 数学 on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 20 Jun 2022 17:44:00 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>指数加权平均(EWA)</title>
+      <link>https://shifengbin.github.io/posts/math/ewa/</link>
+      <pubDate>Mon, 20 Jun 2022 17:44:00 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/math/ewa/</guid>
+      <description>EWA是什么 EWA是以指数式递减加权的移动平均, 是一种近似平均(也可以理解为一段时间的平均值,因为越久的数据对当前的影响越小,小到一定程度就可以忽略,可以理解为一段时间的平均值)
+基本公式 $V_t=βV_{t-1} + (1-β)R_t$
+$V_t$ 代表t时刻的平均值
+$βV_{t-1}$代表t-1时刻的平均值
+$R_t$ 是t时刻的真实值
+$β$ 范围在0-1之间
+平均天数为 $N=\frac {1} {1-β}$
+$β=0.5$则平均个数N=2 $β=0.9$则平均个数N=$\frac{1}{1-0.9}=10$ 也就是平均最近10次的
+可以做什么 计算$\frac {1} {1-β}$个数据的平均值,减少噪声影响,平滑数据
+好处比其他平均的好处是 不需要保存最近N次的数据,只需要保存上次计算的平均值</description>
+    </item>
+    
+  </channel>
+</rss>
