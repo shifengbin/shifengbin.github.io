@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://shifengbin.github.io/sitemap.xml

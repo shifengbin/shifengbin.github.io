@@ -1,5 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Blog Zone</title><link>https://shifengbin.github.io/posts/</link><description>Recent content in Posts on Blog Zone</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 19 Jun 2022 22:02:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>go sync包之singleflight原理</title><link>https://shifengbin.github.io/posts/go_source/sync_singleflight/</link><pubDate>Sun, 19 Jun 2022 22:02:23 +0800</pubDate><guid>https://shifengbin.github.io/posts/go_source/sync_singleflight/</guid><description>singlefight是什么 singlefight 直译为&amp;quot;单飞&amp;quot;, 顾名思义就是只要一个跑了, 是用来对同一资源控制并发 多个goroutine访问同一个资源时,只有一个goroutine真正的进行访问,其他goroutine等待这一个goroutine返回后共享返回结果
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Blog Zone</title>
+    <link>https://shifengbin.github.io/posts/</link>
+    <description>Recent content in Posts on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 19 Jun 2022 22:02:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go sync包之singleflight原理</title>
+      <link>https://shifengbin.github.io/posts/go_source/sync_singleflight/</link>
+      <pubDate>Sun, 19 Jun 2022 22:02:23 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go_source/sync_singleflight/</guid>
+      <description>singlefight是什么 singlefight 直译为&amp;quot;单飞&amp;quot;(雅名到底是啥我也不知道), 顾名思义就是只有一个跑了, 是用来对同一资源控制并发 多个goroutine访问同一个资源时,只有一个goroutine真正的进行访问,其他goroutine等待这一个goroutine返回后共享返回结果
 为什么出现singlefight 这个包 上面是什么中已经交代,是为了控制访问同一个资源的并发数,举个例子:假设有个接口访问数据库中id为1的一条数据,如果我们没有控制并发,那么来一百个并发访问这个数据,那么这一百个请求全部取请求数据库(即使有缓存也是全部请求缓存)
 如果我们使用了singlefight那么,100个并发讲只有一个请求去数据库,其他99个全部共享那1个返回的结果
-怎么用 var g = singleflight.Group{} //初始化了一个singleflight func SharedRes(id int) (int, error) { key := fmt.Sprintf(&amp;#34;id:%d&amp;#34;, id) //同一个group上,相同key的,只会执行一次,也就是说用key标识一个共享资源 ret, err, _ := g.Do(key, func() (interface{}, error) { //调用共享资源 time.Sleep(time.Second) //这里睡1s是模拟资源执行的延迟 fmt.Println(&amp;#34;xxxx&amp;#34;) return 1, nil }) return ret.(int), err } func SingleFlight() { wg := sync.WaitGroup{} //为了等100个goroutine执行完,开启了一个WaitGroup for i := 0; i &amp;lt; 100; i++ { wg.Add(1) go func() { //模拟并发 ret, err := SharedRes(1) fmt.</description></item><item><title>ubuntu 连接WIFI</title><link>https://shifengbin.github.io/posts/pi/connect_wifi/</link><pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate><guid>https://shifengbin.github.io/posts/pi/connect_wifi/</guid><description>本地环境为 ubuntu 22.04
-进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply</description></item><item><title>Mac用网线连接树莓派</title><link>https://shifengbin.github.io/posts/pi/pi_connect_mac/</link><pubDate>Sat, 18 Jun 2022 16:12:36 +0800</pubDate><guid>https://shifengbin.github.io/posts/pi/pi_connect_mac/</guid><description> 首先 打开mac的系统偏好设置-&amp;gt;共享-&amp;gt;互联网共享（USB 10/100/1000 LAN） 并打开共享 打开终端查看树莓派分配的IP 使用arp -a 里面有个带有bridgeXXX的 IP 使用ssh命令 远程连接</description></item></channel></rss>
+怎么用 var g = singleflight.Group{} //初始化了一个singleflight func SharedRes(id int) (int, error) { key := fmt.Sprintf(&amp;#34;id:%d&amp;#34;, id) //同一个group上,相同key的,只会执行一次,也就是说用key标识一个共享资源 ret, err, _ := g.Do(key, func() (interface{}, error) { //调用共享资源 time.Sleep(time.Second) //这里睡1s是模拟资源执行的延迟 fmt.Println(&amp;#34;xxxx&amp;#34;) return 1, nil }) return ret.(int), err } func SingleFlight() { wg := sync.WaitGroup{} //为了等100个goroutine执行完,开启了一个WaitGroup for i := 0; i &amp;lt; 100; i++ { wg.Add(1) go func() { //模拟并发 ret, err := SharedRes(1) fmt.</description>
+    </item>
+    
+    <item>
+      <title>ubuntu 连接WIFI</title>
+      <link>https://shifengbin.github.io/posts/pi/connect_wifi/</link>
+      <pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/connect_wifi/</guid>
+      <description> 本地环境为 ubuntu 22.04
+进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply </description>
+    </item>
+    
+    <item>
+      <title>Mac用网线连接树莓派</title>
+      <link>https://shifengbin.github.io/posts/pi/pi_connect_mac/</link>
+      <pubDate>Sat, 18 Jun 2022 16:12:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/pi_connect_mac/</guid>
+      <description> 首先 打开mac的系统偏好设置-&amp;gt;共享-&amp;gt;互联网共享（USB 10/100/1000 LAN） 并打开共享 打开终端查看树莓派分配的IP 使用arp -a 里面有个带有bridgeXXX的 IP 使用ssh命令 远程连接 </description>
+    </item>
+    
+  </channel>
+</rss>

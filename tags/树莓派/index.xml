@@ -1,2 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>树莓派 on Blog Zone</title><link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link><description>Recent content in 树莓派 on Blog Zone</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 18 Jun 2022 21:15:30 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>ubuntu 连接WIFI</title><link>https://shifengbin.github.io/posts/pi/connect_wifi/</link><pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate><guid>https://shifengbin.github.io/posts/pi/connect_wifi/</guid><description>本地环境为 ubuntu 22.04
-进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply</description></item><item><title>Mac用网线连接树莓派</title><link>https://shifengbin.github.io/posts/pi/pi_connect_mac/</link><pubDate>Sat, 18 Jun 2022 16:12:36 +0800</pubDate><guid>https://shifengbin.github.io/posts/pi/pi_connect_mac/</guid><description> 首先 打开mac的系统偏好设置-&amp;gt;共享-&amp;gt;互联网共享（USB 10/100/1000 LAN） 并打开共享 打开终端查看树莓派分配的IP 使用arp -a 里面有个带有bridgeXXX的 IP 使用ssh命令 远程连接</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>树莓派 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+    <description>Recent content in 树莓派 on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 18 Jun 2022 21:15:30 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ubuntu 连接WIFI</title>
+      <link>https://shifengbin.github.io/posts/pi/connect_wifi/</link>
+      <pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/connect_wifi/</guid>
+      <description> 本地环境为 ubuntu 22.04
+进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply </description>
+    </item>
+    
+    <item>
+      <title>Mac用网线连接树莓派</title>
+      <link>https://shifengbin.github.io/posts/pi/pi_connect_mac/</link>
+      <pubDate>Sat, 18 Jun 2022 16:12:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/pi_connect_mac/</guid>
+      <description> 首先 打开mac的系统偏好设置-&amp;gt;共享-&amp;gt;互联网共享（USB 10/100/1000 LAN） 并打开共享 打开终端查看树莓派分配的IP 使用arp -a 里面有个带有bridgeXXX的 IP 使用ssh命令 远程连接 </description>
+    </item>
+    
+  </channel>
+</rss>
