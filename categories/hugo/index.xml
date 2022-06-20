@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>hugo on Blog Zone</title>
+    <link>https://shifengbin.github.io/categories/hugo/</link>
+    <description>Recent content in hugo on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 20 Jun 2022 15:02:41 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo 支持github评论</title>
+      <link>https://shifengbin.github.io/posts/hugo/comments/</link>
+      <pubDate>Mon, 20 Jun 2022 15:02:41 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/hugo/comments/</guid>
+      <description> 先在utteranc的configuration部分找到安装utteranc app到仓库,选择一个仓库并安装 在页面Enable Utterances部分找到js代码 在自己用的主题上找到关于comment的layout,把js代码添加到里面 运行 </description>
+    </item>
+    
+  </channel>
+</rss>
