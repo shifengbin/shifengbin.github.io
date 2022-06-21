@@ -27,7 +27,10 @@ if redis.call(&amp;#34;GET&amp;#34;, KEYS[1])==ARGV[1] then redis.call(&amp;#34;
 还有一种想法未得到验证,通过redis的发布订阅来改进锁性能
 锁过期问题,没有个安全的方法去估计过期时间 针对这种情况,可以考虑锁续期逻辑,比如默认过期时间是30s,我们到20s的时候去延长过期时间
 可以考虑使用下面的续期逻辑
-if redis.call(&amp;#34;GET&amp;#34;, KEYS[1]) == ARGV[1] then redis.call(&amp;#34;EXPIRE&amp;#34;, KEYS[1], ARGV[2]) return true else return false end 先去判断锁是否是自己的,如果是则进行续期</description>
+if redis.call(&amp;#34;GET&amp;#34;, KEYS[1]) == ARGV[1] then redis.call(&amp;#34;EXPIRE&amp;#34;, KEYS[1], ARGV[2]) return true else return false end 先去判断锁是否是自己的,如果是则进行续期
+参考资料 redis set命令 从2.6.12版本开始，redis为SET命令增加了一系列选项
+EX seconds – 设置键key的过期时间单位时秒
+PX milliseconds – 设置键key的过期时间单位时毫秒</description>
     </item>
     
   </channel>
