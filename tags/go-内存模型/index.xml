@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>go 内存模型 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/go-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in go 内存模型 on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 23 Jun 2022 10:33:29 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/go-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Happens before</title>
+      <link>https://shifengbin.github.io/posts/go/happensbefore/</link>
+      <pubDate>Thu, 23 Jun 2022 10:33:29 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/happensbefore/</guid>
+      <description>在一个goroutine中,读写必须表现得就像它们按照程序指定的顺序执行一样;也就是说 在一个goroutine中,处理器和编译器可以重排读写的执行顺序,仅当重排后的行为不改变语言的设定.因为重排一个goroutine观察到的执行顺序可能与另一个goroutine观察到的顺序不同.举个例子,如果一个goroutine执行a = 1; b = 2;,另一个可能会观察到b在a之前更新.
+为了指定读写的需要，我们定义了在Go程序中执行内存操作的偏序(partial order)。如果事件$e_1$先发生于事件$e_2$我们说$e_2$后发生于$e_1$. 同样的如果$e_1$没有先发生于$e_2$并且$e_1$没有后发生于$e_2$那么我们说$e_1 e_2$同时发生.
+在单个gorutine里, happens-before的顺序是程序表示的顺序.
+如果下面两个条件成立,则允许变量v的读r 观察到对v的写w:
+r没有先发生于w 没有其他对v的写w&amp;rsquo; ,后发生于w, 先发生于r 为了保证r能读到w的写,要确保w是允许r观察的唯一写入.也就是说，如果以下两个条件均成立，则保证r观察到w：
+w先发生于r 任何其他写入共享变量v都要先发生于w或者后发生于r 这对条件比第一对更严格,这一对要求没有其他的写同时发生于w或r
+在单个gorutine中没有并发,这两个定义是等价的:读r观察最近写入w到v的值.
+在多个gorutine访问一个共享变量v,必须使用同步事件来建立happens-before条件来确保读到期望的写.
+变量v的类型为零值时，变量v的初始化行为就像在内存模型中写入一样。(初始化等同于写入)
+读写超过机器字(machine word)的行为就和以未指定的顺序执行多个机器字大小的操作一样(超过machine word 每个machine word 写入顺序可能不是期望的)</description>
+    </item>
+    
+  </channel>
+</rss>
