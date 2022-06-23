@@ -9,7 +9,25 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 23 Jun 2022 10:33:29 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jun 2022 16:39:21 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Race</title>
+      <link>https://shifengbin.github.io/tags/data-race/</link>
+      <pubDate>Thu, 23 Jun 2022 16:39:21 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/data-race/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据竞赛</title>
+      <link>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/</link>
+      <pubDate>Thu, 23 Jun 2022 16:39:21 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>go 内存模型</title>
       <link>https://shifengbin.github.io/tags/go-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>

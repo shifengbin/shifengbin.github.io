@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data Race on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/data-race/</link>
+    <description>Recent content in Data Race on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 23 Jun 2022 16:39:21 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/data-race/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据竞赛(Data Race)</title>
+      <link>https://shifengbin.github.io/posts/go/datarace/</link>
+      <pubDate>Thu, 23 Jun 2022 16:39:21 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/datarace/</guid>
+      <description> 没有安全的数据竞赛,不要使用各种炫技的无锁方式等骚操作! 什么是数据竞赛 并行程序在未使用同步方法(atomic, lock)的情况下, 并发读写共享资源就会造成数据竞争
+数据竞赛检测原理 通过编译器注入检测代码, 检测代码会保存读写内存的 线程id, 时钟, 读写位置和长度, 是否写入等信息, 在运行的过程判断,读写内存是否有交叉,是否满足happens-before等条件,来判断数据竞赛
+如何避免 使用同步方法去解决happens-before 比如使用atomic包, sync包 或者使用chan
+go检测数据竞赛方法 使用go工具链 go build -race 编译一个带有数据竞赛检测的可执行程序,会在编译期插入代码,这种程序消耗内存和CPU是不带检测的数倍到数十倍,不可大范围用于生产环境
+go run -race 直接运行一个带检测的程序(内部也经过编译)
+go test -race 运行待检测的单元测试
+go install -race 编译并安装一个待检测的可执行程序
+注意数据竞赛检测是需要程序运行到有竞赛的代码才会检测到!运行不到的是不会检测出来的! </description>
+    </item>
+    
+  </channel>
+</rss>
