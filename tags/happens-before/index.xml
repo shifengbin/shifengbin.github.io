@@ -25,7 +25,7 @@ w先发生于r 任何其他写入共享变量v都要先发生于w或者后发生
 在单个gorutine中没有并发,这两个定义是等价的:读r观察最近写入w到v的值.
 在多个gorutine访问一个共享变量v,必须使用同步事件来建立happens-before条件来确保读到期望的写.
 变量v的类型为零值时，变量v的初始化行为就像在内存模型中写入一样。(初始化等同于写入)
-读写超过机器字(machine word)的行为就和以未指定的顺序执行多个机器字大小的操作一样(超过machine word 每个machine word 写入顺序可能不是期望的)
+读写超过机器字(machine word)的行为就和以未指定的顺序执行多个机器字大小的操作一样(超过machine word 每个machine word 读取和写入顺序可能不是期望的)
 总之, 想要在一个gorutine中读到另一个gorutine的写就要保证, 写在读之前发生,如果我们不加控制,这个写先于读的顺序就很难保证,所以我们需要使用atomic或者和lock机制来保证顺序保证happens-before</description>
     </item>
     
