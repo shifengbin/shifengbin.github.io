@@ -9,7 +9,25 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 25 Jun 2022 20:50:16 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Jun 2022 14:24:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>trace</title>
+      <link>https://shifengbin.github.io/tags/trace/</link>
+      <pubDate>Mon, 27 Jun 2022 14:24:23 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/trace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>链路追踪</title>
+      <link>https://shifengbin.github.io/tags/%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</link>
+      <pubDate>Mon, 27 Jun 2022 14:24:23 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>once</title>
       <link>https://shifengbin.github.io/tags/once/</link>

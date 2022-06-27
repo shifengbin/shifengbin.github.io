@@ -3,21 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2022-06-25T20:50:16+08:00</lastmod>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2022-06-25T20:50:16+08:00</lastmod>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/trace/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/micro_service/trace/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2022-06-27T14:24:23+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/once/</loc>
     <lastmod>2022-06-25T20:50:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/go_source/once/</loc>
-    <lastmod>2022-06-25T20:50:16+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2022-06-25T20:50:16+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2022-06-25T20:50:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
@@ -111,9 +123,6 @@
     <lastmod>2022-06-18T21:24:37+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2022-06-18T21:24:37+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
     <lastmod>2022-06-18T21:24:37+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/pi/connect_wifi/</loc>
