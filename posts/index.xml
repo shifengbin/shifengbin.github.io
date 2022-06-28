@@ -170,13 +170,12 @@ PX milliseconds – 设置键key的过期时间单位时毫秒</description>
     </item>
     
     <item>
-      <title>ubuntu 连接WIFI</title>
+      <title>树莓派 连接WIFI</title>
       <link>https://shifengbin.github.io/posts/pi/connect_wifi/</link>
       <pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/pi/connect_wifi/</guid>
-      <description> 本地环境为 ubuntu 22.04
-进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply </description>
+      <description>ubuntu 22.04 进入 /etc/netplan/ 文件夹 cd /etc/netplan/ 编辑里面唯一一个文件，大概是：50-cloud-init.yaml sudo vim 50-cloud-init.yaml, 需要使用sudo,因为这个文件是root用户的问题件,或者把文件选项改成可写的 添加WIFI配置 network: ethernets: eth0: dhcp4: true optional: true wifis: # &amp;lt;----添加wifi配置节点 wlan0: dhcp4: true optional: true access-points: &amp;#34;wifi_name&amp;#34;: #&amp;lt;---- 这里填写填写你要连接的wifi名称 password: &amp;#34;xxxxx&amp;#34; #&amp;lt;-------这里填写wifi密码 version: 2 执行命令,生成网络配置sudo netplan generate 使网络配置生效sudo netplan apply 树莓派系统 在命令行中输入sudo raspi-config根选项配置即可(注意,可能不支持5G信号)</description>
     </item>
     
     <item>
