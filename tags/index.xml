@@ -9,7 +9,25 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 27 Jun 2022 14:24:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 00:02:05 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k3s</title>
+      <link>https://shifengbin.github.io/tags/k3s/</link>
+      <pubDate>Wed, 29 Jun 2022 00:02:05 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/k3s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>树莓派</title>
+      <link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+      <pubDate>Wed, 29 Jun 2022 00:02:05 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>trace</title>
       <link>https://shifengbin.github.io/tags/trace/</link>
@@ -187,15 +205,6 @@
       <pubDate>Sat, 18 Jun 2022 21:24:37 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>树莓派</title>
-      <link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
-      <pubDate>Sat, 18 Jun 2022 21:15:30 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
       <description></description>
     </item>
     

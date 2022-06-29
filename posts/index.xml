@@ -9,7 +9,17 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 27 Jun 2022 14:24:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 00:02:05 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K3s安装</title>
+      <link>https://shifengbin.github.io/posts/pi/k3s/</link>
+      <pubDate>Wed, 29 Jun 2022 00:02:05 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/k3s/</guid>
+      <description>安装步骤 根据官方文档使用 curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh - 一条命令安装
+安装过程的坑 建议使用Raspberry OS, 之前使用过Ubuntu 22.04 安装后发生节点有时Ready有时NotReady反复横跳, 最后用Raspberry OS安装成功 Raspberry也有点小坑,需要在/boot/cmdline.txt文件最后用空格,不要换行, 添加cgroup_memory=1 cgroup_enable=memory, 然后重启 `` 官方文档 </description>
+    </item>
+    
     <item>
       <title>链路追踪</title>
       <link>https://shifengbin.github.io/posts/micro_service/trace/</link>
