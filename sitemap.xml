@@ -3,10 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2022-06-29T00:02:05+08:00</lastmod>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2022-06-29T00:02:05+08:00</lastmod>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/semaphore/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go_source/semaphore/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/k3s/</loc>
     <lastmod>2022-06-29T00:02:05+08:00</lastmod>
@@ -15,12 +36,6 @@
     <lastmod>2022-06-29T00:02:05+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/pi/k3s/</loc>
-    <lastmod>2022-06-29T00:02:05+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2022-06-29T00:02:05+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2022-06-29T00:02:05+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
@@ -45,9 +60,6 @@
     <lastmod>2022-06-25T20:50:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/go_source/once/</loc>
-    <lastmod>2022-06-25T20:50:16+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2022-06-25T20:50:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/data-race/</loc>
@@ -126,9 +138,6 @@
     <lastmod>2022-06-19T22:02:23+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/sync/</loc>
-    <lastmod>2022-06-19T22:02:23+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/%E6%BA%90%E7%A0%81/</loc>
     <lastmod>2022-06-19T22:02:23+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/micro_service/redis_lock/</loc>
