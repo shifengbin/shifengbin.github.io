@@ -23,6 +23,18 @@
     </item>
     
     <item>
+      <title>Once</title>
+      <link>https://shifengbin.github.io/posts/go_source/once/</link>
+      <pubDate>Sat, 25 Jun 2022 20:50:16 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go_source/once/</guid>
+      <description>once是什么 和singlefight有些相似,singlefight是并发执行时只有一个在执行, once也是并发时只有一个在执行,只不过,只执行一次,再次调用不会在执行
+once怎么用 var A int var once = sync.Once{} func initA() int { once.Do(func() { //这里只会执行一次 A = 10 //A=10 只会执行一次,并且所有并发进来的,都需要等待A=10 完成后返回 }) return A // A=10 happens before 读取A, 所以initA()在所有gorutine里,都返回10 } 这个例子我们可以构造一个懒汉模式单例
+源码阅读 Once结构 type Once struct { done uint32 m Mutex } Once结构很简单,只有两个字段, done来表示是否执行完成, m为互斥锁
+Do函数 func (o *Once) Do(f func()) { //判断done 如果没完成,则执行doSlow函数,否则直接返回退出函数 if atomic.LoadUint32(&amp;amp;o.done) == 0 { o.doSlow(f) } } doSlow (第一次并发执行时才会进入的分支) func (o *Once) doSlow(f func()) { o.</description>
+    </item>
+    
+    <item>
       <title>go sync包之singleflight原理</title>
       <link>https://shifengbin.github.io/posts/go_source/sync_singleflight/</link>
       <pubDate>Sun, 19 Jun 2022 22:02:23 +0800</pubDate>
