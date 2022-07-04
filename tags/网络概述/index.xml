@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>网络概述 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</link>
+    <description>Recent content in 网络概述 on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 04 Jul 2022 21:10:39 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机网络简要概述</title>
+      <link>https://shifengbin.github.io/posts/net/summary/</link>
+      <pubDate>Mon, 04 Jul 2022 21:10:39 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/net/summary/</guid>
+      <description>计算机网络分层 市面上对网络分层主要是有三种分层
+七层 五层 四层 应用层 应用层 应用层 表示层 会话层 传输层 传输层 传输层 网络层 网络层 网络层 数据链路层 数据链路层 网络接口层 物理层 物理层 每层的职责 物理层 提供物理介质,电压信号等功能
+数据链路层 提供P2P传输 (点对点的, 比如一个路由器到另一个路由器)
+网络层 提供E2E传输 (Endpoint to Endpoint,两个端点的传输,中间可能经过若干个路由器,注意区别P2P, E2E &amp;gt; P2P)
+传输控制层 提供进程到进程的传输(端口到端口的传输)
+应用层 应用自定义个协议
+每一层都是通过下层对上层提供接口的形式来提供服务</description>
+    </item>
+    
+  </channel>
+</rss>
