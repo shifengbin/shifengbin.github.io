@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>编译原理 on Blog Zone</title>
+    <link>https://shifengbin.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+    <description>Recent content in 编译原理 on Blog Zone</description>
+    <image>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 05 Jul 2022 15:31:12 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EBNF</title>
+      <link>https://shifengbin.github.io/posts/compiler/ebnf/</link>
+      <pubDate>Tue, 05 Jul 2022 15:31:12 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/compiler/ebnf/</guid>
+      <description>EBNF 扩展巴科斯-瑙尔范式(EBNF, Extended Backus–Naur Form) 是表达作为描述计算机编程语言形式语言(是用精确的数学或机器可处理的公式定义的语言) 的正规方式的上下文无关文法 的元语法(metalanguage)符号表示法。它是巴科斯范式(BNF) 元语法符号表示法的一种扩展。
+简单的理解就是用来描述语言词法和语法规则的语言
+ISO/IEC 14977标准 基本形式 LEFT=RIGHT 意思为LEFT可由RIGHT推导而来，LEFT为非终结符，RIGHT可以为非终结符也可以为终结符； 非终结符 简单的理解就是可以继续推导的符号 终结符 不可被推导的符号
+符号 符号 含义 示例 = 定义 CharA=&amp;ldquo;a&amp;rdquo;; 代表CharA由字母a推导而来 , 连接符 a,b,c 代表abc是挨着的 ; 结束符 CharA=&amp;ldquo;a&amp;rdquo;; 代表 CharA这条语句定义结束 | 或者 digit = &amp;ldquo;0&amp;rdquo; | &amp;ldquo;1&amp;rdquo; | &amp;ldquo;2&amp;rdquo; | &amp;ldquo;3&amp;rdquo; | &amp;ldquo;4&amp;rdquo; | &amp;ldquo;5&amp;rdquo; | &amp;ldquo;6&amp;rdquo; | &amp;ldquo;7&amp;rdquo; | &amp;ldquo;8&amp;rdquo; | &amp;ldquo;9&amp;rdquo;; [&amp;hellip;] 可选，出现0次或1次 number = [&amp;quot;-&amp;quot;|&amp;quot;+&amp;quot;],digit 可匹配 1 -1 +1 &amp;hellip; {&amp;hellip;} 重复，出现&amp;gt;=0次 number = [&amp;quot;-&amp;quot;|&amp;quot;+&amp;quot;],digit,{digit} 可匹配 1 -1 +1 11 &amp;hellip; (&amp;hellip;) 分组 number = （&amp;quot;-&amp;quot;|&amp;quot;+&amp;quot;）,digit 符号必须添加，可匹配 -1 +1 &amp;hellip; &amp;ldquo;&amp;hellip;&amp;ldquo;或者&amp;rsquo;&amp;hellip;&#39; 终结符,单引号主要是一些特殊情况，比如双引号 &amp;ldquo;a&amp;quot;或者&amp;rsquo;a&amp;rsquo; 由单或双引号引起来的部分是终结符，就是代表字母a，不可继续推导 (* &amp;hellip; *) 注释 (*我是注释*) 注释不参与定义 ?</description>
+    </item>
+    
+  </channel>
+</rss>
