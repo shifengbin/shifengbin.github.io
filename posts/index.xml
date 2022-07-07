@@ -9,7 +9,17 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 05 Jul 2022 15:31:12 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Jul 2022 18:00:27 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>语法图</title>
+      <link>https://shifengbin.github.io/posts/compiler/syntax_graph/</link>
+      <pubDate>Thu, 07 Jul 2022 18:00:27 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/compiler/syntax_graph/</guid>
+      <description>语法图又称铁路图，是EBNF(扩展巴克斯范式)的图形化表示
+从左边界开始沿着轨道去到右边界。 沿途，你将在圆框中遇到的是字面量，在方块中遇到的是规则或者描述。 任何沿着轨道能走通的序列都是合法的。 任何不能沿着轨道走通的序列都是非法的。 /* a simple program in EBNF − Wikipedia */ program ::= &amp;#39;PROGRAM&amp;#39; whiteSpace identifier whiteSpace &amp;#39;BEGIN&amp;#39; whiteSpace (assignment &amp;#34;;&amp;#34;)* &amp;#39;END.&amp;#39; assignment ::= identifier &amp;#34;:=&amp;#34; ( number | identifier | string ) string ::= &amp;#39;&amp;#34;&amp;#39; [A-Z0-9_]+ &amp;#39;&amp;#34;&amp;#39; identifier ::= [A-Z] [0-9A-Z]* whiteSpace ::= [#x20] </description>
+    </item>
+    
     <item>
       <title>EBNF</title>
       <link>https://shifengbin.github.io/posts/compiler/ebnf/</link>
