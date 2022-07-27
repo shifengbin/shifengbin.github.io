@@ -19,7 +19,7 @@
       <description> 这个算法发是今天看了一个go的代码库看到的,同过lo库看到有个Shuffle函数点进去看了一下,调用的数标准库中的shuffle算法,看了一下介绍,感觉有点意思,记录一下
 Fisher-Yates算法是什么 Fisher-Yates算法 是一种生成随机排列的算法
 核心原理 — To shuffle an array ‘a’ of ‘n’ elements: //对于一个规模为n的集合 for i from n-1 down to 1 do //从后向前遍历 j = random integer such that 0 &amp;lt;= j &amp;lt;= i //随机一个从0-i数字 exchange a[j] and a[i] //交换随机下标和当前下标的元素交换 用语言描述就是:
-从后向前遍历 随机一个下标范围是0到当前下标,(范围包含当前下标是因为可能不交换) 交换随机下标指向的值和当前下标指向的值 go语言描述 func Shuffle[T any](t []T) { rand.Seed(time.Now().Unix()) for i := len(t) - 1; i &amp;gt; 0; i-- { j := rand.Int() % (i + 1) t[i], t[j] = t[j], t[i] } } </description>
+从后向前遍历 随机一个下标范围是0到当前下标,(范围包含当前下标是因为可能不交换) 交换随机下标指向的值和当前下标指向的值 go语言描述 func init(){ rand.Seed(time.Now().Unix()) } func Shuffle[T any](t []T) { for i := len(t) - 1; i &amp;gt; 0; i-- { j := rand.Int() % (i + 1) t[i], t[j] = t[j], t[i] } } </description>
     </item>
     
     <item>
