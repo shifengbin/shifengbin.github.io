@@ -9,7 +9,25 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Jul 2022 11:41:33 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 11:06:49 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AMQP</title>
+      <link>https://shifengbin.github.io/tags/amqp/</link>
+      <pubDate>Tue, 02 Aug 2022 11:06:49 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/amqp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>协议</title>
+      <link>https://shifengbin.github.io/tags/%E5%8D%8F%E8%AE%AE/</link>
+      <pubDate>Tue, 02 Aug 2022 11:06:49 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E5%8D%8F%E8%AE%AE/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>洗牌算法</title>
       <link>https://shifengbin.github.io/tags/%E6%B4%97%E7%89%8C%E7%AE%97%E6%B3%95/</link>

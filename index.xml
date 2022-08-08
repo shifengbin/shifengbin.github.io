@@ -9,7 +9,37 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Jul 2022 11:41:33 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 11:06:49 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AMQP 0-9-1协议</title>
+      <link>https://shifengbin.github.io/posts/net/amqp/</link>
+      <pubDate>Tue, 02 Aug 2022 11:06:49 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/net/amqp/</guid>
+      <description>约定 下面出现的无特殊说明都是按下面对应关系
+Publishers(发布者/生产者)
+Consumers(消费者)
+Exchanges(交换机)
+Broker(中间件)
+Queues(队列)
+Bingdings(绑定)
+AMQP是什么 AMQP是Advanced Message Queuing Protocol的缩写,高级消息队列协议,是一种消息传递协议
+中间件和角色 消息中间件从Publishers(发布者/生产者)接收消息,路由到Consumers(消费者)
+因为AMQP是网络协议, 发布者,消费者,中间件能够在不同的机器上.
+AMQP模型简介 AMQP模型有下面的视角:
+消息被发布到交换机(exchange,通常被比作邮局或邮箱) 交换机(exchanges)根据绑定(bindings)规则把消息复制到队列(queues) 中间件(borker)把消息投递到订阅队列或者从队列中拉取的消费者(consumers) 当一个消息发布时, 生产者可以设置一些消息属性(消息元数据meta data).一些元数据被中间件使用,剩下其他的被不透明发送到中间件给应用程序使用.
+网络是不可靠的,应用也有可能处理消息失败,AMQP 0-9-1有一个消息应答(acknowledgements)的概念:当一个消息派发给消费者,消费者会通知中间件,可以自动执行或者开发者选择执行.当使用消息确认时,收到消息的通知就会从队列里删除该消息.
+在某些情况,比如一个消息无法被路由,消息将会返回给生产者,丢弃,或者如果中间件实现一个扩展放入死信队列.生产者通过发布消息携带某些参数来处理这些情况.
+队列(queue)、交换机(exchanges)和绑定(bingdings)统称为AMQP实体.
+AMQP是一个可编程的协议 AMQP是一种可编程协议，AMQP的实体和路由方案主要由应用程序自己定义，而不是由中间件管理员定义.因此，为声明队列和交换机、定义它们之间的绑定、订阅队列等操作做出了规定.
+这给应用程序开发者很大的自由,但是这也要求他们意识到潜在的定义冲突,在实践中定义冲突很少，通常是配置错误。
+应用定义他们需要的实体,定义必要的路由规则和不在使用时删除实体
+交换机和交换机类型 交换机是向其发送消息的AMQP实体,交换机接收消息并将其路由到零个或多个队列中。使用的路由算法取决于交换机类型和绑定,AMQP协议提供四种交换机类型:
+交换机类型 默认名称 Direct exchange (Empty string) and amq.direct Fanout exchange amq.fanout Topic exchange amq.topic Headers exchange amq.match (and amq.headers in RabbitMQ) 除了交换机类型之外，交换机还使用许多属性来声明，其中最重要的是:
+Name (名称) Durability (中间件重启后持久化) Auto-delete (最后一个队列解除绑定自动删除) Arguments (参数,可选的, 由插件和中间件特定功能使用) 交换机可以是持久的或者是临时的,持久性交换机在中间件重启后仍能存在，而暂时性交换机则不能.并非所有场景和用例都要求交换机持久化.
+默认交换机 默认交换机是一个没有名称预定义在broker的直接交换机(direct exchange),它有一个特殊的特性，这使得它对于简单的应用程序非常有用:每个被创建的队列都会用和队列名称相同的路由键(routing key)自动绑定默认交换机.</description>
+    </item>
+    
     <item>
       <title>Fisher-Yates Shuffle</title>
       <link>https://shifengbin.github.io/posts/algorithm/shuffle/</link>
