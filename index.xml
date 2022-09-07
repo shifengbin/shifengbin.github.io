@@ -9,7 +9,20 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 02 Aug 2022 11:06:49 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Sep 2022 17:22:20 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>errgroup</title>
+      <link>https://shifengbin.github.io/posts/go_source/errgroup/</link>
+      <pubDate>Tue, 06 Sep 2022 17:22:20 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go_source/errgroup/</guid>
+      <description>errgroup是一个很简单的工具包,总共代码量加上注释和空行才100来行
+作用就是方便执行的任务,比如
+g := errgroup.Group{} g.Go(func1) g.Go(func2) if err := g.Wait(); err != nil { //... } 结构
+type Group struct { cancel func() //context 取消函数 wg sync.WaitGroup //用来等待全部执行完成 sem chan token //用来控制并发数 errOnce sync.Once //控制err字段只赋值一次 err error //错误 } 主要函数
+func (g *Group) Go(f func() error) { if g.sem != nil { g.sem &amp;lt;- token{} //限制并发数, 并发数由管道能容纳下的token个数决定 } g.wg.Add(1) go func() { defer g.done() if err := f(); err !</description>
+    </item>
+    
     <item>
       <title>AMQP 0-9-1协议</title>
       <link>https://shifengbin.github.io/posts/net/amqp/</link>

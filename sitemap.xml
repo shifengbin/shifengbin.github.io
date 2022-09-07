@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://shifengbin.github.io/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/errgroup/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go_source/errgroup/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2022-09-06T17:22:20+08:00</lastmod>
+  </url><url>
     <loc>https://shifengbin.github.io/tags/amqp/</loc>
     <lastmod>2022-08-02T11:06:49+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/net/amqp/</loc>
-    <lastmod>2022-08-02T11:06:49+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2022-08-02T11:06:49+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2022-08-02T11:06:49+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2022-08-02T11:06:49+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2022-08-02T11:06:49+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
@@ -69,12 +81,6 @@
     <lastmod>2022-07-01T23:51:45+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/</loc>
-    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/%E6%BA%90%E7%A0%81/</loc>
-    <lastmod>2022-07-01T23:51:45+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2022-07-01T23:51:45+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/k3s/</loc>
