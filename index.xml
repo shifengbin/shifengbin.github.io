@@ -9,7 +9,19 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Sep 2022 17:22:20 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Sep 2022 16:31:24 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qemu&#43;gdb裸机调试</title>
+      <link>https://shifengbin.github.io/posts/os/qemu_gdb/</link>
+      <pubDate>Fri, 23 Sep 2022 16:31:24 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/os/qemu_gdb/</guid>
+      <description>假设我们有一个boot.bin裸机汇编程序 我们想用qemu进行调试
+我们可以使用qemu-system-x86_64 -s -S boot.bin
+参数说明: -s 可以使qemu开启1234端口,方便我们使用gdb连接调试 -S 可以让qemu暂停执行,等待我们使用gdb发送调试命令
+gdb 连接: 使用gdb命令,进入gdb后使用target remote 127.0.0.1:1234连接到qemu</description>
+    </item>
+    
     <item>
       <title>errgroup</title>
       <link>https://shifengbin.github.io/posts/go_source/errgroup/</link>
