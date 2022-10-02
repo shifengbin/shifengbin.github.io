@@ -9,7 +9,17 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 23 Sep 2022 16:31:24 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Oct 2022 21:10:36 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>树莓派系统关闭swap</title>
+      <link>https://shifengbin.github.io/posts/pi/swap/</link>
+      <pubDate>Sun, 02 Oct 2022 21:10:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/pi/swap/</guid>
+      <description>网上很多教程通过编辑/etc/fstab编辑swap, 但是在树莓派系统中,并不使用fstab配置,正确的做法是
+编辑/etc/dphys-swapfile 找到配置项CONF_SWAPSIZE (通过名称我们可以知道该配置项为swap大小)该值配置为0 使配置生效 sudo /etc/init.d/dphys-swapfile restart 或者 sudo reboot 重启 通过free -h命令查看swap大小</description>
+    </item>
+    
     <item>
       <title>Qemu&#43;gdb裸机调试</title>
       <link>https://shifengbin.github.io/posts/os/qemu_gdb/</link>
