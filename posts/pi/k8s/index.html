@@ -47,8 +47,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 锁版本</span>
 </span></span><span class=line><span class=cl>sudo apt-mark hold kubelet kubeadm kubectl
-</span></span></code></pre></div><h1 id=在master上需要执行的步骤>在master上需要执行的步骤<a hidden class=anchor aria-hidden=true href=#在master上需要执行的步骤>#</a></h1><ol><li><code>kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.0.104</code></li></ol><blockquote><p>&ndash;pod-network-cidr 指定pod网段, 10.244.0.0/16 时flannel 默认网段, 可以自行修改
-&ndash;apiserver-advertise-address 宣告master节点地址</p></blockquote><p>等待出现类似输出则说明安装成功</p><pre tabindex=0><code>Your Kubernetes control-plane has initialized successfully!
+</span></span></code></pre></div><h1 id=在master上需要执行的步骤>在master上需要执行的步骤<a hidden class=anchor aria-hidden=true href=#在master上需要执行的步骤>#</a></h1><ol><li><code>kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.0.104</code></li></ol><blockquote><p>&ndash;pod-network-cidr 指定pod网段, 10.244.0.0/16 时flannel 默认网段, 可以自行修改</p></blockquote><blockquote><p>&ndash;apiserver-advertise-address 宣告master节点地址</p></blockquote><p>等待出现类似输出则说明安装成功</p><pre tabindex=0><code>Your Kubernetes control-plane has initialized successfully!
 
 To start using your cluster, you need to run the following as a regular user:
 
