@@ -9,7 +9,19 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Oct 2022 20:49:13 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Oct 2022 11:39:19 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proto Plugin</title>
+      <link>https://shifengbin.github.io/posts/micro_service/proto_plugin/</link>
+      <pubDate>Wed, 19 Oct 2022 11:39:19 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/micro_service/proto_plugin/</guid>
+      <description>1.插件命名规则 ​ proto插件名称需要使用protoc-gen-xxx
+​ 当使用protoc &amp;ndash;xxx_out时就会调用proto-gen-xxx插件
+2.protobuf解析一般流程 方法1: 先通过标准输入生成CodeGeneratorRequest 通过CodeGeneratorRequest初始化插件plugin 通过插件plugin获取文件File 遍历文件,处理内容,生成文件 像标准输出写入响应plugin.Response 示例代码:
+s := flag.String(&amp;#34;a&amp;#34;, &amp;#34;&amp;#34;, &amp;#34;a&amp;#34;) flag.Parse() //生成Request input, _ := ioutil.ReadAll(os.Stdin) var req pluginpb.CodeGeneratorRequest proto.Unmarshal(input, &amp;amp;req) //设置参数,生成plugin opts := protogen.Options{ ParamFunc: flag.CommandLine.Set, } plugin, err := opts.New(&amp;amp;req) if err != nil { panic(err) } fmt.Fprintf(os.Stderr, &amp;#34;a=%s\n&amp;#34;, *s) // protoc 将一组文件结构传递给程序处理,包含proto中import中的文件 for _, file := range plugin.Files { if !file.Generate { //显示传入的文件为true continue } fmt.Fprintf(os.Stderr, &amp;#34;path:%s\n&amp;#34;, file.GoImportPath) genF := plugin.</description>
+    </item>
+    
     <item>
       <title>树莓派安装k8s</title>
       <link>https://shifengbin.github.io/posts/pi/k8s/</link>
