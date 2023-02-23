@@ -9,7 +9,22 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 02 Feb 2023 17:06:48 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Feb 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Swap开启和关闭</title>
+      <link>https://shifengbin.github.io/posts/k8s/swap/</link>
+      <pubDate>Thu, 23 Feb 2023 15:37:31 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/k8s/swap/</guid>
+      <description>树莓派 /etc/dphys-swapfile 是 Raspberry Pi 上的一个文件，用于控制swap文件的设置和使用。该文件用于设置swap文件的大小、位置以及启用和禁用swap。
+在 Raspberry Pi 上，如果想要使用swap文件，可以通过以下步骤配置和使用swap文件：
+安装 dphys-swapfile 包，使用命令： sudo apt-get update sudo apt-get install dphys-swapfile 打开 /etc/dphys-swapfile 文件，配置swap文件的大小和位置。例如，将以下行： CONF_SWAPSIZE=100 #修改为0可关闭swap CONF_SWAPFILE=/var/swap 启用 sudo dphys-swapfile setup sudo dphys-swapfile swapon 禁用 sudo dphys-swapfile swapoff 其他linux 在Linux中，可以通过以下步骤关闭swap：
+查看当前的swap情况，使用命令： swapon -s 如果没有任何输出，则说明当前系统没有启用swap。
+如果系统启用了swap，需要先关闭swap，使用命令： swapoff -a 执行此命令会关闭所有swap分区。
+临时禁用swap，使用命令： echo 0 &amp;gt; /proc/sys/vm/swappiness 执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。
+永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行： #/dev/sda2 swap swap defaults 0 0 </description>
+    </item>
+    
     <item>
       <title>针对循环查询的逻辑优化思路</title>
       <link>https://shifengbin.github.io/posts/optimization/logic/</link>
