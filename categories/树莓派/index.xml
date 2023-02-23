@@ -12,12 +12,14 @@
     <lastBuildDate>Wed, 05 Oct 2022 20:49:13 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>树莓派安装k8s</title>
-      <link>https://shifengbin.github.io/posts/pi/k8s/</link>
+      <link>https://shifengbin.github.io/posts/k8s/k8s/</link>
       <pubDate>Wed, 05 Oct 2022 20:49:13 +0800</pubDate>
       
-      <guid>https://shifengbin.github.io/posts/pi/k8s/</guid>
+      <guid>https://shifengbin.github.io/posts/k8s/k8s/</guid>
       <description>本地系统为树莓派官方64位系统 Raspberry Pi OS Lite 64(Debian GNU/Linux 11)
 在master和node都需要执行的步骤 本机cgroup配置 在执行kubeadm init 时出现 missing required cgroup: memory时,可以在/boot/cmdline.txt(有的系统可能在/boot/firmware/cmdline.txt)中追加 cgroup_enable=memory cgroup_memory=1
+cgroup_enable=memory: 启用Cgroup子系统中的内存控制 cgroup_memory=1: 将内存控制子系统的版本设置为1
+在某些特定的发行版中，可能会出于兼容性或其他原因而禁用了Cgroup子系统中的内存控制功能,所以需要手动开启
 关闭swap 网上很多教程通过编辑/etc/fstab编辑swap, 但是在树莓派系统中,并不使用fstab配置,正确的做法是
 编辑/etc/dphys-swapfile 找到配置项CONF_SWAPSIZE (通过名称我们可以知道该配置项为swap大小)该值配置为0 使配置生效 sudo /etc/init.d/dphys-swapfile restart 或者 sudo reboot 重启 通过free -h命令查看swap大小
 系统模块加载 # 必要的模块加载 # overlay 文件系统 # br_netfilter 网桥网络包过滤 cat &amp;lt;&amp;lt;EOF | sudo tee /etc/modules-load.d/k8s.conf overlay br_netfilter EOF sudo modprobe overlay sudo modprobe br_netfilter # 开启转发和流量可观测(开机启动) # sysctl params required by setup, params persist across reboots # bridge-nf-call-iptables 让ip表可以看到桥接流量 # bridge-nf-call-ip6tables 让ip6表可以看到桥接流量 cat &amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.</description>
