@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>linkname on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/linkname/</link>
+    <description>Recent content in linkname on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 24 Feb 2023 14:35:25 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/linkname/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go 编译指令Linkname</title>
+      <link>https://shifengbin.github.io/posts/go/linkname/</link>
+      <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/linkname/</guid>
+      <description>go:linkename是go的编译指令,可以在一个包中使用另一个包中的非导出函数或变量
+具体使用方法举例
+在pkg1包中有个未导出的函数add
+package pkg1 func add(a, b int) int { return a + b } 在pkg2中想要使用pkg1.add,正常来说add开头是小写是不能被另一个包使用的,这时候我们想要在另一个包中使用就有两种方法:
+在pkg1中定义一个可以导出的函数,这种就是在写个Add函数包裹一下,这种就不举例了 在pkg2中使用linkname编译指令修改函数或变量的名称和可见性(不太建议) 这里我们举例第二种
+package pkg2 import ( _ &amp;#34;goasm/pkg1&amp;#34; //需要引入pkg1, 让pkg1参与代码编译,否则编译器找不到, 这句也可以写在别的文件中,只要让pkg1参与编译就行, relocation target goasm/pkg1.add not defined _ &amp;#34;unsafe&amp;#34; //编译器要求导入unsafe包,否则不能使用linkname指令 ) //下面就是linkname编译指令使用方法, 在函数声明上添加注释, 其中pkg1_add是函数名称, goasm/pkg1.add 是要连接的函数, 这句指令的效果就是,调用pkg1_add就是在调用goasm/pkg1包中的add函数 //go:linkname pkg1_add goasm/pkg1.add func pkg1_add(a, b int) int func Add2(a, b int) int { return pkg1_add(a, b) } 总结: go:linkname的使用是依赖于编译器的实现，因此使用时需要慎重考虑其可维护性和可移植性。 总之了解就好,不是迫不得已不要真的使用</description>
+    </item>
+    
+  </channel>
+</rss>

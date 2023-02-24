@@ -5,11 +5,39 @@
     <link>https://shifengbin.github.io/tags/</link>
     <description>Recent content in Tags on Blog Zone</description>
     <image>
+      <title>Blog Zone</title>
       <url>https://shifengbin.github.io/images/cover.jpg</url>
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 23 Feb 2023 15:37:31 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Feb 2023 14:35:25 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go</title>
+      <link>https://shifengbin.github.io/tags/go/</link>
+      <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linkname</title>
+      <link>https://shifengbin.github.io/tags/linkname/</link>
+      <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/linkname/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编译指令</title>
+      <link>https://shifengbin.github.io/tags/%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>swap</title>
       <link>https://shifengbin.github.io/tags/swap/</link>

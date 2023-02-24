@@ -3,24 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-02-23T15:37:31+08:00</lastmod>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-02-23T15:37:31+08:00</lastmod>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/categories/k8s/</loc>
-    <lastmod>2023-02-23T15:37:31+08:00</lastmod>
+    <loc>https://shifengbin.github.io/tags/go/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/go/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go/linkname/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/linkname/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/</loc>
+    <lastmod>2023-02-24T14:35:25+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/k8s/</loc>
     <lastmod>2023-02-23T15:37:31+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/swap/</loc>
     <lastmod>2023-02-23T15:37:31+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/k8s/swap/</loc>
-    <lastmod>2023-02-23T15:37:31+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2023-02-23T15:37:31+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96/</loc>
@@ -168,9 +183,6 @@
     <lastmod>2022-06-25T20:50:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/data-race/</loc>
-    <lastmod>2022-06-23T16:39:21+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/go/</loc>
     <lastmod>2022-06-23T16:39:21+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/%E5%B9%B6%E8%A1%8C/</loc>
