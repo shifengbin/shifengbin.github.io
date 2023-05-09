@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ssh on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/ssh/</link>
+    <description>Recent content in ssh on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 08 May 2023 14:24:08 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在WSL中配置gitlab/github SSH KEY</title>
+      <link>https://shifengbin.github.io/posts/git/auth/</link>
+      <pubDate>Mon, 08 May 2023 14:24:08 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/git/auth/</guid>
+      <description>背景 在公司里普遍使用搭建的gitlab,很多情况下我们使用终端提交,这时候就会频繁的数据账户和密码,为了不输入密码我们会配置SSH KEY来免登录.
+步骤 使用ssh-keygen 来生成公钥和私钥 使用ssh-keygen -t ed25519 或者 ssh-keygen -t rsa -b 2048 没什么特别的一路回车 这时候会在你~/.ssh/目录下生成密钥对 以rsa密钥为例,把~/.ssh/id_rsa.pub的内容配置到gitlab 测试使用ssh git@gitlab.xxx.com(你公司的域名)看下是否正常打印你的配置名称,如果不正常使用ssh -Tvvv git@gitlab.xxx.com打印调试信息,看是哪个地方出了问题 已经可以正常提交代码 可能出现的问题 ssh连接没问题,但是git会提示输入用户密码 这种情况看下自己仓库是否使用的是http连接, 如果是替换ssh链接就可以解决git remote set-url origin git@xxx.com:username/blog.git
+使用go来拉取包时如果使用http地址拉取怎么办 可以使用Git提供的凭证存储器来配置HTTP协议的自动登录,Git提供了三种凭证存储器，分别是cache、store和osxkeychain。不同的存储器有各自的优缺点，例如cache存储器将凭证信息保存在内存中，store存储器将凭证信息保存在本地的plain-text文件中，osxkeychain存储器则将凭证信息保存到Mac的Keychain应用程序中.
+可以使用git config --global credential.helper store来配置,然后随便拉取一个该域名的项目,输入账号密码就会存储到本地,后面就不会再要求输入用户密码</description>
+    </item>
+    
+  </channel>
+</rss>

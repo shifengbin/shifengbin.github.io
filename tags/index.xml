@@ -10,7 +10,25 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 07 Mar 2023 10:50:47 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 May 2023 14:24:08 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git</title>
+      <link>https://shifengbin.github.io/tags/git/</link>
+      <pubDate>Mon, 08 May 2023 14:24:08 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://shifengbin.github.io/tags/ssh/</link>
+      <pubDate>Mon, 08 May 2023 14:24:08 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>build</title>
       <link>https://shifengbin.github.io/tags/build/</link>
