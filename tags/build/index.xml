@@ -23,7 +23,10 @@
 例如，下面的构建约束将约束一个文件在满足“linux”和“386”约束条件或在满足“darwin”条件且未满足“cgo”条件时进行构建：//go:build (linux &amp;amp;&amp;amp; 386) || (darwin &amp;amp;&amp;amp; !cgo)
 自定义tag
 //go:build atest
-当我们使用go build -tags atest的情况下会编译此文件,否则不会编译</description>
+当我们使用go build -tags atest的情况下会编译此文件,否则不会编译
+控制go版本
+//go:build go1.17 指定当前文件&amp;gt;=go1.17才编译
+//go:build go1.17 &amp;amp;&amp;amp; go1.20 版本&amp;gt;= go1.17 并且&amp;lt;= go1.20</description>
     </item>
     
   </channel>
