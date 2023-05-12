@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-05-08T14:24:08+08:00</lastmod>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-05-08T14:24:08+08:00</lastmod>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/k8s/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/k8s/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/k8s/probs/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/probs/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/git/</loc>
     <lastmod>2023-05-08T14:24:08+08:00</lastmod>
@@ -14,13 +32,7 @@
     <loc>https://shifengbin.github.io/categories/git/</loc>
     <lastmod>2023-05-08T14:24:08+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2023-05-08T14:24:08+08:00</lastmod>
-  </url><url>
     <loc>https://shifengbin.github.io/tags/ssh/</loc>
-    <lastmod>2023-05-08T14:24:08+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2023-05-08T14:24:08+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/git/auth/</loc>
@@ -56,9 +68,6 @@
     <loc>https://shifengbin.github.io/tags/linkname/</loc>
     <lastmod>2023-02-24T14:35:25+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/categories/k8s/</loc>
-    <lastmod>2023-02-23T15:37:31+08:00</lastmod>
-  </url><url>
     <loc>https://shifengbin.github.io/tags/swap/</loc>
     <lastmod>2023-02-23T15:37:31+08:00</lastmod>
   </url><url>
@@ -82,9 +91,6 @@
   </url><url>
     <loc>https://shifengbin.github.io/tags/protobuf/</loc>
     <lastmod>2022-10-19T11:39:19+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/k8s/</loc>
-    <lastmod>2022-10-05T20:49:13+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
     <lastmod>2022-10-05T20:49:13+08:00</lastmod>
