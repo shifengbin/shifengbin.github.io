@@ -10,7 +10,16 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 12 May 2023 11:03:18 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 May 2023 15:00:31 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>service中的几种port的区别</title>
+      <link>https://shifengbin.github.io/posts/k8s/service_ports/</link>
+      <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/k8s/service_ports/</guid>
+      <description> port : service暴露的端口,可以在集群内进行访问 nodePort : 可以在集群外访问service的端口 targetPort : pod内的container暴露的端口 一张图来理解 </description>
+    </item>
+    
     <item>
       <title>k8s 几种探针作用和用法</title>
       <link>https://shifengbin.github.io/posts/k8s/probs/</link>

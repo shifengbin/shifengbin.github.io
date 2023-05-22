@@ -3,27 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/k8s/</loc>
-    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/k8s/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/ports/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/service/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/k8s/service_ports/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2023-05-22T15:00:31+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/k8s/</loc>
     <lastmod>2023-05-12T11:03:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/k8s/probs/</loc>
     <lastmod>2023-05-12T11:03:18+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
-  </url><url>
     <loc>https://shifengbin.github.io/tags/probs/</loc>
-    <lastmod>2023-05-12T11:03:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2023-05-12T11:03:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/git/</loc>

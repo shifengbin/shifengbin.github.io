@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ports on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/ports/</link>
+    <description>Recent content in ports on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 22 May 2023 15:00:31 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/ports/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>service中的几种port的区别</title>
+      <link>https://shifengbin.github.io/posts/k8s/service_ports/</link>
+      <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/k8s/service_ports/</guid>
+      <description> port : service暴露的端口,可以在集群内进行访问 nodePort : 可以在集群外访问service的端口 targetPort : pod内的container暴露的端口 一张图来理解 </description>
+    </item>
+    
+  </channel>
+</rss>
