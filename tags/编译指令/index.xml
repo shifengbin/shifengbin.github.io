@@ -10,6 +10,7 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
     <lastBuildDate>Tue, 07 Mar 2023 10:50:47 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>go 编译指令build</title>

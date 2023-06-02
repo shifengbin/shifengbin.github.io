@@ -10,6 +10,7 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
     <lastBuildDate>Fri, 23 Sep 2022 16:31:24 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Qemu&#43;gdb裸机调试</title>

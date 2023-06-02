@@ -10,6 +10,7 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
     <lastBuildDate>Sun, 19 Jun 2022 22:02:23 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/singlefight/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>go sync包之singleflight原理</title>

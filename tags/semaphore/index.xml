@@ -10,6 +10,7 @@
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
     <lastBuildDate>Fri, 01 Jul 2022 23:51:45 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/semaphore/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Semaphore(信号量)</title>

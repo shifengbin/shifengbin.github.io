@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>排序 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in 排序 on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 02 Jun 2023 10:18:35 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库中排序的一些想法</title>
+      <link>https://shifengbin.github.io/posts/math/sort/</link>
+      <pubDate>Fri, 02 Jun 2023 10:18:35 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/math/sort/</guid>
+      <description>数据库中很多时候要有排序字段作为排序依据,有时候还会对排序进行调整,常见的我们会加一个xx_sort字段,从1开始的一个排序,那样如果我们把最后一个元素排到第一时会导致每个记录中排序都要进行+1操作,需要操作很多记录;那有没有一种方法可以只修改被调整的那一条记录或者减少更改记录的次数.
+今天想到一个方法,在给排序字段赋值的时候,不是按照+1的方式递增,而是以一个间隔递增比如
+id order 1 1 2 1001 3 2001 4 3001 在每次调整顺序时,比如把4调整到1和2之间, 那么就在(1,1001)区间范围内随机找到一个值(或者取中间值),赋给4这种情况下只需要调整一次就可以了.
+那么如果上面的结果变成这样了, 3想要移动到1和4之间怎么办
+id order 1 1 4 2 2 1001 3 2001 和上面一样现在(1,2)区间随机(或者取中间值),发现不能找到一个值,那么就需要一个策略,把后面的一部分数据进行分散.
+只要合理的设置间隔,就能达到在大多数情况下都能只修改一条记录
+注意: 设置间隔可能需要考虑最多能容纳多少元素,还有字段类型所能容纳的最大值</description>
+    </item>
+    
+  </channel>
+</rss>

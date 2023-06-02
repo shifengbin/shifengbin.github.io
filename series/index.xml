@@ -9,6 +9,7 @@
       <url>https://shifengbin.github.io/images/cover.jpg</url>
       <link>https://shifengbin.github.io/images/cover.jpg</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://shifengbin.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language><atom:link href="https://shifengbin.github.io/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
