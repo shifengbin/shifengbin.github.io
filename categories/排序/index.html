@@ -4,6 +4,7 @@
 id order 1 1 2 1001 3 2001 4 3001 在每次调整顺序时,比如把4调整到1和2之间, 那么就在(1,1001)区间范围内随机找到一个值(或者取中间值),赋给4这种情况下只需要调整一次就可以了.
 那么如果上面的结果变成这样了, 3想要移动到1和4之间怎么办
 id order 1 1 4 2 2 1001 3 2001 和上面一样现在(1,2)区间随机(或者取中间值),发现不能找到一个值,那么就需要一个策略,把后面的一部分数据进行分散.
+分散策略比如:按顺序找到后面一条间距大于多少的(比如1000)数据,然后把这几条数据按总间距平均分配一下,或者更简单粗暴的,如果遇到无法插入的值,就把后面的数据重新安排一下,都按初始间隔重新赋值
 只要合理的设置间隔,就能达到在大多数情况下都能只修改一条记录
 注意: 设置间隔可能需要考虑最多能容纳多少元素,还有字段类型所能容纳的最大值</p></div><footer class=entry-footer><span title='2023-06-02 10:18:35 +0800 +0800'>六月 2, 2023</span>&nbsp;·&nbsp;1 分钟</footer><a class=entry-link aria-label="post link to 数据库中排序的一些想法" href=https://shifengbin.github.io/posts/math/sort/></a></article></main><footer class=footer><span>&copy; 2023 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
