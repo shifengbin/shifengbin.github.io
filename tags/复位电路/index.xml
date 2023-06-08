@@ -18,7 +18,7 @@
       <pubDate>Thu, 08 Jun 2023 11:06:21 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/embed/reset/</guid>
-      <description>${T = \frac R C}$ 变换为 ${C = \frac T R }$ 其中T为时间 R为电阻 C为电容
+      <description>${T = R C}$ 变换为 ${C = \frac T R }$ 其中T为时间 R为电阻 C为电容
 以1ms复位时间来算, 如果电阻选10kΩ那么 $C = \frac {0.001s} {10000Ω} = 100nF$</description>
     </item>
     
