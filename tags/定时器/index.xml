@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>定时器 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
+    <description>Recent content in 定时器 on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 06 Jun 2023 11:09:27 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>外部中断和定时器</title>
+      <link>https://shifengbin.github.io/posts/embed/interrupt/</link>
+      <pubDate>Tue, 06 Jun 2023 11:09:27 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/embed/interrupt/</guid>
+      <description>都说学习硬件是学习计算机组成原理的快速途径,我也入坑了,这里记录一些学习中初学者可能感觉难受的难点
+一个MCU就好比一个很复杂的函数,他需要两种初始化,一种就是硬件初始化(也就是最小系统+外设电路), 一种是软件初始化(设置寄存器来使用某些功能)
+中断 其实也没什么难的,难的是和GPIO那种简单方式的对比,都是固定套路
+中断套路 编写好中断处理函数 设置触发方式(低电平触发或者下降沿触发) 开启某一中断 开启总中断 定时器 套路 设置定时器模式 设置定时器初值 开启定时器 (到目前定时器已经可以使用了) 定时器中断开启 (如果还想定时中断的话,需要剩下3,4两步) 总中断开启 中断优先级可以进行调整</description>
+    </item>
+    
+  </channel>
+</rss>
