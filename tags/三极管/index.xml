@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>硬件 on Blog Zone</title>
-    <link>https://shifengbin.github.io/categories/%E7%A1%AC%E4%BB%B6/</link>
-    <description>Recent content in 硬件 on Blog Zone</description>
+    <title>三极管 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E4%B8%89%E6%9E%81%E7%AE%A1/</link>
+    <description>Recent content in 三极管 on Blog Zone</description>
     <image>
       <title>Blog Zone</title>
       <url>https://shifengbin.github.io/images/cover.jpg</url>
@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 19 Jul 2023 16:43:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/%E7%A1%AC%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jul 2023 16:43:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E4%B8%89%E6%9E%81%E7%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>三极管集电极电流产生原理</title>
       <link>https://shifengbin.github.io/posts/embed/bjt/</link>
@@ -25,28 +25,6 @@
 值得注意的是,PN结在正向偏置时,电流主要由多数载流子形成;而反向偏置时,则由少数载流子形成微弱的电流。三极管反向偏置下Ic的产生,则利用了基极注入的大量电子,从电流形成机理上破除了PN结的限制。
 通过解析三极管反向偏置导通的科学机理,我们加深了对其工作原理的理解。这也展示了半导体器件的奥秘比单纯PN结更为复杂。希望本文能够满足读者对这个有趣现象的好奇心,并成为理解半导体物理的一个窗口。
 注意: 在严格意义上说PN并不能单向导电,我们所说的单向导电只是因为反向电流非常微弱 PN结在正向偏置时,电流主要由多数载流子形成;而反向偏置时,则由少数载流子形成微弱的电流</description>
-    </item>
-    
-    <item>
-      <title>复位电路电容选择</title>
-      <link>https://shifengbin.github.io/posts/embed/reset/</link>
-      <pubDate>Thu, 08 Jun 2023 11:06:21 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/posts/embed/reset/</guid>
-      <description>${T = R C}$ 变换为 ${C = \frac T R }$ 其中T为时间 R为电阻 C为电容
-以1ms复位时间来算, 如果电阻选10kΩ那么 $C = \frac {0.001s} {10000Ω} = 100nF$</description>
-    </item>
-    
-    <item>
-      <title>外部中断和定时器</title>
-      <link>https://shifengbin.github.io/posts/embed/interrupt/</link>
-      <pubDate>Tue, 06 Jun 2023 11:09:27 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/posts/embed/interrupt/</guid>
-      <description>都说学习硬件是学习计算机组成原理的快速途径,我也入坑了,这里记录一些学习中初学者可能感觉难受的难点
-一个MCU就好比一个很复杂的函数,他需要两种初始化,一种就是硬件初始化(也就是最小系统+外设电路), 一种是软件初始化(设置寄存器来使用某些功能)
-中断 其实也没什么难的,难的是和GPIO那种简单方式的对比,都是固定套路
-中断套路 编写好中断处理函数 设置触发方式(低电平触发或者下降沿触发) 开启某一中断 开启总中断 定时器 套路 设置定时器模式 设置定时器初值 开启定时器 (到目前定时器已经可以使用了) 定时器中断开启 (如果还想定时中断的话,需要剩下3,4两步) 总中断开启 中断优先级可以进行调整</description>
     </item>
     
   </channel>

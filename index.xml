@@ -11,7 +11,22 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 08 Jun 2023 11:06:21 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jul 2023 16:43:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>三极管集电极电流产生原理</title>
+      <link>https://shifengbin.github.io/posts/embed/bjt/</link>
+      <pubDate>Wed, 19 Jul 2023 16:43:28 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/embed/bjt/</guid>
+      <description>三极管作为一种重要的半导体器件,其集电结反向偏置时表现出的导电性违背了PN结的传统认知,这一现象的原因一直令人感到好奇。在本文中,笔者将通俗解释三极管反向偏置下集电结仍可导电的科学机理。
+我们知道,PN结反向偏置时,少数载流子形成的漏电流非常微弱。但三极管的情况则完全不同,反向偏置的集电结也会产生明显的集电电流Ic。这主要归因于三极管独特的内部结构。
+需要强调的是,这种反向偏置下的电流并非由反向击穿产生,而是有别于PN结的全新机理。三极管通过基极控制发射极附近的电子浓度。当基极电流注入电子时,发射极区域会聚集大量电子。这些电子可以跨越集电结的反向势垒,形成显著的反向漏电流。随着基极电流增大,发射极电子浓度提高,反向漏电流Ic也随之增加。
+可以看出,三极管反向偏置下集电结的导电性,是由基极注入产生的大量电子引起的。这种机理完全不同于PN结中仅依赖少数载流子的反向漏电流。正是三极管的独特结构及工作原理导致了反向偏置下也存在明显Ic的现象。
+值得注意的是,PN结在正向偏置时,电流主要由多数载流子形成;而反向偏置时,则由少数载流子形成微弱的电流。三极管反向偏置下Ic的产生,则利用了基极注入的大量电子,从电流形成机理上破除了PN结的限制。
+通过解析三极管反向偏置导通的科学机理,我们加深了对其工作原理的理解。这也展示了半导体器件的奥秘比单纯PN结更为复杂。希望本文能够满足读者对这个有趣现象的好奇心,并成为理解半导体物理的一个窗口。
+注意: 在严格意义上说PN并不能单向导电,我们所说的单向导电只是因为反向电流非常微弱 PN结在正向偏置时,电流主要由多数载流子形成;而反向偏置时,则由少数载流子形成微弱的电流</description>
+    </item>
+    
     <item>
       <title>复位电路电容选择</title>
       <link>https://shifengbin.github.io/posts/embed/reset/</link>
