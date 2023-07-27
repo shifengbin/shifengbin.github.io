@@ -11,7 +11,20 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 19 Jul 2023 16:43:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Jul 2023 16:14:07 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>51读取io口状态注意事项</title>
+      <link>https://shifengbin.github.io/posts/embed/51io/</link>
+      <pubDate>Thu, 27 Jul 2023 16:14:07 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/embed/51io/</guid>
+      <description>51在读取io时需要设置io口为高电平,然后再读取
+8051（包括 STC89C52RC）的 I/O 口是开漏（open-drain）输出而非推挽（push-pull）输出。
+开漏输出只能主动驱动低电平（0），不能主动驱动高电平（1）。要实现高电平，开漏输出需要通过外部的拉升电阻（通常连接到电源 VCC）实现。这也就是为什么在使用开漏输出的 GPIO 引脚时，你需要首先将它设置为高电平，然后才可以正确读取输入的低电平。
+相比之下，推挽输出可以主动驱动低电平和高电平。这就使得在使用推挽输出时，不需要首先设定为高电平来正确读取低电平。
+这就是为什么你在使用 STC89C52RC 或者其他 8051 系列的微控制器时，必须首先将引脚设为高电平，只有这样，你才能正确地读取被设为低电平的输入。因此，理解开漏和推挽输出的区别对于理解这个问题是非常重要的。每种类型的输出方式都有其优缺点，需要根据具体应用来选择。</description>
+    </item>
+    
     <item>
       <title>三极管集电极电流产生原理</title>
       <link>https://shifengbin.github.io/posts/embed/bjt/</link>
