@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>51 on Blog Zone</title>
-    <link>https://shifengbin.github.io/tags/51/</link>
-    <description>Recent content in 51 on Blog Zone</description>
+    <title>EEPROM on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/eeprom/</link>
+    <description>Recent content in EEPROM on Blog Zone</description>
     <image>
       <title>Blog Zone</title>
       <url>https://shifengbin.github.io/images/cover.jpg</url>
@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 27 Jul 2023 16:14:07 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/51/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Jul 2023 16:14:07 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/eeprom/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>51单片机注意事项</title>
       <link>https://shifengbin.github.io/posts/embed/51/</link>
@@ -28,18 +28,6 @@ Flash存储器使用了浮动栅层的原理来存储数据，在晶体管中存
 然而，将存储单元从0改为1是不可行的，因为在Flash存储器中，写入操作是通过电子隧穿来实现的。当试图将存储单元从0改为1时，需要将电子引入浮动栅层。但是，由于浮动栅层与控制栅层之间的绝缘层，电子无法通过正常的电子隧穿过程引入到浮动栅层中，因此无法实现将0写成1的操作。
 为了将存储单元从0改为1，需要执行擦除操作。擦除会将整个存储单元中的电荷移除，将其重置为初始状态，通常是全1。然后再通过编程操作将所需的位写入为1。
 由于擦除操作会擦除整个存储单元的数据，而不是单个位或字节，因此对Flash存储器进行写入操作时，通常需要将整个存储块或页擦除，然后再编程所需的位。这种擦除和编程的特性使得Flash存储器在数据写入方面有一定的限制和特殊性。</description>
-    </item>
-    
-    <item>
-      <title>外部中断和定时器</title>
-      <link>https://shifengbin.github.io/posts/embed/interrupt/</link>
-      <pubDate>Tue, 06 Jun 2023 11:09:27 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/posts/embed/interrupt/</guid>
-      <description>都说学习硬件是学习计算机组成原理的快速途径,我也入坑了,这里记录一些学习中初学者可能感觉难受的难点
-一个MCU就好比一个很复杂的函数,他需要两种初始化,一种就是硬件初始化(也就是最小系统+外设电路), 一种是软件初始化(设置寄存器来使用某些功能)
-中断 其实也没什么难的,难的是和GPIO那种简单方式的对比,都是固定套路
-中断套路 编写好中断处理函数 设置触发方式(低电平触发或者下降沿触发) 开启某一中断 开启总中断 定时器 套路 设置定时器模式 设置定时器初值 开启定时器 (到目前定时器已经可以使用了) 定时器中断开启 (如果还想定时中断的话,需要剩下3,4两步) 总中断开启 中断优先级可以进行调整</description>
     </item>
     
   </channel>
