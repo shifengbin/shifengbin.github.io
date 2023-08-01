@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>注意事项 on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</link>
+    <description>Recent content in 注意事项 on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 27 Jul 2023 16:14:07 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>51单片机注意事项</title>
+      <link>https://shifengbin.github.io/posts/embed/51/</link>
+      <pubDate>Thu, 27 Jul 2023 16:14:07 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/embed/51/</guid>
+      <description>下面的51均指的是STC89C52RC芯片,别的51是否也是这样有待验证
+io相关注意事项 51在读取io时需要设置io口为高电平,然后再读取 8051（包括 STC89C52RC）的 I/O 口是开漏（open-drain）输出而非推挽（push-pull）输出。
+开漏输出只能主动驱动低电平（0），不能主动驱动高电平（1）。要实现高电平，开漏输出需要通过外部的拉升电阻（通常连接到电源 VCC）实现。这也就是为什么在使用开漏输出的 GPIO 引脚时，你需要首先将它设置为高电平，然后才可以正确读取输入的低电平。
+相比之下，推挽输出可以主动驱动低电平和高电平。这就使得在使用推挽输出时，不需要首先设定为高电平来正确读取低电平。
+这就是为什么你在使用 STC89C52RC 或者其他 8051 系列的微控制器时，必须首先将引脚设为高电平，只有这样，你才能正确地读取被设为低电平的输入。因此，理解开漏和推挽输出的区别对于理解这个问题是非常重要的。每种类型的输出方式都有其优缺点，需要根据具体应用来选择。
+内置EEPROM 在写入前需要先擦除 原因是内部的EEPROM是用Flash来做的,由于Flash的物理性质,只能从1变0,不能从0变1,所以先要擦除为0xFF, 然后在写入相应的数据,注意擦除是按扇区来擦除的
+Flash存储器使用了浮动栅层的原理来存储数据，在晶体管中存储了电荷量，代表了0或1的状态。当需要将存储单元从1改为0时，可以通过施加适当的电压，将电荷从浮动栅层中移除，使得晶体管的导通特性被改变为阻断状态，表示0。
+然而，将存储单元从0改为1是不可行的，因为在Flash存储器中，写入操作是通过电子隧穿来实现的。当试图将存储单元从0改为1时，需要将电子引入浮动栅层。但是，由于浮动栅层与控制栅层之间的绝缘层，电子无法通过正常的电子隧穿过程引入到浮动栅层中，因此无法实现将0写成1的操作。
+为了将存储单元从0改为1，需要执行擦除操作。擦除会将整个存储单元中的电荷移除，将其重置为初始状态，通常是全1。然后再通过编程操作将所需的位写入为1。
+由于擦除操作会擦除整个存储单元的数据，而不是单个位或字节，因此对Flash存储器进行写入操作时，通常需要将整个存储块或页擦除，然后再编程所需的位。这种擦除和编程的特性使得Flash存储器在数据写入方面有一定的限制和特殊性。
+LCD1602异常 是否是每个阶段的延迟不够 调高延迟试一下是否正常
+多写一些字符 如果出现屏幕位置不同,可能是算法问题
+乱码(比如全屏写&#39;1&amp;rsquo;,但是显示的是其他内容) 可能是虚焊
+判断方法:
+写一个程序,使io口高低电平切换,如果使用示波器可以间隔短点间隔时间, 如果使用万用表让间隔长一点比如5s切换一次电平 使用示波器或者万用表分别测量每个io对应的LCD接口,看是否有电平切换, 可以判断接口是否异常 再看芯片对应异常的io引脚如果输出是正常,则说明虚焊,如果引脚输出异常,则可能是芯片坏了 </description>
+    </item>
+    
+  </channel>
+</rss>
