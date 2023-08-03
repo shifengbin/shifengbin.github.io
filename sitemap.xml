@@ -2,28 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://shifengbin.github.io/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/go/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go/memory_leak/</loc>
+    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
+  </url><url>
     <loc>https://shifengbin.github.io/tags/51/</loc>
     <lastmod>2023-07-27T16:14:07+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/embed/51/</loc>
     <lastmod>2023-07-27T16:14:07+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-07-27T16:14:07+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-07-27T16:14:07+08:00</lastmod>
-  </url><url>
     <loc>https://shifengbin.github.io/tags/eeprom/</loc>
     <lastmod>2023-07-27T16:14:07+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/io/</loc>
-    <lastmod>2023-07-27T16:14:07+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2023-07-27T16:14:07+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2023-07-27T16:14:07+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/%E5%8D%95%E7%89%87%E6%9C%BA/</loc>
@@ -102,9 +111,6 @@
     <lastmod>2023-03-07T10:50:47+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/go/</loc>
-    <lastmod>2023-03-07T10:50:47+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/go/</loc>
     <lastmod>2023-03-07T10:50:47+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/go/build/</loc>
