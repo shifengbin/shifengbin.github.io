@@ -11,7 +11,25 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 03 Aug 2023 09:57:26 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Aug 2023 15:08:46 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu当开发过程中主力机遇到的问题</title>
+      <link>https://shifengbin.github.io/posts/linux/qa/</link>
+      <pubDate>Mon, 14 Aug 2023 15:08:46 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/linux/qa/</guid>
+      <description> 使用deb包安装软件时想要拆卸 在使用dpkg -r拆卸软件需要知道包名，有的时候不好查，可以使用用Ubuntu Software打开deb包，点删除
+安装virtualbox,启动虚拟机报 Kernel driver not installed (rc=-1908) 可以使用sudo apt install --reinstall linux-headers-$(uname -r) virtualbox-dkms dkms 安装完成后重启
+使用clash for window时，无法正常代理 在ubuntu设置中，点击网络，设置网络代理配置好即可
+使用拼音输入法 安装fcitx5
+sudo apt install fcitx5 \ fcitx5-chinese-addons \ fcitx5-frontend-gtk4 fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 \ fcitx5-frontend-qt5 安装词库
+在https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases下载.dict结尾的词库文件，放入 ~/.local/share/fcitx5/pinyin/dictionaries/，没有创建即可。
+设置默认输入法im-config命令
+配置环境变量/etc/profile
+export XMODIFIERS=@im=fcitx export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx 在home目录.pam_environment添加配置
+GTK_IM_MODULE DEFAULT=fcitx QT_IM_MODULE DEFAULT=fcitx XMODIFIERS DEFAULT=@im=fcitx SDL_IM_MODULE DEFAULT=fcitx </description>
+    </item>
+    
     <item>
       <title>内存泄漏</title>
       <link>https://shifengbin.github.io/posts/go/memory_leak/</link>
