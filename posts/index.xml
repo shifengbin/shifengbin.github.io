@@ -18,7 +18,7 @@
       <pubDate>Mon, 14 Aug 2023 15:08:46 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/linux/qa/</guid>
-      <description> 使用deb包安装软件时想要拆卸 在使用dpkg -r拆卸软件需要知道包名，有的时候不好查，可以使用用Ubuntu Software打开deb包，点删除
+      <description>使用deb包安装软件时想要拆卸 在使用dpkg -r拆卸软件需要知道包名，有的时候不好查，可以使用用Ubuntu Software打开deb包，点删除
 安装virtualbox,启动虚拟机报 Kernel driver not installed (rc=-1908) 可以使用sudo apt install --reinstall linux-headers-$(uname -r) virtualbox-dkms dkms 安装完成后重启
 使用clash for window时，无法正常代理 在ubuntu设置中，点击网络，设置网络代理配置好即可
 使用拼音输入法 安装fcitx5
