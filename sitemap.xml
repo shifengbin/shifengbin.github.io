@@ -2,17 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://shifengbin.github.io/tags/alpine/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-08-14T15:08:46+08:00</lastmod>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-08-14T15:08:46+08:00</lastmod>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/docker/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/docker/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/go/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/go-build/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2023-08-14T15:08:46+08:00</lastmod>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/</loc>
-    <lastmod>2023-08-14T15:08:46+08:00</lastmod>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go/docker/</loc>
+    <lastmod>2023-09-07T11:17:42+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/ubuntu/</loc>
     <lastmod>2023-08-14T15:08:46+08:00</lastmod>
@@ -22,9 +40,6 @@
   </url><url>
     <loc>https://shifengbin.github.io/tags/ubuntu%E5%9C%A8%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2023-08-14T15:08:46+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/go/</loc>
-    <lastmod>2023-08-03T09:57:26+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</loc>
     <lastmod>2023-08-03T09:57:26+08:00</lastmod>

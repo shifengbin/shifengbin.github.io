@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 03 Aug 2023 09:57:26 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Sep 2023 11:17:42 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在docker中go编译应注意的问题</title>
+      <link>https://shifengbin.github.io/posts/go/docker/</link>
+      <pubDate>Thu, 07 Sep 2023 11:17:42 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/docker/</guid>
+      <description>1.使用golang:tag 这种镜像编译后在alpine中会报错(not found) 原因是：go默认会使用glibc,而alpine中没有glibc,所以会报错 解决办法有三种： 连接RUN mkdir /lib64 &amp;amp;&amp;amp; ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86_64.so.2，建立一个glic链接 使用golang:tag-alpine镜像编译，编译系统和运行系统都用alpine 编译时禁用CGO CGO_ENABLED=0 go build编译出来的文件不依赖动态库 </description>
+    </item>
+    
     <item>
       <title>内存泄漏</title>
       <link>https://shifengbin.github.io/posts/go/memory_leak/</link>
