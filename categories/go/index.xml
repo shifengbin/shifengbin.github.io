@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 07 Sep 2023 11:17:42 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Sep 2023 15:56:44 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Viper读取自定义远程配置</title>
+      <link>https://shifengbin.github.io/posts/go/viper/</link>
+      <pubDate>Fri, 15 Sep 2023 15:56:44 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/viper/</guid>
+      <description>实现viper.remoteConfigFactory接口 type remoteConfigProvider struct{} //这个接口是在第一次读取远程配置时调用，viper.ReadRemoteConfig() func (rc remoteConfigProvider) Get(rp viper.RemoteProvider) (io.Reader, error) { log.Println(&amp;#34;Getting config from remote&amp;#34;, rp) r := bytes.NewReader([]byte(&amp;#34;{\&amp;#34;a\&amp;#34;:1}&amp;#34;)) time.Sleep(time.Second) return r, nil } //这个接口是在客户端调用viper.WatchRemoteConfig()， 只监听一次变化 func (rc remoteConfigProvider) Watch(rp viper.RemoteProvider) (io.Reader, error) { //这里写你获取配置的方法 log.Println(&amp;#34;Watching config from remote&amp;#34;, rp) s := fmt.Sprintf(`{&amp;#34;app&amp;#34;:{&amp;#34;name&amp;#34;:&amp;#34;test&amp;#34;,&amp;#34;version&amp;#34;:%d}}`, time.Now().Unix()) r := bytes.NewReader([]byte(s)) time.Sleep(time.Second) return r, nil } //这个接口是在客户端调用viper.GetViper().WatchRemoteConfigOnChannel()时，监听多次变化 func (rc remoteConfigProvider) WatchChannel(rp viper.RemoteProvider) (&amp;lt;-chan *viper.RemoteResponse, chan bool) { log.Println(&amp;#34;Watching Channel config from remote&amp;#34;, rp) ch := make(chan *viper.</description>
+    </item>
+    
     <item>
       <title>在docker中go编译应注意的问题</title>
       <link>https://shifengbin.github.io/posts/go/docker/</link>

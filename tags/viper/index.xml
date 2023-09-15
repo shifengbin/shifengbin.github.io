@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>viper on Blog Zone</title>
+    <link>https://shifengbin.github.io/tags/viper/</link>
+    <description>Recent content in viper on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 15 Sep 2023 15:56:44 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/viper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Viper读取自定义远程配置</title>
+      <link>https://shifengbin.github.io/posts/go/viper/</link>
+      <pubDate>Fri, 15 Sep 2023 15:56:44 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/viper/</guid>
+      <description>实现viper.remoteConfigFactory接口 type remoteConfigProvider struct{} //这个接口是在第一次读取远程配置时调用，viper.ReadRemoteConfig() func (rc remoteConfigProvider) Get(rp viper.RemoteProvider) (io.Reader, error) { log.Println(&amp;#34;Getting config from remote&amp;#34;, rp) r := bytes.NewReader([]byte(&amp;#34;{\&amp;#34;a\&amp;#34;:1}&amp;#34;)) time.Sleep(time.Second) return r, nil } //这个接口是在客户端调用viper.WatchRemoteConfig()， 只监听一次变化 func (rc remoteConfigProvider) Watch(rp viper.RemoteProvider) (io.Reader, error) { //这里写你获取配置的方法 log.Println(&amp;#34;Watching config from remote&amp;#34;, rp) s := fmt.Sprintf(`{&amp;#34;app&amp;#34;:{&amp;#34;name&amp;#34;:&amp;#34;test&amp;#34;,&amp;#34;version&amp;#34;:%d}}`, time.Now().Unix()) r := bytes.NewReader([]byte(s)) time.Sleep(time.Second) return r, nil } //这个接口是在客户端调用viper.GetViper().WatchRemoteConfigOnChannel()时，监听多次变化 func (rc remoteConfigProvider) WatchChannel(rp viper.RemoteProvider) (&amp;lt;-chan *viper.RemoteResponse, chan bool) { log.Println(&amp;#34;Watching Channel config from remote&amp;#34;, rp) ch := make(chan *viper.</description>
+    </item>
+    
+  </channel>
+</rss>
