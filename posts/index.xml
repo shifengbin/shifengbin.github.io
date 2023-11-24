@@ -11,7 +11,20 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 23 Nov 2023 14:42:12 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Nov 2023 14:20:35 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>本地&#43;redis多级缓存</title>
+      <link>https://shifengbin.github.io/posts/micro_service/multi_cache/</link>
+      <pubDate>Fri, 24 Nov 2023 14:20:35 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/micro_service/multi_cache/</guid>
+      <description>由一次线上问题引发的思考，本地缓存+redis缓存的多级缓存方案。
+一次线上发生OOM, CPU占用高排查，之前所有的缓存都是放在redis中，并发高时，大量请求去redis,服务反序列化，导致CPU占用高，内存占用高，最终达到资源上线被k8s杀掉。
+后来想到了使用本地缓存，这种公共对象保存一份数据，不用反复序列化，减少CPU占用，减少内存占用，但是本地缓存有一个问题，多个副本在同一时间可能缓存数据不一致，虽然在我们这个场景下，这份公共数据更新不频繁，但是也有可能发生这个情况，所以想到了使用多级缓存，本地缓存+redis缓存，本地缓存作为一级缓存，redis作为二级缓存，当redis更新时会设置数据版本号(时间戳)，本地获取时会比对版本号，如果相同redis就不返回数据，如果不同就返回数据，这样就可以保证数据一致性。
+用go描述一下取值和设置值的逻辑，其他逻辑都比较简单，这里使用lua脚本来实现，版本和数据的原子性，和比较版本和返回相应的返回值
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/go-redis/redis&amp;#34; ) //这段脚本是用来设置值的，设置值的时候会设置版本号，设置过期时间 const setval = ` local key_val = KEYS[1] local key_version = key_val .. &amp;#34;_version&amp;#34; local val = ARGV[1] local expire = ARGV[2] local version = ARGV[3] redis.call(&amp;#39;SET&amp;#39;, key_version, version) redis.call(&amp;#39;EXPIRE&amp;#39;, key_version, expire) redis.call(&amp;#39;SET&amp;#39;, key_val, val) redis.call(&amp;#39;EXPIRE&amp;#39;, key_val, expire) return nil ` //这段脚本是用来取值的，取值的时候会比较版本号，如果版本号不一致就返回值 const getval = ` local key_val = KEYS[1] local key_version = key_val .. &amp;#34;_version&amp;#34; local givenVersion = ARGV[1] local version = redis.</description>
+    </item>
+    
     <item>
       <title>DCDC原理 电感</title>
       <link>https://shifengbin.github.io/posts/embed/dcdc-inductance/</link>
