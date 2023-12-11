@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>数据库 on Blog Zone</title>
+    <link>https://shifengbin.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on Blog Zone</description>
+    <image>
+      <title>Blog Zone</title>
+      <url>https://shifengbin.github.io/images/cover.jpg</url>
+      <link>https://shifengbin.github.io/images/cover.jpg</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 11 Dec 2023 10:41:18 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql中time_zone的作用，以及为什么要配置本地时区和db时区</title>
+      <link>https://shifengbin.github.io/posts/go/go_mysql/</link>
+      <pubDate>Mon, 11 Dec 2023 10:41:18 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/go/go_mysql/</guid>
+      <description>mysql中time_zone的作用，以及为什么要配置本地时区和db时区 1. mysql中time_zone的作用 mysql中time_zone的作用，就是用来设置时区的（废话），time_zone影响TIMESTAMP类型和NOW等函数的值，但并不影响DATETIME类型和DATE类型。
+因为TIMESTAMP存储的时时间戳，当用户发送过来一个时间如“2023-12-11 10:41:18”，那么mysql会将其时间戳,这个时间就是按time_zone设置的时区来解析的，然后转换成时间戳保存，
+在给用户查询时在通过时区转换会时间串。
+DATETIME类型不是时间戳，存入时是“2023-12-11 10:41:18”，查询时也是“2023-12-11 10:41:18”，不会做转换，也和时区无关
+2. 为什么要配置本地时区和db时区 本地时区是给mysql驱动使用，并不会影响mysql的时区，只会影响mysql驱动的解析，
+db时区是mysql的时区，会影响mysql的时区，会影响mysql的查询结果。
+本地时区作用 在读取到mysql发来的时间，go会按照本地时区来解析，转换为time.Time类型mysql按照数据库time_zone返回时间串后，go并不知道用哪个时区来解析这个时间串，所以需要设置本地时区。 本在写入time.Time类型时，go会把time.Time转换为本地时区发送给mysql 比如设置本地时区为“Asia/Shanghai” root:root@tcp(127.0.0.1:3306)/db?charset=utf8&amp;amp;loc=Asia%2FShanghai&amp;amp;parseTime=true通过loc参数来这设置
+同时设置本地和数据库时区 root:root@tcp(127.0.0.1:3306)/db?charset=utf8&amp;amp;loc=Asia%2FShanghai&amp;amp;parseTime=true&amp;amp;time_zone=%27%2B8%3A00%27
+dsn上的参数有的是给数据库驱动使用，有的是给mysql使用，具体可参阅mysql驱动的DSN</description>
+    </item>
+    
+  </channel>
+</rss>
