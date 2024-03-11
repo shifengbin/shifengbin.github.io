@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
+    <lastmod>2024-01-13T17:45:16+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2024-01-13T17:45:16+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E4%B8%8D%E5%85%BC%E5%AE%B9/</loc>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/db/add_filed/</loc>
+    <lastmod>2024-01-12T12:37:19+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/go/</loc>
     <lastmod>2023-12-11T10:41:18+08:00</lastmod>
@@ -17,19 +35,7 @@
     <loc>https://shifengbin.github.io/posts/go/go_mysql/</loc>
     <lastmod>2023-12-11T10:41:18+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
-  </url><url>
     <loc>https://shifengbin.github.io/tags/%E6%97%B6%E5%8C%BA/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2023-12-11T10:41:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/redis/</loc>
@@ -257,10 +263,10 @@
     <loc>https://shifengbin.github.io/tags/%E8%A3%B8%E6%9C%BA%E8%B0%83%E8%AF%95/</loc>
     <lastmod>2022-09-23T16:31:24+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/tags/errgroup/</loc>
+    <loc>https://shifengbin.github.io/posts/go_source/errgroup/</loc>
     <lastmod>2022-09-06T17:22:20+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/posts/go_source/errgroup/</loc>
+    <loc>https://shifengbin.github.io/tags/errgroup/</loc>
     <lastmod>2022-09-06T17:22:20+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E6%BA%90%E7%A0%81/</loc>
@@ -380,10 +386,10 @@
     <loc>https://shifengbin.github.io/categories/cpu/</loc>
     <lastmod>2022-06-22T15:04:38+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/tags/false-sharing/</loc>
+    <loc>https://shifengbin.github.io/posts/cpu/falsesharing/</loc>
     <lastmod>2022-06-22T15:04:38+08:00</lastmod>
   </url><url>
-    <loc>https://shifengbin.github.io/posts/cpu/falsesharing/</loc>
+    <loc>https://shifengbin.github.io/tags/false-sharing/</loc>
     <lastmod>2022-06-22T15:04:38+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/%E7%AD%89%E5%80%99%E7%90%86%E8%AE%BA/</loc>

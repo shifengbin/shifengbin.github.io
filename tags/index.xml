@@ -11,9 +11,27 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 11 Dec 2023 10:41:18 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Jan 2024 12:37:19 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>go</title>
+      <title>不兼容</title>
+      <link>https://shifengbin.github.io/tags/%E4%B8%8D%E5%85%BC%E5%AE%B9/</link>
+      <pubDate>Fri, 12 Jan 2024 12:37:19 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E4%B8%8D%E5%85%BC%E5%AE%B9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库</title>
+      <link>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Fri, 12 Jan 2024 12:37:19 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
       <link>https://shifengbin.github.io/tags/go/</link>
       <pubDate>Mon, 11 Dec 2023 10:41:18 +0800</pubDate>
       
@@ -31,16 +49,7 @@
     </item>
     
     <item>
-      <title>数据库</title>
-      <link>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Mon, 11 Dec 2023 10:41:18 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>redis</title>
+      <title>Redis</title>
       <link>https://shifengbin.github.io/tags/redis/</link>
       <pubDate>Fri, 24 Nov 2023 14:20:35 +0800</pubDate>
       
@@ -94,7 +103,7 @@
     </item>
     
     <item>
-      <title>viper</title>
+      <title>Viper</title>
       <link>https://shifengbin.github.io/tags/viper/</link>
       <pubDate>Fri, 15 Sep 2023 15:56:44 +0800</pubDate>
       
@@ -103,7 +112,7 @@
     </item>
     
     <item>
-      <title>alpine</title>
+      <title>Alpine</title>
       <link>https://shifengbin.github.io/tags/alpine/</link>
       <pubDate>Thu, 07 Sep 2023 11:17:42 +0800</pubDate>
       
@@ -112,7 +121,7 @@
     </item>
     
     <item>
-      <title>docker</title>
+      <title>Docker</title>
       <link>https://shifengbin.github.io/tags/docker/</link>
       <pubDate>Thu, 07 Sep 2023 11:17:42 +0800</pubDate>
       
@@ -121,7 +130,7 @@
     </item>
     
     <item>
-      <title>go build</title>
+      <title>Go Build</title>
       <link>https://shifengbin.github.io/tags/go-build/</link>
       <pubDate>Thu, 07 Sep 2023 11:17:42 +0800</pubDate>
       
@@ -130,7 +139,7 @@
     </item>
     
     <item>
-      <title>ubuntu在使用过程中问题记录</title>
+      <title>Ubuntu在使用过程中问题记录</title>
       <link>https://shifengbin.github.io/tags/ubuntu%E5%9C%A8%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Mon, 14 Aug 2023 15:08:46 +0800</pubDate>
       
@@ -166,7 +175,7 @@
     </item>
     
     <item>
-      <title>io</title>
+      <title>Io</title>
       <link>https://shifengbin.github.io/tags/io/</link>
       <pubDate>Thu, 27 Jul 2023 16:14:07 +0800</pubDate>
       
@@ -229,7 +238,7 @@
     </item>
     
     <item>
-      <title>ports</title>
+      <title>Ports</title>
       <link>https://shifengbin.github.io/tags/ports/</link>
       <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
       
@@ -238,7 +247,7 @@
     </item>
     
     <item>
-      <title>service</title>
+      <title>Service</title>
       <link>https://shifengbin.github.io/tags/service/</link>
       <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
       
@@ -247,7 +256,7 @@
     </item>
     
     <item>
-      <title>k8s</title>
+      <title>K8s</title>
       <link>https://shifengbin.github.io/tags/k8s/</link>
       <pubDate>Fri, 12 May 2023 11:03:18 +0800</pubDate>
       
@@ -256,7 +265,7 @@
     </item>
     
     <item>
-      <title>probs</title>
+      <title>Probs</title>
       <link>https://shifengbin.github.io/tags/probs/</link>
       <pubDate>Fri, 12 May 2023 11:03:18 +0800</pubDate>
       
@@ -265,7 +274,7 @@
     </item>
     
     <item>
-      <title>git</title>
+      <title>Git</title>
       <link>https://shifengbin.github.io/tags/git/</link>
       <pubDate>Mon, 08 May 2023 14:24:08 +0800</pubDate>
       
@@ -274,7 +283,7 @@
     </item>
     
     <item>
-      <title>ssh</title>
+      <title>Ssh</title>
       <link>https://shifengbin.github.io/tags/ssh/</link>
       <pubDate>Mon, 08 May 2023 14:24:08 +0800</pubDate>
       
@@ -283,7 +292,7 @@
     </item>
     
     <item>
-      <title>build</title>
+      <title>Build</title>
       <link>https://shifengbin.github.io/tags/build/</link>
       <pubDate>Tue, 07 Mar 2023 10:50:47 +0800</pubDate>
       
@@ -301,7 +310,7 @@
     </item>
     
     <item>
-      <title>intel hex</title>
+      <title>Intel Hex</title>
       <link>https://shifengbin.github.io/tags/intel-hex/</link>
       <pubDate>Mon, 27 Feb 2023 16:45:45 +0800</pubDate>
       
@@ -310,7 +319,7 @@
     </item>
     
     <item>
-      <title>linkname</title>
+      <title>Linkname</title>
       <link>https://shifengbin.github.io/tags/linkname/</link>
       <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
       
@@ -319,7 +328,7 @@
     </item>
     
     <item>
-      <title>swap</title>
+      <title>Swap</title>
       <link>https://shifengbin.github.io/tags/swap/</link>
       <pubDate>Thu, 23 Feb 2023 15:37:31 +0800</pubDate>
       
@@ -355,7 +364,7 @@
     </item>
     
     <item>
-      <title>gdb</title>
+      <title>Gdb</title>
       <link>https://shifengbin.github.io/tags/gdb/</link>
       <pubDate>Fri, 23 Sep 2022 16:31:24 +0800</pubDate>
       
@@ -382,7 +391,7 @@
     </item>
     
     <item>
-      <title>errgroup</title>
+      <title>Errgroup</title>
       <link>https://shifengbin.github.io/tags/errgroup/</link>
       <pubDate>Tue, 06 Sep 2022 17:22:20 +0800</pubDate>
       
@@ -481,7 +490,7 @@
     </item>
     
     <item>
-      <title>k3s</title>
+      <title>K3s</title>
       <link>https://shifengbin.github.io/tags/k3s/</link>
       <pubDate>Wed, 29 Jun 2022 00:02:05 +0800</pubDate>
       
@@ -490,7 +499,7 @@
     </item>
     
     <item>
-      <title>trace</title>
+      <title>Trace</title>
       <link>https://shifengbin.github.io/tags/trace/</link>
       <pubDate>Mon, 27 Jun 2022 14:24:23 +0800</pubDate>
       
@@ -508,7 +517,7 @@
     </item>
     
     <item>
-      <title>once</title>
+      <title>Once</title>
       <link>https://shifengbin.github.io/tags/once/</link>
       <pubDate>Sat, 25 Jun 2022 20:50:16 +0800</pubDate>
       
@@ -535,7 +544,7 @@
     </item>
     
     <item>
-      <title>go 内存模型</title>
+      <title>Go 内存模型</title>
       <link>https://shifengbin.github.io/tags/go-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 23 Jun 2022 10:33:29 +0800</pubDate>
       
@@ -544,7 +553,7 @@
     </item>
     
     <item>
-      <title>Happens before</title>
+      <title>Happens Before</title>
       <link>https://shifengbin.github.io/tags/happens-before/</link>
       <pubDate>Thu, 23 Jun 2022 10:33:29 +0800</pubDate>
       
@@ -571,7 +580,7 @@
     </item>
     
     <item>
-      <title>false sharing</title>
+      <title>False Sharing</title>
       <link>https://shifengbin.github.io/tags/false-sharing/</link>
       <pubDate>Wed, 22 Jun 2022 15:04:38 +0800</pubDate>
       
@@ -616,7 +625,7 @@
     </item>
     
     <item>
-      <title>hugo</title>
+      <title>Hugo</title>
       <link>https://shifengbin.github.io/tags/hugo/</link>
       <pubDate>Mon, 20 Jun 2022 15:02:41 +0800</pubDate>
       
@@ -625,7 +634,7 @@
     </item>
     
     <item>
-      <title>singlefight</title>
+      <title>Singlefight</title>
       <link>https://shifengbin.github.io/tags/singlefight/</link>
       <pubDate>Sun, 19 Jun 2022 22:02:23 +0800</pubDate>
       
@@ -634,7 +643,7 @@
     </item>
     
     <item>
-      <title>sync</title>
+      <title>Sync</title>
       <link>https://shifengbin.github.io/tags/sync/</link>
       <pubDate>Sun, 19 Jun 2022 22:02:23 +0800</pubDate>
       
