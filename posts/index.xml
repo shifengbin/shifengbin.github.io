@@ -21,7 +21,14 @@
       <description>获取不到虚拟IP 使用下面的命令时不能获取到虚拟IP
 docker run -it --net vipnet --ip 172.18.0.2 vipimage /bin/bash 应该添加参数可以让容器有权限操作网络配置
 docker run -it --net vipnet --ip 172.18.0.2 --cap-add=NET_ADMIN vipimage /bin/bash 或者
-docker run -it --net vipnet --ip 172.18.0.2 --privileged vipimage /bin/bash </description>
+docker run -it --net vipnet --ip 172.18.0.2 --privileged vipimage /bin/bash privileged小知识 在 Docker 中使用 --privileged 标志会给容器提供类似于宿主机 root 用户的权限。当容器以 --privileged 模式运行时，它可以绕过 Linux 内核的许多安全限制，从而获得较广泛的操作权限。这通常用于需要执行一些高级系统管理操作的场景，例如直接访问硬件设备或进行某些需要特殊权限的网络操作。
+--privileged 模式的主要影响包括： 全能力（Capabilities）：
+容器将获得 Linux 所有的 capabilities，与在宿主机上运行的进程几乎相同。 设备访问：
+容器可以访问和操作宿主机上的所有设备（/dev 下的设备）。 安全限制：
+绕过了 AppArmor 或 SELinux 的限制，容器可以执行更多的系统级操作。 文件系统：
+容器可以挂载宿主机上的文件系统，甚至使用一些通常需要更高权限的挂载选项。 网络操作：
+允许执行一些通常受限的网络操作，如更改网络配置或使用低号端口。 使用场景 使用 --privileged 模式通常适用于以下场景：
+开发和测试：</description>
     </item>
     
     <item>
