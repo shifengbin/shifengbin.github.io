@@ -3,10 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2024-04-26T18:12:19+08:00</lastmod>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2024-04-26T18:12:19+08:00</lastmod>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/deadlock/</loc>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/go/deadlock/</loc>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/go/</loc>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2024-05-08T17:52:55+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/docker/</loc>
     <lastmod>2024-04-26T18:12:19+08:00</lastmod>
@@ -18,12 +33,6 @@
     <lastmod>2024-04-26T18:12:19+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/linux/</loc>
-    <lastmod>2024-04-26T18:12:19+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2024-04-26T18:12:19+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2024-04-26T18:12:19+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/vip/</loc>
@@ -51,9 +60,6 @@
     <lastmod>2024-01-12T12:37:19+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/go/</loc>
-    <lastmod>2023-12-11T10:41:18+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/categories/go/</loc>
     <lastmod>2023-12-11T10:41:18+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/posts/go/go_mysql/</loc>
