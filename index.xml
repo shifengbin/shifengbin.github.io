@@ -11,7 +11,21 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 08 May 2024 17:52:55 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Jun 2024 11:15:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debezium</title>
+      <link>https://shifengbin.github.io/posts/db/debezium/</link>
+      <pubDate>Fri, 28 Jun 2024 11:15:28 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/db/debezium/</guid>
+      <description>当我们想监控数据库数据变动时我可以使用一些CDC工具,这里介绍一款配合Kafka使用的Connect插件Debezium,他支持Mysql, PostgreSQL, MongoDB等
+这里我们以MySQL为例
+环境: 1. Kafka 3.7 2. MySQL 8.0 3. Debezium Mysql connect Plugin 2.6.2 Final
+Mysql: 需要开启row格式binlog
+[mysqld] bind-address = 0.0.0.0 binlog_format = ROW server_id = 1 log_bin = /var/log/mysql/mysql-bin.log 需要以下权限
+GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, LOCK TABLES, REPLICATION CLIENT ON *.* TO &amp;#39;user&amp;#39; IDENTIFIED BY &amp;#39;password&amp;#39;; 权限 作用 SELECT 查询数据,仅在执行快照时使用 RELOAD 允许连接器使用 FLUSH 语句来清除或重新加载内部缓存、刷新表或获取锁。仅在执行快照时使用 SHOW DATABASES 使连接器能够通过发出 SHOW DATABASE 语句来查看数据库名称。仅在执行快照时使用 REPLICATION SLAVE 使连接器能够连接并读取 MySQL 服务器二进制日志 REPLICATION CLIENT 允许连接器使用以下语句：SHOW MASTER STATUS,SHOW SLAVE STATUS,SHOW BINARY LOGS LOCK TABLES 执行快照时需要锁表 Debezium: 把插件解压到一个目录下,我这里解压到Kafka目录下,创建一个connects目录,解压到这里,解压后我的目录像这样</description>
+    </item>
+    
     <item>
       <title>Deadlock检测时机</title>
       <link>https://shifengbin.github.io/posts/go/deadlock/</link>
