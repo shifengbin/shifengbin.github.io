@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shifengbin.github.io/</loc>
-    <lastmod>2024-06-28T11:15:28+08:00</lastmod>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/</loc>
-    <lastmod>2024-06-28T11:15:28+08:00</lastmod>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/kafka/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/mq/kafka_kraft/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/kraft/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/posts/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/tags/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
+  </url><url>
+    <loc>https://shifengbin.github.io/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2024-07-04T15:16:44+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/debezium/</loc>
     <lastmod>2024-06-28T11:15:28+08:00</lastmod>
@@ -15,12 +33,6 @@
     <lastmod>2024-06-28T11:15:28+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/tags/kafka-connect/</loc>
-    <lastmod>2024-06-28T11:15:28+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/posts/</loc>
-    <lastmod>2024-06-28T11:15:28+08:00</lastmod>
-  </url><url>
-    <loc>https://shifengbin.github.io/tags/</loc>
     <lastmod>2024-06-28T11:15:28+08:00</lastmod>
   </url><url>
     <loc>https://shifengbin.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>

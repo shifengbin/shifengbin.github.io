@@ -11,7 +11,24 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 28 Jun 2024 11:15:28 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Jul 2024 15:16:44 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka使用kraft搭建集群</title>
+      <link>https://shifengbin.github.io/posts/mq/kafka_kraft/</link>
+      <pubDate>Thu, 04 Jul 2024 15:16:44 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/mq/kafka_kraft/</guid>
+      <description>主机准备
+主机 IP 系统 kafka1 192.168.10.101 ubuntu22.04 kafka2 192.168.10.102 ubuntu22.04 kafka3 192.168.10.103 ubuntu22.04 主机环境
+安装java17 kafka_2.13-3.7.0 配置
+这里部署的是broker和controller在一起的方式,也可以分别部署,具体修改kraft相关文件,配置都是相通的 kafka/config/kraft/server.properties
+#集群角色 process.roles=broker,controller #每台机器的id不能一样 node.id=3 #这个是所有conntroller的地址,用于投票选举使用 controller.quorum.voters=1@192.168.10.101:9093,2@192.168.10.102:9093,3@192.168.10.103:9093 # 监听端口 listeners=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093 # 客户端连接地址 advertised.listeners=PLAINTEXT://192.168.20.208:9092 # 日志地址, 这个修改到非/tmp目录,否则系统重启后会丢失 log.dirs=/var/log/kafka/kraft-combined-logs # ...其他配置按照实际情况修改 启动集群步骤:
+KAFKA_CLUSTER_ID=&amp;quot;$(bin/kafka-storage.sh random-uuid)&amp;quot; 这个操作只在一个机器上运行,执行后记录这个值,这个是集群id,整个集群需要一致
+bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties 每个机器上都要执行, 这个KAFKA_CLUSTER_ID 都要是上面执行的值
+bin/kafka-server-start.sh config/kraft/server.properties 启动集群
+注意事项: 1. 先改配置文件然后在执行上述2的命令,否则启动会报错 2. 步骤1产生的随机数是集群id, 所有节点在2步骤时需要使用同一个id,否则运行期间会报INCONSISTENT_CLUSTER_ID in FETCH response: InboundResponse</description>
+    </item>
+    
     <item>
       <title>Debezium</title>
       <link>https://shifengbin.github.io/posts/db/debezium/</link>
