@@ -28,7 +28,7 @@ bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properti
 bin/kafka-server-start.sh config/kraft/server.properties 启动集群
 配置systemd开机启动
 在/etc/systemd/system/kafka.service文件中添加内容
-[Unit] Description=Apache Kafka Server [Service] Type=simple User=root Group=root ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/kraft/server.properties ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh Restart=on-failure [Install] WantedBy=multi-user.target 执行sudo systemctl daemon-reload 重新加载 执行sudo systemctl enable kafka 开机启动 执行sudo systemctl start kafka 启动 如果说还需要配置connect 在/etc/systemd/system/connect.</description>
+[Unit] Description=Apache Kafka Server [Service] Type=simple User=root Group=root ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/kraft/server.properties ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh Restart=on-failure [Install] WantedBy=multi-user.target 执行sudo systemctl daemon-reload 重新加载 执行sudo systemctl enable kafka 开机启动 执行sudo systemctl start kafka 启动 使用sudo journalctl -u kafka.</description>
     </item>
     
   </channel>
