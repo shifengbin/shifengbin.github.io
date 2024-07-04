@@ -26,7 +26,9 @@
 KAFKA_CLUSTER_ID=&amp;quot;$(bin/kafka-storage.sh random-uuid)&amp;quot; 这个操作只在一个机器上运行,执行后记录这个值,这个是集群id,整个集群需要一致
 bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties 每个机器上都要执行, 这个KAFKA_CLUSTER_ID 都要是上面执行的值
 bin/kafka-server-start.sh config/kraft/server.properties 启动集群
-注意事项: 1. 先改配置文件然后在执行上述2的命令,否则启动会报错 2. 步骤1产生的随机数是集群id, 所有节点在2步骤时需要使用同一个id,否则运行期间会报INCONSISTENT_CLUSTER_ID in FETCH response: InboundResponse</description>
+配置systemd开机启动
+在/etc/systemd/system/kafka.service文件中添加内容
+[Unit] Description=Apache Kafka Server [Service] Type=simple User=root Group=root ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/kraft/server.properties ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh Restart=on-failure [Install] WantedBy=multi-user.target 执行sudo systemctl daemon-reload 重新加载 执行sudo systemctl enable kafka 开机启动 执行sudo systemctl start kafka 启动 如果说还需要配置connect 在/etc/systemd/system/connect.</description>
     </item>
     
     <item>

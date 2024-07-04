@@ -8,7 +8,9 @@
 KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)" 这个操作只在一个机器上运行,执行后记录这个值,这个是集群id,整个集群需要一致
 bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties 每个机器上都要执行, 这个KAFKA_CLUSTER_ID 都要是上面执行的值
 bin/kafka-server-start.sh config/kraft/server.properties 启动集群
-注意事项: 1. 先改配置文件然后在执行上述2的命令,否则启动会报错 2. 步骤1产生的随机数是集群id, 所有节点在2步骤时需要使用同一个id,否则运行期间会报INCONSISTENT_CLUSTER_ID in FETCH response: InboundResponse</p></div><footer class=entry-footer>&lt;span title='2024-07-04 15:16:44 +0800 +0800'>七月 4, 2024&lt;/span></footer><a class=entry-link aria-label="post link to Kafka使用kraft搭建集群" href=https://shifengbin.github.io/posts/mq/kafka_kraft/></a></article><article class=post-entry><header class=entry-header><h2>Debezium</h2></header><div class=entry-content><p>当我们想监控数据库数据变动时我可以使用一些CDC工具,这里介绍一款配合Kafka使用的Connect插件Debezium,他支持Mysql, PostgreSQL, MongoDB等
+配置systemd开机启动
+在/etc/systemd/system/kafka.service文件中添加内容
+[Unit] Description=Apache Kafka Server [Service] Type=simple User=root Group=root ExecStart=/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/kraft/server.properties ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh Restart=on-failure [Install] WantedBy=multi-user.target 执行sudo systemctl daemon-reload 重新加载 执行sudo systemctl enable kafka 开机启动 执行sudo systemctl start kafka 启动 如果说还需要配置connect 在/etc/systemd/system/connect....</p></div><footer class=entry-footer>&lt;span title='2024-07-04 15:16:44 +0800 +0800'>七月 4, 2024&lt;/span></footer><a class=entry-link aria-label="post link to Kafka使用kraft搭建集群" href=https://shifengbin.github.io/posts/mq/kafka_kraft/></a></article><article class=post-entry><header class=entry-header><h2>Debezium</h2></header><div class=entry-content><p>当我们想监控数据库数据变动时我可以使用一些CDC工具,这里介绍一款配合Kafka使用的Connect插件Debezium,他支持Mysql, PostgreSQL, MongoDB等
 这里我们以MySQL为例
 环境: 1. Kafka 3.7 2. MySQL 8.0 3. Debezium Mysql connect Plugin 2.6.2 Final Mysql: 需要开启row格式binlog
 [mysqld] bind-address = 0.0.0.0 binlog_format = ROW server_id = 1 log_bin = /var/log/mysql/mysql-bin.log 需要以下权限
