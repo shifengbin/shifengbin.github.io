@@ -18,11 +18,15 @@
       <pubDate>Fri, 28 Jun 2024 11:15:28 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/db/debezium/</guid>
-      <description>当我们想监控数据库数据变动时我可以使用一些CDC工具,这里介绍一款配合Kafka使用的Connect插件Debezium,他支持Mysql, PostgreSQL, MongoDB等
-这里我们以MySQL为例
-环境: 1. Kafka 3.7 2. MySQL 8.0 3. Debezium Mysql connect Plugin 2.6.2 Final Mysql: 需要开启row格式binlog
+      <description>Debezium 用于捕获数据库中的更改，以便应用程序可以查看这些更改并对其做出响应。 Debezium 会记录每个数据库表中所有行级别的更改，并将其作为更改事件流记录下来
+主流CDC工具：
+canal : 监控binlog,支持mysql,社区已不活跃,非首选 debezium : 支持mysql, postgresql, mongodb等十余种数据库,mysql也支持binlog,成熟稳定 flink cdc: 主要应用于大数据,基于debezium,延迟较低 这里选择debezium的理由:
+不选canal的原因 只支持mysql,并且社区已不活跃，除了老项目使用新的已经不是首选,在阿里也都边缘化了 不选flink cdc的原因,公司大数据没有flink的项目,增加运维成本，并且需要使用java开发,并不是所有开发都会使用java 选择debezium的原因，debezium成熟稳定,支持多种数据库，经典的使用方式是使用的是kafka connect部署, 我们有自己的kafka,不会增加运维成本, kafka connect是kafka自带的分布式工具，不用搭建额外的平台管理任务,使用消息队列和固定语言解耦,降低开发成本 当我们想监控数据库数据变动时我可以使用一些CDC工具,这里介绍一款配合Kafka使用的Connect插件Debezium,他支持Mysql, PostgreSQL, MongoDB等
+能做什么:
+1. 解耦数据修改端和使用端,减少应该通知但是没有通知的数据变更的错误,或者手动修改数据库时没有或忘记通知其他端 2. 异构数据库同步数据,比如搜索相关业务,需要数据实时同步，但是要保证数据一致 3. 缓存数据的生成和过期 4. 一些计算任务(数据统计,聚合) 这里我们以MySQL为例
+环境 1. Kafka 3.7 2. MySQL 8.0 3. Debezium Mysql connect Plugin 2.6.2 Final Mysql 需要开启row格式binlog
 [mysqld] bind-address = 0.0.0.0 binlog_format = ROW server_id = 1 log_bin = /var/log/mysql/mysql-bin.log 需要以下权限
-GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, LOCK TABLES, REPLICATION CLIENT ON *.* TO &amp;#39;user&amp;#39; IDENTIFIED BY &amp;#39;password&amp;#39;; 权限 作用 SELECT 查询数据,仅在执行快照时使用 RELOAD 允许连接器使用 FLUSH 语句来清除或重新加载内部缓存、刷新表或获取锁。仅在执行快照时使用 SHOW DATABASES 使连接器能够通过发出 SHOW DATABASE 语句来查看数据库名称。仅在执行快照时使用 REPLICATION SLAVE 使连接器能够连接并读取 MySQL 服务器二进制日志 REPLICATION CLIENT 允许连接器使用以下语句：SHOW MASTER STATUS,SHOW SLAVE STATUS,SHOW BINARY LOGS LOCK TABLES 执行快照时需要锁表 Debezium: 把插件解压到一个目录下,我这里解压到Kafka目录下,创建一个connects目录,解压到这里,解压后我的目录像这样 --kafka |--connects |--debezium-connector-mysql 在kafka的config文件夹下配置connect-distributed.</description>
+GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, LOCK TABLES, REPLICATION CLIENT ON *.</description>
     </item>
     
     <item>
