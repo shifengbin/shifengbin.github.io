@@ -173,7 +173,7 @@ GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, LOCK TABLES, REPLICATIO
 
 3. skip: 跳过有问题的事件并且不记录任何内容
 </code></pre><p>transforms: 转换器列表，逗号分隔,可用于把分表的事件转换到一个主题下</p><p>使用curl把配置文件发送给connect</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>curl -X POST -H <span class=s2>&#34;Content-Type: application/json&#34;</span> --data @mysql.json http://localhost:8083/connectors
-</span></span></code></pre></div><p>其他接口方法请参考</p><p><a href=/static/json/kafka%20connector.postman_collection.json>postman json</a></p><p>这条语句会把mysql.json这个文件POST给connect, connect收到请求后会启动task启动对mysql的监控</p><p>剩下要做的是编写consumer来消费数据库变动事件就可以了</p><p>注意:</p><pre><code>schema.history.internal.kafka.topic:
+</span></span></code></pre></div><p>其他接口方法请参考</p><p><a href=/json/kafka_connector.postman_collection.json>postman json</a></p><p>这条语句会把mysql.json这个文件POST给connect, connect收到请求后会启动task启动对mysql的监控</p><p>剩下要做的是编写consumer来消费数据库变动事件就可以了</p><p>注意:</p><pre><code>schema.history.internal.kafka.topic:
 
 1. 这个配置项是connector内部使用，不需消费
 2. partition必须为1(因为要保证顺序性)
