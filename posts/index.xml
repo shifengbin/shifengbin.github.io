@@ -33,7 +33,14 @@
 &lt;li&gt;等待或强制终止：如果容器在终止宽限期(terminationGracePeriodSeconds)内没有关闭，Kubernetes 会发送 SIGKILL 信号强制终止容器。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;添加延迟的原因主要是preStop和更新endpoint是异步进行,如果没有设置preStop就会出现修改endpoint和发送SIGTERM异步进行, 当应用收到SIGTERM时就不会接收新请求处理完老请求后退出,但是此时endpoint还有可能没有修改完成,就会导致一部分请求流入了即将退出的pod,而且无法响应请求,这时候这部分请求就会损失&lt;/p&gt;
-&lt;p&gt;这个延时就是为了能让endpoint修改完成之后pod再响应SIGTERM进行优雅退出,此时新的流量已经不会在进入该pod了&lt;/p&gt;</description>
+&lt;p&gt;没有配置preStop的情况
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/non_preStop.drawio.png&#34; alt=&#34;没有配置preStop的情况&#34;  /&gt;
+
+当应用接收到SIGTERM就不处理新请求了,从收到SIGTERM到更新完endpoint前,这部分请求都会异常&lt;/p&gt;
+&lt;p&gt;有配置preStop的情况
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/has_preStop.drawio.png&#34; alt=&#34;有配置preStop的情况&#34;  /&gt;
+
+这时候能保证应用收到SIGTERM前endpoint已经更新完成,这样就不会异常了&lt;/p&gt;</description>
     </item>
     
     <item>
