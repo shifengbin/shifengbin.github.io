@@ -18,16 +18,16 @@
       <pubDate>Tue, 07 Mar 2023 10:50:47 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/build/</guid>
-      <description>go:build 是 Go 1.17 版本中引入的一个构建标记，用于根据不同的条件控制代码的编译。go:build 格式如//go:build &amp;lt;标记表达式&amp;gt;, 1.17之前使用+build的方式,这里我们介绍更强大的的go:build.
-表达式可以包含由 ||、&amp;amp;&amp;amp; 和 ! 运算符和括号组合的选项,含义与 Go 语言中相同.
-构建约束可以出现在任何类型的源文件中（不仅仅是 Go 文件），但是它们必须出现在文件的顶部附近，仅由空行和其他行注释分隔。这些规则意味着在 Go 文件中，构建约束必须出现在包声明之前。
-例如，下面的构建约束将约束一个文件在满足“linux”和“386”约束条件或在满足“darwin”条件且未满足“cgo”条件时进行构建：//go:build (linux &amp;amp;&amp;amp; 386) || (darwin &amp;amp;&amp;amp; !cgo)
-自定义tag
-//go:build atest
-当我们使用go build -tags atest的情况下会编译此文件,否则不会编译
-控制go版本
-//go:build go1.17 指定当前文件&amp;gt;=go1.17才编译
-//go:build go1.17 &amp;amp;&amp;amp; go1.20 版本&amp;gt;= go1.17 并且&amp;lt;= go1.20</description>
+      <description>&lt;p&gt;&lt;code&gt;go:build&lt;/code&gt; 是 Go 1.17 版本中引入的一个构建标记，用于根据不同的条件控制代码的编译。go:build 格式如&lt;code&gt;//go:build &amp;lt;标记表达式&amp;gt;&lt;/code&gt;, 1.17之前使用&lt;code&gt;+build&lt;/code&gt;的方式,这里我们介绍更强大的的&lt;code&gt;go:build&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;表达式可以包含由 ||、&amp;amp;&amp;amp; 和 ! 运算符和括号组合的选项,含义与 Go 语言中相同.&lt;/p&gt;
+&lt;p&gt;构建约束可以出现在任何类型的源文件中（不仅仅是 Go 文件），但是它们必须出现在文件的顶部附近，仅由空行和其他行注释分隔。这些规则意味着在 Go 文件中，&lt;strong&gt;构建约束必须出现在包声明之前&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;例如，下面的构建约束将约束一个文件在满足“linux”和“386”约束条件或在满足“darwin”条件且未满足“cgo”条件时进行构建：&lt;code&gt;//go:build (linux &amp;amp;&amp;amp; 386) || (darwin &amp;amp;&amp;amp; !cgo)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;自定义tag&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//go:build atest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当我们使用&lt;code&gt;go build -tags atest&lt;/code&gt;的情况下会编译此文件,否则不会编译&lt;/p&gt;
+&lt;p&gt;控制go版本&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//go:build go1.17&lt;/code&gt; 指定当前文件&amp;gt;=go1.17才编译&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;//go:build go1.17 &amp;amp;&amp;amp; go1.20&lt;/code&gt; 版本&amp;gt;= go1.17 并且&amp;lt;= go1.20&lt;/p&gt;</description>
     </item>
     
   </channel>

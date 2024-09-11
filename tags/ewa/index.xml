@@ -18,16 +18,23 @@
       <pubDate>Mon, 20 Jun 2022 17:44:00 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/math/ewa/</guid>
-      <description>EWA是什么 EWA是以指数式递减加权的移动平均, 是一种近似平均(也可以理解为一段时间的平均值,因为越久的数据对当前的影响越小,小到一定程度就可以忽略,可以理解为一段时间的平均值)
-基本公式 $V_t=βV_{t-1} + (1-β)R_t$
-$V_t$ 代表t时刻的平均值
-$βV_{t-1}$代表t-1时刻的平均值
-$R_t$ 是t时刻的真实值
-$β$ 范围在0-1之间
-平均天数为 $N=\frac {1} {1-β}$
-$β=0.5$则平均个数N=2 $β=0.9$则平均个数N=$\frac{1}{1-0.9}=10$ 也就是平均最近10次的
-可以做什么 计算$\frac {1} {1-β}$个数据的平均值,减少噪声影响,平滑数据
-好处比其他平均的好处是 不需要保存最近N次的数据,只需要保存上次计算的平均值</description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/cover.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;ewa是什么&#34;&gt;EWA是什么&lt;/h2&gt;
+&lt;p&gt;EWA是以指数式递减加权的移动平均, 是一种近似平均(也可以理解为一段时间的平均值,因为越久的数据对当前的影响越小,小到一定程度就可以忽略,可以理解为一段时间的平均值)&lt;/p&gt;
+&lt;h2 id=&#34;基本公式&#34;&gt;基本公式&lt;/h2&gt;
+&lt;p&gt;$V_t=βV_{t-1} + (1-β)R_t$&lt;/p&gt;
+&lt;p&gt;$V_t$ 代表t时刻的平均值&lt;/p&gt;
+&lt;p&gt;$βV_{t-1}$代表t-1时刻的平均值&lt;/p&gt;
+&lt;p&gt;$R_t$ 是t时刻的真实值&lt;/p&gt;
+&lt;p&gt;$β$ 范围在0-1之间&lt;/p&gt;
+&lt;p&gt;平均天数为 $N=\frac {1} {1-β}$&lt;/p&gt;
+&lt;p&gt;$β=0.5$则平均个数N=2
+$β=0.9$则平均个数N=$\frac{1}{1-0.9}=10$ 也就是平均最近10次的&lt;/p&gt;
+&lt;h2 id=&#34;可以做什么&#34;&gt;可以做什么&lt;/h2&gt;
+&lt;p&gt;计算$\frac {1} {1-β}$个数据的平均值,减少噪声影响,平滑数据&lt;/p&gt;
+&lt;h2 id=&#34;好处比其他平均的好处是&#34;&gt;好处比其他平均的好处是&lt;/h2&gt;
+&lt;p&gt;不需要保存最近N次的数据,只需要保存上次计算的平均值&lt;/p&gt;</description>
     </item>
     
   </channel>

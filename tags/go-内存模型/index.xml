@@ -18,25 +18,54 @@
       <pubDate>Thu, 23 Jun 2022 10:33:29 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/memorymodel/</guid>
-      <description>介绍 Go内存模型指定了一种条件，在这种条件下，可以保证读取一个goroutine中的变量，以观察不同goroutine中写入同一变量所产生的值。
-建议 修改多个goroutine同时访问的数据必须序列化访问
-序列化访问保护数据使用channel操作或者其他同步原语比如sync或者sync/atomic包
-Happens before 在一个goroutine中,读写必须表现得就像它们按照程序指定的顺序执行一样;也就是说 在一个goroutine中,处理器和编译器可以重排读写的执行顺序,仅当重排后的行为不改变语言的设定.因为重排,一个goroutine观察到的执行顺序可能与另一个goroutine观察到的顺序不同.举个例子,如果一个goroutine执行a = 1; b = 2;,另一个可能会观察到b在a之前更新.
-为了指定读写的需要，我们定义了在Go程序中执行内存操作的偏序(partial order)。如果事件$e_1$先发生于事件$e_2$我们说$e_2$后发生于$e_1$. 同样的如果$e_1$没有先发生于$e_2$并且$e_1$没有后发生于$e_2$那么我们说$e_1 e_2$同时发生.
-在单个gorutine里, happens-before的顺序是程序表示的顺序.
-如果下面两个条件成立,则允许变量v的读r 观察到对v的写w:
-r没有先发生于w 没有其他对v的写w&amp;rsquo; ,后发生于w, 先发生于r (也就是在w 和 r之间不存在 w&#39;) 为了保证r能读到w的写,要确保w是允许r观察的唯一写入.也就是说，如果以下两个条件均成立，则保证r观察到w：
-w先发生于r 任何其他写入共享变量v都要先发生于w或者后发生于r 这对条件比第一对更严格,这一对要求没有其他的写同时发生于w或r
-在单个gorutine中没有并发,这两个定义是等价的:读r观察最近写入w到v的值.
-在多个gorutine访问一个共享变量v,必须使用同步事件来建立happens-before条件来确保读到期望的写.
-变量v的类型为零值时，变量v的初始化行为就像在内存模型中写入一样。(初始化等同于写入)
-读写超过机器字(machine word)的行为就和以未指定的顺序执行多个机器字大小的操作一样(超过machine word 每个machine word 读取和写入顺序可能不是期望的)
-总之, 想要在一个gorutine中读到另一个gorutine的写就要保证, 写在读之前发生,如果我们不加控制,这个写先于读的顺序就很难保证,所以我们需要使用atomic或者和lock机制来保证顺序保证happens-before
-同步 初始化 程序初始化在单个goroutine中运行，但该goroutine可能会创建其他并发运行的goroutine。
-如果包p导入包q，则q的init函数的完成时间在任何p的开始之前。
-函数main的开始。main在所有init函数完成后发生。
-Goroutine创建 启动新goroutine的go语句发生在goroutine开始执行之前。 举例
-var a string func f() { print(a) } func hello() { a = &amp;#34;hello, world&amp;#34; go f() } 调用hello将在将来hello, world,可能hello已经返回</description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/train.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;Go内存模型指定了一种条件，在这种条件下，可以保证读取一个goroutine中的变量，以观察不同goroutine中写入同一变量所产生的值。&lt;/p&gt;
+&lt;h1 id=&#34;建议&#34;&gt;建议&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;修改&lt;/strong&gt;多个goroutine同时访问的数据必须序列化访问&lt;/p&gt;
+&lt;p&gt;序列化访问保护数据使用&lt;code&gt;channel&lt;/code&gt;操作或者其他同步原语比如&lt;code&gt;sync&lt;/code&gt;或者&lt;code&gt;sync/atomic&lt;/code&gt;包&lt;/p&gt;
+&lt;h1 id=&#34;happens-before&#34;&gt;Happens before&lt;/h1&gt;
+&lt;p&gt;在一个goroutine中,读写必须表现得就像它们按照程序指定的顺序执行一样;也就是说 在一个goroutine中,处理器和编译器可以重排读写的执行顺序,仅当重排后的行为不改变语言的设定.因为重排,一个goroutine观察到的执行顺序可能与另一个goroutine观察到的顺序不同.举个例子,如果一个goroutine执行&lt;code&gt;a = 1; b = 2;&lt;/code&gt;,另一个可能会观察到b在a之前更新.&lt;/p&gt;
+&lt;p&gt;为了指定读写的需要，我们定义了在Go程序中执行内存操作的偏序(partial order)。如果事件$e_1$先发生于事件$e_2$我们说$e_2$后发生于$e_1$. 同样的如果$e_1$没有先发生于$e_2$并且$e_1$没有后发生于$e_2$那么我们说$e_1 e_2$同时发生.&lt;/p&gt;
+&lt;p&gt;在单个gorutine里, &lt;code&gt;happens-before&lt;/code&gt;的顺序是程序表示的顺序.&lt;/p&gt;
+&lt;p&gt;如果下面两个条件成立,则允许变量v的读r 观察到对v的写w:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;r没有先发生于w&lt;/li&gt;
+&lt;li&gt;没有其他对v的写w&amp;rsquo; ,后发生于w, 先发生于r (也就是在w 和 r之间不存在 w&#39;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为了保证r能读到w的写,要确保w是允许r观察的唯一写入.也就是说，如果以下两个条件均成立，则保证r观察到w：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;w先发生于r&lt;/li&gt;
+&lt;li&gt;任何其他写入共享变量v都要先发生于w或者后发生于r&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这对条件比第一对更严格,这一对要求没有其他的写同时发生于w或r&lt;/p&gt;
+&lt;p&gt;在单个gorutine中没有并发,这两个定义是等价的:读r观察最近写入w到v的值.&lt;/p&gt;
+&lt;p&gt;在多个gorutine访问一个共享变量v,必须使用同步事件来建立&lt;code&gt;happens-before&lt;/code&gt;条件来确保读到期望的写.&lt;/p&gt;
+&lt;p&gt;变量v的类型为零值时，变量v的初始化行为就像在内存模型中写入一样。(初始化等同于写入)&lt;/p&gt;
+&lt;p&gt;读写超过机器字(machine word)的行为就和以未指定的顺序执行多个机器字大小的操作一样(超过machine word 每个machine word 读取和写入顺序可能不是期望的)&lt;/p&gt;
+&lt;p&gt;总之, 想要在一个gorutine中读到另一个gorutine的写就要保证, 写在读之前发生,如果我们不加控制,这个写先于读的顺序就很难保证,所以我们需要使用atomic或者和lock机制来保证顺序保证&lt;code&gt;happens-before&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;同步&#34;&gt;同步&lt;/h1&gt;
+&lt;h2 id=&#34;初始化&#34;&gt;初始化&lt;/h2&gt;
+&lt;p&gt;程序初始化在单个goroutine中运行，但该goroutine可能会创建其他并发运行的goroutine。&lt;/p&gt;
+&lt;p&gt;如果包p导入包q，则q的init函数的完成时间在任何p的开始之前。&lt;/p&gt;
+&lt;p&gt;函数main的开始。main在所有init函数完成后发生。&lt;/p&gt;
+&lt;h2 id=&#34;goroutine创建&#34;&gt;Goroutine创建&lt;/h2&gt;
+&lt;p&gt;启动新goroutine的&lt;code&gt;go&lt;/code&gt;语句发生在goroutine开始执行之前。
+举例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;hello, world&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;go&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;调用hello将在将来hello, world,可能hello已经返回&lt;/p&gt;
+&lt;h2 id=&#34;goroutine销毁&#34;&gt;Goroutine销毁&lt;/h2&gt;
+&lt;p&gt;goroutine的退出不能保证先发生于任何事件,例如:&lt;/p&gt;</description>
     </item>
     
   </channel>

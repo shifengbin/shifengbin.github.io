@@ -18,17 +18,53 @@
       <pubDate>Fri, 26 Apr 2024 18:12:19 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/linux/docker_vip/</guid>
-      <description>获取不到虚拟IP 使用下面的命令时不能获取到虚拟IP
-docker run -it --net vipnet --ip 172.18.0.2 vipimage /bin/bash 应该添加参数可以让容器有权限操作网络配置
-docker run -it --net vipnet --ip 172.18.0.2 --cap-add=NET_ADMIN vipimage /bin/bash 或者
-docker run -it --net vipnet --ip 172.18.0.2 --privileged vipimage /bin/bash privileged小知识 在 Docker 中使用 --privileged 标志会给容器提供类似于宿主机 root 用户的权限。当容器以 --privileged 模式运行时，它可以绕过 Linux 内核的许多安全限制，从而获得较广泛的操作权限。这通常用于需要执行一些高级系统管理操作的场景，例如直接访问硬件设备或进行某些需要特殊权限的网络操作。
---privileged 模式的主要影响包括： 全能力（Capabilities）：
-容器将获得 Linux 所有的 capabilities，与在宿主机上运行的进程几乎相同。 设备访问：
-容器可以访问和操作宿主机上的所有设备（/dev 下的设备）。 安全限制：
-绕过了 AppArmor 或 SELinux 的限制，容器可以执行更多的系统级操作。 文件系统：
-容器可以挂载宿主机上的文件系统，甚至使用一些通常需要更高权限的挂载选项。 网络操作：
-允许执行一些通常受限的网络操作，如更改网络配置或使用低号端口。 使用场景 使用 --privileged 模式通常适用于以下场景：
-开发和测试：</description>
+      <description>&lt;h1 id=&#34;获取不到虚拟ip&#34;&gt;获取不到虚拟IP&lt;/h1&gt;
+&lt;p&gt;使用下面的命令时不能获取到虚拟IP&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it --net vipnet --ip 172.18.0.2 vipimage /bin/bash&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;应该添加参数可以让容器有权限操作网络配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it --net vipnet --ip 172.18.0.2 --cap-add&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;NET_ADMIN vipimage /bin/bash&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -it --net vipnet --ip 172.18.0.2 --privileged vipimage /bin/bash&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;privileged小知识&#34;&gt;privileged小知识&lt;/h1&gt;
+&lt;p&gt;在 Docker 中使用 &lt;code&gt;--privileged&lt;/code&gt; 标志会给容器提供类似于宿主机 root 用户的权限。当容器以 &lt;code&gt;--privileged&lt;/code&gt; 模式运行时，它可以绕过 Linux 内核的许多安全限制，从而获得较广泛的操作权限。这通常用于需要执行一些高级系统管理操作的场景，例如直接访问硬件设备或进行某些需要特殊权限的网络操作。&lt;/p&gt;
+&lt;h3 id=&#34;--privileged-模式的主要影响包括&#34;&gt;&lt;code&gt;--privileged&lt;/code&gt; 模式的主要影响包括：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;全能力（Capabilities）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器将获得 Linux 所有的 capabilities，与在宿主机上运行的进程几乎相同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;设备访问&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器可以访问和操作宿主机上的所有设备（&lt;code&gt;/dev&lt;/code&gt; 下的设备）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全限制&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;绕过了 AppArmor 或 SELinux 的限制，容器可以执行更多的系统级操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;文件系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器可以挂载宿主机上的文件系统，甚至使用一些通常需要更高权限的挂载选项。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络操作&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;允许执行一些通常受限的网络操作，如更改网络配置或使用低号端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;使用场景&#34;&gt;使用场景&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code&gt;--privileged&lt;/code&gt; 模式通常适用于以下场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开发和测试&lt;/strong&gt;：&lt;/p&gt;</description>
     </item>
     
   </channel>

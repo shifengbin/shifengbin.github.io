@@ -18,13 +18,50 @@
       <pubDate>Thu, 23 Feb 2023 15:37:31 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/swap/</guid>
-      <description>树莓派 /etc/dphys-swapfile 是 Raspberry Pi 上的一个文件，用于控制swap文件的设置和使用。该文件用于设置swap文件的大小、位置以及启用和禁用swap。
-在 Raspberry Pi 上，如果想要使用swap文件，可以通过以下步骤配置和使用swap文件：
-安装 dphys-swapfile 包，使用命令： sudo apt-get update sudo apt-get install dphys-swapfile 打开 /etc/dphys-swapfile 文件，配置swap文件的大小和位置。例如，将以下行： CONF_SWAPSIZE=100 #修改为0可关闭swap CONF_SWAPFILE=/var/swap 启用 sudo dphys-swapfile setup sudo dphys-swapfile swapon 禁用 sudo dphys-swapfile swapoff 其他linux 在Linux中，可以通过以下步骤关闭swap：
-查看当前的swap情况，使用命令： swapon -s 如果没有任何输出，则说明当前系统没有启用swap。
-如果系统启用了swap，需要先关闭swap，使用命令： swapoff -a 执行此命令会关闭所有swap分区。
-临时禁用swap，使用命令： echo 0 &amp;gt; /proc/sys/vm/swappiness 执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。
-永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行： #/dev/sda2 swap swap defaults 0 0 </description>
+      <description>&lt;h1 id=&#34;树莓派&#34;&gt;树莓派&lt;/h1&gt;
+&lt;p&gt;/etc/dphys-swapfile 是 Raspberry Pi 上的一个文件，用于控制swap文件的设置和使用。该文件用于设置swap文件的大小、位置以及启用和禁用swap。&lt;/p&gt;
+&lt;p&gt;在 Raspberry Pi 上，如果想要使用swap文件，可以通过以下步骤配置和使用swap文件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 dphys-swapfile 包，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install dphys-swapfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;打开 /etc/dphys-swapfile 文件，配置swap文件的大小和位置。例如，将以下行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CONF_SWAPSIZE=100  #修改为0可关闭swap
+CONF_SWAPFILE=/var/swap
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;启用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile setup
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile swapon
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;禁用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile swapoff
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;其他linux&#34;&gt;其他linux&lt;/h1&gt;
+&lt;p&gt;在Linux中，可以通过以下步骤关闭swap：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查看当前的swap情况，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swapon -s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有任何输出，则说明当前系统没有启用swap。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;如果系统启用了swap，需要先关闭swap，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swapoff -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行此命令会关闭所有swap分区。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;临时禁用swap，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &amp;gt; /proc/sys/vm/swappiness
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#/dev/sda2       swap            swap    defaults        0 0
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>

@@ -18,7 +18,14 @@
       <pubDate>Mon, 20 Jun 2022 15:02:41 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/hugo/comments/</guid>
-      <description> 先在utteranc的configuration部分找到安装utteranc app到仓库,选择一个仓库并安装 在页面Enable Utterances部分找到js代码 在自己用的主题上找到关于comment的layout,把js代码添加到里面 运行 </description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/201220120347-5.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先在&lt;a href=&#34;https://utteranc.es/&#34;&gt;utteranc&lt;/a&gt;的&lt;code&gt;configuration&lt;/code&gt;部分找到安装utteranc app到仓库,选择一个仓库并安装&lt;/li&gt;
+&lt;li&gt;在页面&lt;code&gt;Enable Utterances&lt;/code&gt;部分找到js代码&lt;/li&gt;
+&lt;li&gt;在自己用的主题上找到关于comment的layout,把js代码添加到里面&lt;/li&gt;
+&lt;li&gt;运行&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>

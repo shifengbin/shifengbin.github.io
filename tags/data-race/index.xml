@@ -18,14 +18,22 @@
       <pubDate>Thu, 23 Jun 2022 16:39:21 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/datarace/</guid>
-      <description> 没有安全的数据竞赛,不要使用各种炫技的无锁方式等骚操作! 什么是数据竞赛 并行程序在未使用同步方法(atomic, lock)的情况下, 并发读写共享资源就会造成数据竞争
-数据竞赛检测原理 通过编译器注入检测代码, 检测代码会保存读写内存的 线程id, 时钟, 读写位置和长度, 是否写入等信息, 在运行的过程判断,读写内存是否有交叉,是否满足happens-before等条件,来判断数据竞赛
-如何避免 使用同步方法去解决happens-before 比如使用atomic包, sync包 或者使用chan
-go检测数据竞赛方法 使用go工具链 go build -race 编译一个带有数据竞赛检测的可执行程序,会在编译期插入代码,这种程序消耗内存和CPU是不带检测的数倍到数十倍,不可大范围用于生产环境
-go run -race 直接运行一个带检测的程序(内部也经过编译)
-go test -race 运行待检测的单元测试
-go install -race 编译并安装一个待检测的可执行程序
-注意数据竞赛检测是需要程序运行到有竞赛的代码才会检测到!运行不到的是不会检测出来的! </description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/train2.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;没有安全的数据竞赛不要使用各种炫技的无锁方式等骚操作&#34;&gt;没有安全的数据竞赛,不要使用各种炫技的无锁方式等骚操作!&lt;/h1&gt;
+&lt;h1 id=&#34;什么是数据竞赛&#34;&gt;什么是数据竞赛&lt;/h1&gt;
+&lt;p&gt;并行程序在未使用同步方法(atomic, lock)的情况下, 并发读写共享资源就会造成数据竞争&lt;/p&gt;
+&lt;h1 id=&#34;数据竞赛检测原理&#34;&gt;数据竞赛检测原理&lt;/h1&gt;
+&lt;p&gt;通过编译器注入检测代码, 检测代码会保存读写内存的 线程id, 时钟, 读写位置和长度, 是否写入等信息, 在运行的过程判断,读写内存是否有交叉,是否满足&lt;code&gt;happens-before&lt;/code&gt;等条件,来判断数据竞赛&lt;/p&gt;
+&lt;h1 id=&#34;如何避免&#34;&gt;如何避免&lt;/h1&gt;
+&lt;p&gt;使用同步方法去解决&lt;code&gt;happens-before&lt;/code&gt; 比如使用atomic包, sync包 或者使用chan&lt;/p&gt;
+&lt;h1 id=&#34;go检测数据竞赛方法&#34;&gt;go检测数据竞赛方法&lt;/h1&gt;
+&lt;p&gt;使用go工具链
+&lt;code&gt;go build -race&lt;/code&gt; 编译一个带有数据竞赛检测的可执行程序,会在编译期插入代码,这种程序消耗内存和CPU是不带检测的数倍到数十倍,不可大范围用于生产环境&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;go run -race&lt;/code&gt; 直接运行一个带检测的程序(内部也经过编译)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;go test -race&lt;/code&gt; 运行待检测的单元测试&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;go install -race&lt;/code&gt; 编译并安装一个待检测的可执行程序&lt;/p&gt;
+&lt;h1 id=&#34;注意数据竞赛检测是需要程序运行到有竞赛的代码才会检测到运行不到的是不会检测出来的&#34;&gt;注意数据竞赛检测是需要程序运行到有竞赛的代码才会检测到!运行不到的是不会检测出来的!&lt;/h1&gt;</description>
     </item>
     
   </channel>

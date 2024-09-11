@@ -18,11 +18,80 @@
       <pubDate>Fri, 24 Nov 2023 14:20:35 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/micro_service/multi_cache/</guid>
-      <description>由一次线上问题引发的思考，本地缓存+redis缓存的多级缓存方案。
-一次线上发生OOM, CPU占用高排查，之前所有的缓存都是放在redis中，并发高时，大量请求去redis,服务反序列化，导致CPU占用高，内存占用高，最终达到资源上线被k8s杀掉。
-后来想到了使用本地缓存，这种公共对象保存一份数据，不用反复序列化，减少CPU占用，减少内存占用，但是本地缓存有一个问题，多个副本在同一时间可能缓存数据不一致，虽然在我们这个场景下，这份公共数据更新不频繁，但是也有可能发生这个情况，所以想到了使用多级缓存，本地缓存+redis缓存，本地缓存作为一级缓存，redis作为二级缓存，当redis更新时会设置数据版本号(时间戳)，本地获取时会比对版本号，如果相同redis就不返回数据，如果不同就返回数据，这样就可以保证数据一致性。
-用go描述一下取值和设置值的逻辑，其他逻辑都比较简单，这里使用lua脚本来实现，版本和数据的原子性和比较版本和返回相应的返回值，还可以减少网络开销
-package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/go-redis/redis&amp;#34; ) //这段脚本是用来设置值的，设置值的时候会设置版本号，设置过期时间 const setval = ` local key_val = KEYS[1] local key_version = key_val .. &amp;#34;_version&amp;#34; local val = ARGV[1] local expire = ARGV[2] local version = ARGV[3] redis.call(&amp;#39;SET&amp;#39;, key_version, version) redis.call(&amp;#39;EXPIRE&amp;#39;, key_version, expire) redis.call(&amp;#39;SET&amp;#39;, key_val, val) redis.call(&amp;#39;EXPIRE&amp;#39;, key_val, expire) return nil ` //这段脚本是用来取值的，取值的时候会比较版本号，如果版本号不一致就返回值 const getval = ` local key_val = KEYS[1] local key_version = key_val .. &amp;#34;_version&amp;#34; local givenVersion = ARGV[1] local version = redis.</description>
+      <description>&lt;p&gt;由一次线上问题引发的思考，本地缓存+redis缓存的多级缓存方案。&lt;/p&gt;
+&lt;p&gt;一次线上发生OOM, CPU占用高排查，之前所有的缓存都是放在redis中，并发高时，大量请求去redis,服务反序列化，导致CPU占用高，内存占用高，最终达到资源上线被k8s杀掉。&lt;/p&gt;
+&lt;p&gt;后来想到了使用本地缓存，这种公共对象保存一份数据，不用反复序列化，减少CPU占用，减少内存占用，但是本地缓存有一个问题，多个副本在同一时间可能缓存数据不一致，虽然在我们这个场景下，这份公共数据更新不频繁，但是也有可能发生这个情况，所以想到了使用多级缓存，本地缓存+redis缓存，本地缓存作为一级缓存，redis作为二级缓存，当redis更新时会设置数据版本号(时间戳)，本地获取时会比对版本号，如果相同redis就不返回数据，如果不同就返回数据，这样就可以保证数据一致性。&lt;/p&gt;
+&lt;p&gt;用go描述一下取值和设置值的逻辑，其他逻辑都比较简单，这里使用lua脚本来实现，版本和数据的原子性和比较版本和返回相应的返回值，还可以减少网络开销&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;s&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;s&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;s&#34;&gt;&amp;#34;github.com/go-redis/redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//这段脚本是用来设置值的，设置值的时候会设置版本号，设置过期时间
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;setval&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local key_val = KEYS[1]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local key_version = key_val .. &amp;#34;_version&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local val = ARGV[1]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local expire = ARGV[2]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local version = ARGV[3]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;redis.call(&amp;#39;SET&amp;#39;, key_version, version)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;redis.call(&amp;#39;EXPIRE&amp;#39;, key_version, expire)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;redis.call(&amp;#39;SET&amp;#39;, key_val, val)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;redis.call(&amp;#39;EXPIRE&amp;#39;, key_val, expire)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;return nil
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//这段脚本是用来取值的，取值的时候会比较版本号，如果版本号不一致就返回值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;getval&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local key_val = KEYS[1]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local key_version = key_val .. &amp;#34;_version&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local givenVersion = ARGV[1]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;local version = redis.call(&amp;#39;GET&amp;#39;, key_version)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;if not version then
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;    return nil
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;if version ~= givenVersion then
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;    local value1 = redis.call(&amp;#39;GET&amp;#39;, key_val)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;    return {version, value1}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;return {version}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;redisClient&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;redis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;NewClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;redis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nx&#34;&gt;Addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;     &lt;span class=&#34;s&#34;&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nx&#34;&gt;Password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;xxx&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nx&#34;&gt;DB&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;       &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;redisClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Eval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ab&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;redisClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Eval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;setval&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ab&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;UnixNano&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Unix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;redis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Nil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;说一下总体的思路
+使用一个localstorage, redis， redis lua, singleflight&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,13 +100,32 @@ package main import ( &amp;#34;fmt&amp;#34; &amp;#34;time&amp;#34; &amp;#34;gith
       <pubDate>Mon, 27 Jun 2022 14:24:23 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/micro_service/trace/</guid>
-      <description>链路追踪是什么 链路追踪是在分布式条件下将一个请求还原成一个完整调用链条,可以分析调用拓扑,延迟分析,性能分析.
-链路追踪的好处 分析网络,服务耗时(通过链路追踪事件可以知道网络延迟,服务延迟) 分析网络拓扑(链路分析) 故障定位(配合日志,进行故障定位) 原理 Trace Trace代表一个调用链路,通过TraceID来标记, 一次请求调用的各个服务TraceID在全局都是唯一的
-Span Span代表一个调用范围拥有(ParentID, SpanID), ParentID代表他的调用者SpanID, SpanID代表本层次调用id
-通过TraceID标记一个完整调用链都调用了哪些调用过程, 通过ParendID,和SpanID还原了调用的父子关系
-Annotation 通过上面三个ID只能还原调用关系, 还不能进行性能分析和定位,所以还要添加一些辅助的注解信息, 可以同定义事件比如: Client Send: 客户端调用开始 Client Receive: 客户端调用结束 Server Send: 服务端发送 Server Receive: 服务端接收
-图一是一个调用关系图,展示了TraceID, SpanID, ParentID 之间的关系,和传递 其中,个方框是一个服务,箭头代表调用关系,一个完整调用链中trace是相同的, 每个服务有各自的SpanID, ParentID是调用方的SpanID, 通过这些ID我们可以知道调用的上下级关系
-图二是通过Annotation附带信息进行性能分析,通过Client Send 到 Server Receive可以分析出请求服务的网络时延;通过Server Receive到Server Send可以分析出调用时延;同理Server Send到Client Receive分析出响应的网络时延, Client Send到Client Receive整个请求的时延</description>
+      <description>&lt;h1 id=&#34;链路追踪是什么&#34;&gt;链路追踪是什么&lt;/h1&gt;
+&lt;p&gt;链路追踪是在分布式条件下将一个请求还原成一个完整调用链条,可以分析调用拓扑,延迟分析,性能分析.&lt;/p&gt;
+&lt;h1 id=&#34;链路追踪的好处&#34;&gt;链路追踪的好处&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;分析网络,服务耗时(通过链路追踪事件可以知道网络延迟,服务延迟)&lt;/li&gt;
+&lt;li&gt;分析网络拓扑(链路分析)&lt;/li&gt;
+&lt;li&gt;故障定位(配合日志,进行故障定位)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;原理&#34;&gt;原理&lt;/h1&gt;
+&lt;h2 id=&#34;trace&#34;&gt;Trace&lt;/h2&gt;
+&lt;p&gt;Trace代表一个调用链路,通过TraceID来标记, 一次请求调用的各个服务TraceID在全局都是唯一的&lt;/p&gt;
+&lt;h2 id=&#34;span&#34;&gt;Span&lt;/h2&gt;
+&lt;p&gt;Span代表一个调用范围拥有(ParentID, SpanID), ParentID代表他的调用者SpanID, SpanID代表本层次调用id&lt;/p&gt;
+&lt;p&gt;通过TraceID标记一个完整调用链都调用了哪些调用过程, 通过ParendID,和SpanID还原了调用的父子关系&lt;/p&gt;
+&lt;h2 id=&#34;annotation&#34;&gt;Annotation&lt;/h2&gt;
+&lt;p&gt;通过上面三个ID只能还原调用关系, 还不能进行性能分析和定位,所以还要添加一些辅助的注解信息,
+可以同定义事件比如:
+Client Send:  客户端调用开始
+Client Receive: 客户端调用结束
+Server Send: 服务端发送
+Server Receive: 服务端接收&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/trace.jpg&#34; alt=&#34;trace&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;图一是一个调用关系图,展示了TraceID, SpanID, ParentID 之间的关系,和传递
+其中,个方框是一个服务,箭头代表调用关系,一个完整调用链中trace是相同的, 每个服务有各自的SpanID, ParentID是调用方的SpanID, 通过这些ID我们可以知道调用的上下级关系&lt;/p&gt;
+&lt;p&gt;图二是通过Annotation附带信息进行性能分析,通过Client Send 到 Server Receive可以分析出请求服务的网络时延;通过Server Receive到Server Send可以分析出调用时延;同理Server Send到Client Receive分析出响应的网络时延, Client Send到Client Receive整个请求的时延&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -46,21 +134,48 @@ Annotation 通过上面三个ID只能还原调用关系, 还不能进行性能�
       <pubDate>Sat, 18 Jun 2022 21:24:37 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/micro_service/redis_lock/</guid>
-      <description>redis分布式锁网上方案很多,这里简单的介绍一种
-加锁步骤 1.创建锁对象,内部创建一个随机数
-2.使用SET KEY VALUE NX EX xxxSecond, 如果成功创建了KEY 则证明加锁成功VALUE 就是第一步创建的随机数 3.如果未能成功加锁需要不断取重试,直到超时或者获取锁
-解锁步骤 解锁需要去判断KEY对应的值是否是创建时的随机数,如果不是就不能删除,只有是的时候才能删除,因为如果不是自己的随机数可能是因为锁过期被别人加锁了,不能去删除别人的锁, 检查和删除必须是原子操作,所以我们可以使用lua脚本保证原子操作
-if redis.call(&amp;#34;GET&amp;#34;, KEYS[1])==ARGV[1] then redis.call(&amp;#34;DEL&amp;#34;, KEYS[1]) return true else	return false end 上面的lua脚本很容易懂,就是用来判断key对应的值是否是参数的值,如果是就删除key并返回成功,否则返回失败;失败的情况就是上述说的锁过期被其他程序加锁
-优化 加锁是需要不断去重试,访问次数过多可能会给redis造成压力,比如100ms抢一次,一个线程1s钟要请求redis 10次, 如果是10线程抢锁,那么1s就是100次,抢锁的越多就会将redis请求数放大10倍 应对这种情况我们可以考虑,进程内部先去加互斥锁,解锁的时候去解互斥锁, 然后抢到锁的线程再去抢redis锁
-优点: 这样如果有两个进程,各有5个线程去抢锁,则实际只有两个线程去访问redis,抢到锁后只有另一个进程的1个线程继续抢,这种已经在生产环境中得到实践
-缺点: 造成锁竞争的不公平,同一个进程其他线程更容易抢到锁,因为互斥锁解锁同一个进程的其他线程可以更快的感知
-还有一种想法未得到验证,通过redis的发布订阅来改进锁性能
-锁过期问题,没有个安全的方法去估计过期时间 针对这种情况,可以考虑锁续期逻辑,比如默认过期时间是30s,我们到20s的时候去延长过期时间
-可以考虑使用下面的续期逻辑
-if redis.call(&amp;#34;GET&amp;#34;, KEYS[1]) == ARGV[1] then redis.call(&amp;#34;EXPIRE&amp;#34;, KEYS[1], ARGV[2]) return true else return false end 先去判断锁是否是自己的,如果是则进行续期
-参考资料 redis set命令 从2.6.12版本开始，redis为SET命令增加了一系列选项
-EX seconds – 设置键key的过期时间单位时秒
-PX milliseconds – 设置键key的过期时间单位时毫秒</description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/pexels-artem-beliaikin-853199.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;redis分布式锁网上方案很多,这里简单的介绍一种&lt;/p&gt;
+&lt;h2 id=&#34;加锁步骤&#34;&gt;加锁步骤&lt;/h2&gt;
+&lt;p&gt;1.创建锁对象,内部创建一个随机数&lt;/p&gt;
+&lt;p&gt;2.使用&lt;code&gt;SET KEY VALUE NX EX xxxSecond&lt;/code&gt;, 如果成功创建了KEY 则证明加锁成功VALUE 就是第一步创建的随机数
+3.如果未能成功加锁需要不断取重试,直到超时或者获取锁&lt;/p&gt;
+&lt;h2 id=&#34;解锁步骤&#34;&gt;解锁步骤&lt;/h2&gt;
+&lt;p&gt;解锁需要去判断KEY对应的值是否是创建时的随机数,如果不是就不能删除,只有是的时候才能删除,因为如果不是自己的随机数可能是因为锁过期被别人加锁了,不能去删除别人的锁, 检查和删除必须是原子操作,所以我们可以使用lua脚本保证原子操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;DEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;else&lt;/span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的lua脚本很容易懂,就是用来判断key对应的值是否是参数的值,如果是就删除key并返回成功,否则返回失败;失败的情况就是上述说的锁过期被其他程序加锁&lt;/p&gt;
+&lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
+&lt;h3 id=&#34;加锁是需要不断去重试访问次数过多可能会给redis造成压力比如100ms抢一次一个线程1s钟要请求redis-10次-如果是10线程抢锁那么1s就是100次抢锁的越多就会将redis请求数放大10倍&#34;&gt;加锁是需要不断去重试,访问次数过多可能会给redis造成压力,比如100ms抢一次,一个线程1s钟要请求redis 10次, 如果是10线程抢锁,那么1s就是100次,抢锁的越多就会将redis请求数放大10倍&lt;/h3&gt;
+&lt;p&gt;应对这种情况我们可以考虑,进程内部先去加互斥锁,解锁的时候去解互斥锁, 然后抢到锁的线程再去抢redis锁&lt;/p&gt;
+&lt;p&gt;优点:
+这样如果有两个进程,各有5个线程去抢锁,则实际只有两个线程去访问redis,抢到锁后只有另一个进程的1个线程继续抢,这种已经在生产环境中得到实践&lt;/p&gt;
+&lt;p&gt;缺点:
+造成锁竞争的不公平,同一个进程其他线程更容易抢到锁,因为互斥锁解锁同一个进程的其他线程可以更快的感知&lt;/p&gt;
+&lt;p&gt;还有一种想法未得到验证,通过redis的发布订阅来改进锁性能&lt;/p&gt;
+&lt;h3 id=&#34;锁过期问题没有个安全的方法去估计过期时间&#34;&gt;锁过期问题,没有个安全的方法去估计过期时间&lt;/h3&gt;
+&lt;p&gt;针对这种情况,可以考虑锁续期逻辑,比如默认过期时间是30s,我们到20s的时候去延长过期时间&lt;/p&gt;
+&lt;p&gt;可以考虑使用下面的续期逻辑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;EXPIRE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;else&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先去判断锁是否是自己的,如果是则进行续期&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;redis set命令 从2.6.12版本开始，redis为SET命令增加了一系列选项&lt;/p&gt;
+&lt;p&gt;EX seconds – 设置键key的过期时间单位时秒&lt;/p&gt;
+&lt;p&gt;PX milliseconds – 设置键key的过期时间单位时毫秒&lt;/p&gt;
+&lt;p&gt;NX – 只有键key不存在的时候才会设置key的值&lt;/p&gt;
+&lt;p&gt;XX – 只有键key存在的时候才会设置key的值&lt;/p&gt;
+&lt;h2 id=&#34;redlock&#34;&gt;redlock&lt;/h2&gt;
+&lt;p&gt;redlock 和 普通的redis lock的区别就是,redlock需要使用多个redis(奇数个),采用大多数原则, 锁住大多数redis就算上锁成功&lt;/p&gt;</description>
     </item>
     
   </channel>

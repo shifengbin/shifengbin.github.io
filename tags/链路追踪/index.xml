@@ -18,13 +18,32 @@
       <pubDate>Mon, 27 Jun 2022 14:24:23 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/micro_service/trace/</guid>
-      <description>链路追踪是什么 链路追踪是在分布式条件下将一个请求还原成一个完整调用链条,可以分析调用拓扑,延迟分析,性能分析.
-链路追踪的好处 分析网络,服务耗时(通过链路追踪事件可以知道网络延迟,服务延迟) 分析网络拓扑(链路分析) 故障定位(配合日志,进行故障定位) 原理 Trace Trace代表一个调用链路,通过TraceID来标记, 一次请求调用的各个服务TraceID在全局都是唯一的
-Span Span代表一个调用范围拥有(ParentID, SpanID), ParentID代表他的调用者SpanID, SpanID代表本层次调用id
-通过TraceID标记一个完整调用链都调用了哪些调用过程, 通过ParendID,和SpanID还原了调用的父子关系
-Annotation 通过上面三个ID只能还原调用关系, 还不能进行性能分析和定位,所以还要添加一些辅助的注解信息, 可以同定义事件比如: Client Send: 客户端调用开始 Client Receive: 客户端调用结束 Server Send: 服务端发送 Server Receive: 服务端接收
-图一是一个调用关系图,展示了TraceID, SpanID, ParentID 之间的关系,和传递 其中,个方框是一个服务,箭头代表调用关系,一个完整调用链中trace是相同的, 每个服务有各自的SpanID, ParentID是调用方的SpanID, 通过这些ID我们可以知道调用的上下级关系
-图二是通过Annotation附带信息进行性能分析,通过Client Send 到 Server Receive可以分析出请求服务的网络时延;通过Server Receive到Server Send可以分析出调用时延;同理Server Send到Client Receive分析出响应的网络时延, Client Send到Client Receive整个请求的时延</description>
+      <description>&lt;h1 id=&#34;链路追踪是什么&#34;&gt;链路追踪是什么&lt;/h1&gt;
+&lt;p&gt;链路追踪是在分布式条件下将一个请求还原成一个完整调用链条,可以分析调用拓扑,延迟分析,性能分析.&lt;/p&gt;
+&lt;h1 id=&#34;链路追踪的好处&#34;&gt;链路追踪的好处&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;分析网络,服务耗时(通过链路追踪事件可以知道网络延迟,服务延迟)&lt;/li&gt;
+&lt;li&gt;分析网络拓扑(链路分析)&lt;/li&gt;
+&lt;li&gt;故障定位(配合日志,进行故障定位)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;原理&#34;&gt;原理&lt;/h1&gt;
+&lt;h2 id=&#34;trace&#34;&gt;Trace&lt;/h2&gt;
+&lt;p&gt;Trace代表一个调用链路,通过TraceID来标记, 一次请求调用的各个服务TraceID在全局都是唯一的&lt;/p&gt;
+&lt;h2 id=&#34;span&#34;&gt;Span&lt;/h2&gt;
+&lt;p&gt;Span代表一个调用范围拥有(ParentID, SpanID), ParentID代表他的调用者SpanID, SpanID代表本层次调用id&lt;/p&gt;
+&lt;p&gt;通过TraceID标记一个完整调用链都调用了哪些调用过程, 通过ParendID,和SpanID还原了调用的父子关系&lt;/p&gt;
+&lt;h2 id=&#34;annotation&#34;&gt;Annotation&lt;/h2&gt;
+&lt;p&gt;通过上面三个ID只能还原调用关系, 还不能进行性能分析和定位,所以还要添加一些辅助的注解信息,
+可以同定义事件比如:
+Client Send:  客户端调用开始
+Client Receive: 客户端调用结束
+Server Send: 服务端发送
+Server Receive: 服务端接收&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/trace.jpg&#34; alt=&#34;trace&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;图一是一个调用关系图,展示了TraceID, SpanID, ParentID 之间的关系,和传递
+其中,个方框是一个服务,箭头代表调用关系,一个完整调用链中trace是相同的, 每个服务有各自的SpanID, ParentID是调用方的SpanID, 通过这些ID我们可以知道调用的上下级关系&lt;/p&gt;
+&lt;p&gt;图二是通过Annotation附带信息进行性能分析,通过Client Send 到 Server Receive可以分析出请求服务的网络时延;通过Server Receive到Server Send可以分析出调用时延;同理Server Send到Client Receive分析出响应的网络时延, Client Send到Client Receive整个请求的时延&lt;/p&gt;</description>
     </item>
     
   </channel>

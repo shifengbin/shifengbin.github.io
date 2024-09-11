@@ -18,7 +18,16 @@
       <pubDate>Thu, 07 Sep 2023 11:17:42 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/docker/</guid>
-      <description>1.使用golang:tag 这种镜像编译后在alpine中会报错(not found) 原因是：go默认会使用glibc,而alpine中没有glibc,所以会报错 解决办法有三种： 连接RUN mkdir /lib64 &amp;amp;&amp;amp; ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86_64.so.2，建立一个glic链接 使用golang:tag-alpine镜像编译，编译系统和运行系统都用alpine 编译时禁用CGO CGO_ENABLED=0 go build编译出来的文件不依赖动态库 </description>
+      <description>&lt;h2 id=&#34;1使用golangtag-这种镜像编译后在alpine中会报错not-found&#34;&gt;1.使用golang:tag 这种镜像编译后在alpine中会报错(not found)&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;原因是：go默认会使用glibc,而alpine中没有glibc,所以会报错
+
+解决办法有三种：
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;连接&lt;code&gt;RUN  mkdir /lib64 &amp;amp;&amp;amp; ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86_64.so.2&lt;/code&gt;，建立一个glic链接&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;golang:tag-alpine&lt;/code&gt;镜像编译，编译系统和运行系统都用alpine&lt;/li&gt;
+&lt;li&gt;编译时禁用CGO &lt;code&gt;CGO_ENABLED=0 go build&lt;/code&gt;编译出来的文件不依赖动态库&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>

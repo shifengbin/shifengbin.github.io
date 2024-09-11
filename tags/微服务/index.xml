@@ -18,21 +18,48 @@
       <pubDate>Sat, 18 Jun 2022 21:24:37 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/micro_service/redis_lock/</guid>
-      <description>redis分布式锁网上方案很多,这里简单的介绍一种
-加锁步骤 1.创建锁对象,内部创建一个随机数
-2.使用SET KEY VALUE NX EX xxxSecond, 如果成功创建了KEY 则证明加锁成功VALUE 就是第一步创建的随机数 3.如果未能成功加锁需要不断取重试,直到超时或者获取锁
-解锁步骤 解锁需要去判断KEY对应的值是否是创建时的随机数,如果不是就不能删除,只有是的时候才能删除,因为如果不是自己的随机数可能是因为锁过期被别人加锁了,不能去删除别人的锁, 检查和删除必须是原子操作,所以我们可以使用lua脚本保证原子操作
-if redis.call(&amp;#34;GET&amp;#34;, KEYS[1])==ARGV[1] then redis.call(&amp;#34;DEL&amp;#34;, KEYS[1]) return true else	return false end 上面的lua脚本很容易懂,就是用来判断key对应的值是否是参数的值,如果是就删除key并返回成功,否则返回失败;失败的情况就是上述说的锁过期被其他程序加锁
-优化 加锁是需要不断去重试,访问次数过多可能会给redis造成压力,比如100ms抢一次,一个线程1s钟要请求redis 10次, 如果是10线程抢锁,那么1s就是100次,抢锁的越多就会将redis请求数放大10倍 应对这种情况我们可以考虑,进程内部先去加互斥锁,解锁的时候去解互斥锁, 然后抢到锁的线程再去抢redis锁
-优点: 这样如果有两个进程,各有5个线程去抢锁,则实际只有两个线程去访问redis,抢到锁后只有另一个进程的1个线程继续抢,这种已经在生产环境中得到实践
-缺点: 造成锁竞争的不公平,同一个进程其他线程更容易抢到锁,因为互斥锁解锁同一个进程的其他线程可以更快的感知
-还有一种想法未得到验证,通过redis的发布订阅来改进锁性能
-锁过期问题,没有个安全的方法去估计过期时间 针对这种情况,可以考虑锁续期逻辑,比如默认过期时间是30s,我们到20s的时候去延长过期时间
-可以考虑使用下面的续期逻辑
-if redis.call(&amp;#34;GET&amp;#34;, KEYS[1]) == ARGV[1] then redis.call(&amp;#34;EXPIRE&amp;#34;, KEYS[1], ARGV[2]) return true else return false end 先去判断锁是否是自己的,如果是则进行续期
-参考资料 redis set命令 从2.6.12版本开始，redis为SET命令增加了一系列选项
-EX seconds – 设置键key的过期时间单位时秒
-PX milliseconds – 设置键key的过期时间单位时毫秒</description>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/pexels-artem-beliaikin-853199.jpg&#34; alt=&#34;head&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;redis分布式锁网上方案很多,这里简单的介绍一种&lt;/p&gt;
+&lt;h2 id=&#34;加锁步骤&#34;&gt;加锁步骤&lt;/h2&gt;
+&lt;p&gt;1.创建锁对象,内部创建一个随机数&lt;/p&gt;
+&lt;p&gt;2.使用&lt;code&gt;SET KEY VALUE NX EX xxxSecond&lt;/code&gt;, 如果成功创建了KEY 则证明加锁成功VALUE 就是第一步创建的随机数
+3.如果未能成功加锁需要不断取重试,直到超时或者获取锁&lt;/p&gt;
+&lt;h2 id=&#34;解锁步骤&#34;&gt;解锁步骤&lt;/h2&gt;
+&lt;p&gt;解锁需要去判断KEY对应的值是否是创建时的随机数,如果不是就不能删除,只有是的时候才能删除,因为如果不是自己的随机数可能是因为锁过期被别人加锁了,不能去删除别人的锁, 检查和删除必须是原子操作,所以我们可以使用lua脚本保证原子操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;DEL&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;else&lt;/span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的lua脚本很容易懂,就是用来判断key对应的值是否是参数的值,如果是就删除key并返回成功,否则返回失败;失败的情况就是上述说的锁过期被其他程序加锁&lt;/p&gt;
+&lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
+&lt;h3 id=&#34;加锁是需要不断去重试访问次数过多可能会给redis造成压力比如100ms抢一次一个线程1s钟要请求redis-10次-如果是10线程抢锁那么1s就是100次抢锁的越多就会将redis请求数放大10倍&#34;&gt;加锁是需要不断去重试,访问次数过多可能会给redis造成压力,比如100ms抢一次,一个线程1s钟要请求redis 10次, 如果是10线程抢锁,那么1s就是100次,抢锁的越多就会将redis请求数放大10倍&lt;/h3&gt;
+&lt;p&gt;应对这种情况我们可以考虑,进程内部先去加互斥锁,解锁的时候去解互斥锁, 然后抢到锁的线程再去抢redis锁&lt;/p&gt;
+&lt;p&gt;优点:
+这样如果有两个进程,各有5个线程去抢锁,则实际只有两个线程去访问redis,抢到锁后只有另一个进程的1个线程继续抢,这种已经在生产环境中得到实践&lt;/p&gt;
+&lt;p&gt;缺点:
+造成锁竞争的不公平,同一个进程其他线程更容易抢到锁,因为互斥锁解锁同一个进程的其他线程可以更快的感知&lt;/p&gt;
+&lt;p&gt;还有一种想法未得到验证,通过redis的发布订阅来改进锁性能&lt;/p&gt;
+&lt;h3 id=&#34;锁过期问题没有个安全的方法去估计过期时间&#34;&gt;锁过期问题,没有个安全的方法去估计过期时间&lt;/h3&gt;
+&lt;p&gt;针对这种情况,可以考虑锁续期逻辑,比如默认过期时间是30s,我们到20s的时候去延长过期时间&lt;/p&gt;
+&lt;p&gt;可以考虑使用下面的续期逻辑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;redis.call&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;EXPIRE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEYS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ARGV&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;else&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kr&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先去判断锁是否是自己的,如果是则进行续期&lt;/p&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;redis set命令 从2.6.12版本开始，redis为SET命令增加了一系列选项&lt;/p&gt;
+&lt;p&gt;EX seconds – 设置键key的过期时间单位时秒&lt;/p&gt;
+&lt;p&gt;PX milliseconds – 设置键key的过期时间单位时毫秒&lt;/p&gt;
+&lt;p&gt;NX – 只有键key不存在的时候才会设置key的值&lt;/p&gt;
+&lt;p&gt;XX – 只有键key存在的时候才会设置key的值&lt;/p&gt;
+&lt;h2 id=&#34;redlock&#34;&gt;redlock&lt;/h2&gt;
+&lt;p&gt;redlock 和 普通的redis lock的区别就是,redlock需要使用多个redis(奇数个),采用大多数原则, 锁住大多数redis就算上锁成功&lt;/p&gt;</description>
     </item>
     
   </channel>

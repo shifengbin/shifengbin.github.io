@@ -18,8 +18,29 @@
       <pubDate>Thu, 07 Jul 2022 18:00:27 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/compiler/syntax_graph/</guid>
-      <description>语法图又称铁路图，是EBNF(扩展巴克斯范式)的图形化表示
-从左边界开始沿着轨道去到右边界。 沿途，你将在圆框中遇到的是字面量，在方块中遇到的是规则或者描述。 任何沿着轨道能走通的序列都是合法的。 任何不能沿着轨道走通的序列都是非法的。 /* a simple program in EBNF − Wikipedia */ program ::= &amp;#39;PROGRAM&amp;#39; whiteSpace identifier whiteSpace &amp;#39;BEGIN&amp;#39; whiteSpace (assignment &amp;#34;;&amp;#34;)* &amp;#39;END.&amp;#39; assignment ::= identifier &amp;#34;:=&amp;#34; ( number | identifier | string ) string ::= &amp;#39;&amp;#34;&amp;#39; [A-Z0-9_]+ &amp;#39;&amp;#34;&amp;#39; identifier ::= [A-Z] [0-9A-Z]* whiteSpace ::= [#x20] </description>
+      <description>&lt;p&gt;语法图又称铁路图，是EBNF(扩展巴克斯范式)的图形化表示&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从左边界开始沿着轨道去到右边界。&lt;/li&gt;
+&lt;li&gt;沿途，你将在圆框中遇到的是字面量，在方块中遇到的是规则或者描述。&lt;/li&gt;
+&lt;li&gt;任何沿着轨道能走通的序列都是合法的。&lt;/li&gt;
+&lt;li&gt;任何不能沿着轨道走通的序列都是非法的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-EBNF&#34; data-lang=&#34;EBNF&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;/*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;a simple program in EBNF &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;−&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;Wikipedia &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;program &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;PROGRAM&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;whiteSpace identifier whiteSpace &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;BEGIN&amp;#39;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;whiteSpace  &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;assignment  &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;*&lt;/span&gt;  &lt;span class=&#34;s1&#34;&gt;&amp;#39;END.&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;assignment &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;identifier  &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:=&amp;#34;&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;number &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;identifier &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;string &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;string &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#34;&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;A-Z0-9_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#34;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;identifier &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;A-Z&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;A-Z&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;whiteSpace &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;::=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;x20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/syntax_graph1.png&#34; alt=&#34;p1&#34;  /&gt;
+
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/syntax_graph2.png&#34; alt=&#34;p2&#34;  /&gt;
+
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/syntax_graph3.png&#34; alt=&#34;p3&#34;  /&gt;
+
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/syntax_graph4.png&#34; alt=&#34;p4&#34;  /&gt;
+
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/syntax_graph5.png&#34; alt=&#34;p5&#34;  /&gt;
+&lt;/p&gt;</description>
     </item>
     
   </channel>

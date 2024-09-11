@@ -18,12 +18,36 @@
       <pubDate>Fri, 24 Feb 2023 14:35:25 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/linkname/</guid>
-      <description>go:linkename是go的编译指令,可以在一个包中使用另一个包中的非导出函数或变量
-具体使用方法举例
-在pkg1包中有个未导出的函数add
-package pkg1 func add(a, b int) int { return a + b } 在pkg2中想要使用pkg1.add,正常来说add开头是小写是不能被另一个包使用的,这时候我们想要在另一个包中使用就有两种方法:
-在pkg1中定义一个可以导出的函数,这种就是在写个Add函数包裹一下,这种就不举例了 在pkg2中使用linkname编译指令修改函数或变量的名称和可见性(不太建议) 这里我们举例第二种
-package pkg2 import ( _ &amp;#34;goasm/pkg1&amp;#34; //需要引入pkg1, 让pkg1参与代码编译,否则编译器找不到, 这句也可以写在别的文件中,只要让pkg1参与编译就行, relocation target goasm/pkg1.add not defined _ &amp;#34;unsafe&amp;#34; //编译器要求导入unsafe包,否则不能使用linkname指令 ) //下面就是linkname编译指令使用方法, 在函数声明上添加注释, 其中pkg1_add是函数名称, goasm/pkg1.add 是要连接的函数, 这句指令的效果就是,调用pkg1_add就是在调用goasm/pkg1包中的add函数 //go:linkname pkg1_add goasm/pkg1.add func pkg1_add(a, b int) int func Add2(a, b int) int { return pkg1_add(a, b) } 总结: go:linkname的使用是依赖于编译器的实现，因此使用时需要慎重考虑其可维护性和可移植性。 总之了解就好,不是迫不得已不要真的使用</description>
+      <description>&lt;p&gt;go:linkename是go的编译指令,可以在一个包中使用另一个包中的非导出函数或变量&lt;/p&gt;
+&lt;p&gt;具体使用方法举例&lt;/p&gt;
+&lt;p&gt;在pkg1包中有个未导出的函数add&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pkg1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在pkg2中想要使用pkg1.add,正常来说add开头是小写是不能被另一个包使用的,这时候我们想要在另一个包中使用就有两种方法:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在pkg1中定义一个可以导出的函数,这种就是在写个Add函数包裹一下,这种就不举例了&lt;/li&gt;
+&lt;li&gt;在pkg2中使用linkname编译指令修改函数或变量的名称和可见性(不太建议)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里我们举例第二种&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pkg2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;goasm/pkg1&amp;#34;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//需要引入pkg1, 让pkg1参与代码编译,否则编译器找不到, 这句也可以写在别的文件中,只要让pkg1参与编译就行, relocation target goasm/pkg1.add not defined
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;unsafe&amp;#34;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//编译器要求导入unsafe包,否则不能使用linkname指令
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//下面就是linkname编译指令使用方法, 在函数声明上添加注释, 其中pkg1_add是函数名称, goasm/pkg1.add 是要连接的函数, 这句指令的效果就是,调用pkg1_add就是在调用goasm/pkg1包中的add函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//go:linkname pkg1_add goasm/pkg1.add
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;pkg1_add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Add2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;pkg1_add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;总结: go:linkname的使用是依赖于编译器的实现，因此使用时需要慎重考虑其可维护性和可移植性。
+总之了解就好,不是迫不得已不要真的使用&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -11,14 +11,45 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 22 May 2023 15:00:31 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Sep 2024 15:44:16 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>无损滚动更新机制</title>
+      <link>https://shifengbin.github.io/posts/k8s/grace_update/</link>
+      <pubDate>Wed, 11 Sep 2024 15:44:16 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/k8s/grace_update/</guid>
+      <description>&lt;p&gt;想要进行无损滚动更新需要保证一下3点&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;应用支持优雅退出(收到退出信号时不接收新请求并且要处理完已经接收到的请求)&lt;/li&gt;
+&lt;li&gt;k8s正确配置readnessProbe就绪探针&lt;/li&gt;
+&lt;li&gt;添加生命周期函数preStop添加一定的延时, 比如preStop.exec.commend: [&amp;quot;/bin/sh&amp;quot;, &amp;ldquo;-c&amp;rdquo;, &amp;ldquo;sleep 10&amp;rdquo;]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;主要原因为Kubernetes 在终止 Pod 时的操作顺序是&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;标记 Pod 为 Terminating 状态：当 Kubernetes 接收到删除 Pod 的请求时，它会将 Pod 的状态设置为 Terminating&lt;/li&gt;
+&lt;li&gt;执行 preStop 钩子：如果 Pod 定义了 preStop 钩子，Kubernetes 会立即同步执行这个钩子&lt;/li&gt;
+&lt;li&gt;并行更新 Endpoint：在 Kubernetes 标记 Pod 为 Terminating 状态的同时，Endpoint Controller 会异步地从相关的服务端点（endpoints）中移除该 Pod 的 IP 地址。Kube-proxy 也会开始更新其网络规则，以停止向该 Pod 转发流量&lt;/li&gt;
+&lt;li&gt;发送 SIGTERM 信号：一旦 preStop 钩子完成，Kubernetes 会向 Pod 中的容器发送 SIGTERM 信号，告诉容器开始优雅地关闭&lt;/li&gt;
+&lt;li&gt;等待或强制终止：如果容器在终止宽限期(terminationGracePeriodSeconds)内没有关闭，Kubernetes 会发送 SIGKILL 信号强制终止容器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;添加延迟的原因主要是preStop和更新endpoint是异步进行,如果没有设置preStop就会出现修改endpoint和发送SIGTERM异步进行, 当应用收到SIGTERM时就不会接收新请求处理完老请求后退出,但是此时endpoint还有可能没有修改完成,就会导致一部分请求流入了即将退出的pod,而且无法响应请求,这时候这部分请求就会损失&lt;/p&gt;
+&lt;p&gt;这个延时就是为了能让endpoint修改完成之后pod再响应SIGTERM进行优雅退出,此时新的流量已经不会在进入该pod了&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>service中的几种port的区别</title>
       <link>https://shifengbin.github.io/posts/k8s/service_ports/</link>
       <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/service_ports/</guid>
-      <description> port : service暴露的端口,可以在集群内进行访问 nodePort : 可以在集群外访问service的端口 targetPort : pod内的container暴露的端口 一张图来理解 </description>
+      <description>&lt;ol&gt;
+&lt;li&gt;port : service暴露的端口,可以在集群内进行访问&lt;/li&gt;
+&lt;li&gt;nodePort : 可以在集群外访问service的端口&lt;/li&gt;
+&lt;li&gt;targetPort : pod内的container暴露的端口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一张图来理解
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/service_ports.png&#34; alt=&#34;ports&#34;  /&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,14 +58,38 @@
       <pubDate>Fri, 12 May 2023 11:03:18 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/probs/</guid>
-      <description>在 Kubernetes 中，探针（probes）是一种机制，用于检查容器是否处于正常状态以及容器是否可以接收流量。 Kubernetes 提供了三种类型的探针：存活探针（Liveness Probe）、就绪探针（Readiness Probe）和启动探针（Startup Probe）。
-以下是这三种探针的作用和用法：
-存活探针（Liveness Probe） 作用：检查容器中的进程是否仍在运行。如果进程崩溃或停止响应，Kubernetes 将重启容器。 用法：建议在容器的生命周期中始终使用存活探针，以确保容器的可靠性。例如，您可以配置一个存活探针来检查容器中的进程是否响应 HTTP 请求或 ping 命令。
-示例 YAML 配置：
-livenessProbe: httpGet: path: /healthz port: 8080 initialDelaySeconds: 5 periodSeconds: 10 该配置文件指示 Kubernetes 发送一个 HTTP GET 请求到容器的 /healthz 路径，并在容器启动后的 5 秒后开始检查容器的运行状况。检查频率为每隔 10 秒发送一次。
-就绪探针（Readiness Probe） 作用：检查容器是否准备好接收流量。如果容器尚未准备好接收流量，则 Kubernetes 将不会将流量发送到容器。 用法：建议在容器需要一些额外的时间来启动的情况下使用就绪探针。例如，您可以配置一个就绪探针来检查容器是否存在必需的文件或数据库连接。
-示例 YAML 配置：
-readinessProbe: tcpSocket: port: 8080 initialDelaySeconds: 5 periodSeconds: 10 该配置文件指示 Kubernetes 检查容器是否可以在 8080 端口接收 TCP 连接，并在容器启动后的 5 秒后开始检查容器的运行状况。检查频率为每隔 10 秒发送一次。</description>
+      <description>&lt;p&gt;在 Kubernetes 中，探针（probes）是一种机制，用于检查容器是否处于正常状态以及容器是否可以接收流量。 Kubernetes 提供了三种类型的探针：存活探针（Liveness Probe）、就绪探针（Readiness Probe）和启动探针（Startup Probe）。&lt;/p&gt;
+&lt;p&gt;以下是这三种探针的作用和用法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;存活探针（Liveness Probe）
+作用：检查容器中的进程是否仍在运行。如果进程崩溃或停止响应，Kubernetes 将重启容器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用法：建议在容器的生命周期中始终使用存活探针，以确保容器的可靠性。例如，您可以配置一个存活探针来检查容器中的进程是否响应 HTTP 请求或 ping 命令。&lt;/p&gt;
+&lt;p&gt;示例 YAML 配置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;该配置文件指示 Kubernetes 发送一个 HTTP GET 请求到容器的 /healthz 路径，并在容器启动后的 5 秒后开始检查容器的运行状况。检查频率为每隔 10 秒发送一次。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;就绪探针（Readiness Probe）
+作用：检查容器是否准备好接收流量。如果容器尚未准备好接收流量，则 Kubernetes 将不会将流量发送到容器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用法：建议在容器需要一些额外的时间来启动的情况下使用就绪探针。例如，您可以配置一个就绪探针来检查容器是否存在必需的文件或数据库连接。&lt;/p&gt;
+&lt;p&gt;示例 YAML 配置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;readinessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;该配置文件指示 Kubernetes 检查容器是否可以在 8080 端口接收 TCP 连接，并在容器启动后的 5 秒后开始检查容器的运行状况。检查频率为每隔 10 秒发送一次。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;启动探针（Startup Probe）
+作用：检查容器内部应用程序是否已经启动并准备好接收流量。与存活探针和就绪探针不同，它们在容器启动时运行，并在容器启动完成后禁用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用法：建议在容器启动时需要启动较长时间的应用程序时使用启动探针。例如，您可以配置一个启动探针来检查容器中的某个进程或 Web 服务器是否已经启动。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,13 +98,50 @@ readinessProbe: tcpSocket: port: 8080 initialDelaySeconds: 5 periodSeconds: 10 �
       <pubDate>Thu, 23 Feb 2023 15:37:31 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/swap/</guid>
-      <description>树莓派 /etc/dphys-swapfile 是 Raspberry Pi 上的一个文件，用于控制swap文件的设置和使用。该文件用于设置swap文件的大小、位置以及启用和禁用swap。
-在 Raspberry Pi 上，如果想要使用swap文件，可以通过以下步骤配置和使用swap文件：
-安装 dphys-swapfile 包，使用命令： sudo apt-get update sudo apt-get install dphys-swapfile 打开 /etc/dphys-swapfile 文件，配置swap文件的大小和位置。例如，将以下行： CONF_SWAPSIZE=100 #修改为0可关闭swap CONF_SWAPFILE=/var/swap 启用 sudo dphys-swapfile setup sudo dphys-swapfile swapon 禁用 sudo dphys-swapfile swapoff 其他linux 在Linux中，可以通过以下步骤关闭swap：
-查看当前的swap情况，使用命令： swapon -s 如果没有任何输出，则说明当前系统没有启用swap。
-如果系统启用了swap，需要先关闭swap，使用命令： swapoff -a 执行此命令会关闭所有swap分区。
-临时禁用swap，使用命令： echo 0 &amp;gt; /proc/sys/vm/swappiness 执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。
-永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行： #/dev/sda2 swap swap defaults 0 0 </description>
+      <description>&lt;h1 id=&#34;树莓派&#34;&gt;树莓派&lt;/h1&gt;
+&lt;p&gt;/etc/dphys-swapfile 是 Raspberry Pi 上的一个文件，用于控制swap文件的设置和使用。该文件用于设置swap文件的大小、位置以及启用和禁用swap。&lt;/p&gt;
+&lt;p&gt;在 Raspberry Pi 上，如果想要使用swap文件，可以通过以下步骤配置和使用swap文件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 dphys-swapfile 包，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install dphys-swapfile
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;打开 /etc/dphys-swapfile 文件，配置swap文件的大小和位置。例如，将以下行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CONF_SWAPSIZE=100  #修改为0可关闭swap
+CONF_SWAPFILE=/var/swap
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;启用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile setup
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile swapon
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;禁用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo dphys-swapfile swapoff
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;其他linux&#34;&gt;其他linux&lt;/h1&gt;
+&lt;p&gt;在Linux中，可以通过以下步骤关闭swap：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查看当前的swap情况，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swapon -s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有任何输出，则说明当前系统没有启用swap。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;如果系统启用了swap，需要先关闭swap，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;swapoff -a
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行此命令会关闭所有swap分区。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;临时禁用swap，使用命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &amp;gt; /proc/sys/vm/swappiness
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#/dev/sda2       swap            swap    defaults        0 0
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -58,13 +150,58 @@ readinessProbe: tcpSocket: port: 8080 initialDelaySeconds: 5 periodSeconds: 10 �
       <pubDate>Wed, 05 Oct 2022 20:49:13 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/k8s/</guid>
-      <description>本地系统为树莓派官方64位系统 Raspberry Pi OS Lite 64(Debian GNU/Linux 11)
-在master和node都需要执行的步骤 本机cgroup配置 在执行kubeadm init 时出现 missing required cgroup: memory时,可以在/boot/cmdline.txt(有的系统可能在/boot/firmware/cmdline.txt)中追加 cgroup_enable=memory cgroup_memory=1
-cgroup_enable=memory: 启用Cgroup子系统中的内存控制 cgroup_memory=1: 将内存控制子系统的版本设置为1
-在某些特定的发行版中，可能会出于兼容性或其他原因而禁用了Cgroup子系统中的内存控制功能,所以需要手动开启
-关闭swap 网上很多教程通过编辑/etc/fstab编辑swap, 但是在树莓派系统中,并不使用fstab配置,正确的做法是
-编辑/etc/dphys-swapfile 找到配置项CONF_SWAPSIZE (通过名称我们可以知道该配置项为swap大小)该值配置为0 使配置生效 sudo /etc/init.d/dphys-swapfile restart 或者 sudo reboot 重启 通过free -h命令查看swap大小
-系统模块加载 # 必要的模块加载 # overlay 文件系统 # br_netfilter 网桥网络包过滤 cat &amp;lt;&amp;lt;EOF | sudo tee /etc/modules-load.d/k8s.conf overlay br_netfilter EOF # 这个命令会将 &amp;#34;overlay&amp;#34; 和 &amp;#34;br_netfilter&amp;#34; 内核模块的名称添加到 /etc/modules-load.d/k8s.conf 文件中，以便在系统启动时自动加载这些模块 sudo modprobe overlay sudo modprobe br_netfilter # sudo modprobe overlay：加载 overlay 的内核模块，该模块提供了用于 overlayfs 的文件系统类型。在使用容器化技术如 Docker 时，通常需要使用 overlayfs 进行容器镜像的存储和管理。因此，在启用容器化环境时，需要确保该模块已加载。 # sudo modprobe br_netfilter：加载 br_netfilter 的内核模块，该模块提供了用于 Linux 桥接网络的过滤和 NAT 功能。在使用 Kubernetes 集群时，通常需要将容器内部的网络流量转发到主机上的网络设备，以实现容器与外部网络的通信。因此，在启用 Kubernetes 集群时，需要确保该模块已加载。 # 开启转发和流量可观测(开机启动) # sysctl params required by setup, params persist across reboots # bridge-nf-call-iptables 让ip表可以看到桥接流量 # bridge-nf-call-ip6tables 让ip6表可以看到桥接流量 cat &amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.</description>
+      <description>&lt;p&gt;本地系统为树莓派官方64位系统  &lt;code&gt;Raspberry Pi OS Lite 64(Debian GNU/Linux 11)&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;在master和node都需要执行的步骤&#34;&gt;在master和node都需要执行的步骤&lt;/h1&gt;
+&lt;h2 id=&#34;本机cgroup配置&#34;&gt;本机cgroup配置&lt;/h2&gt;
+&lt;p&gt;在执行kubeadm init 时出现 missing required cgroup: memory时,可以在/boot/cmdline.txt(有的系统可能在/boot/firmware/cmdline.txt)中追加 cgroup_enable=memory cgroup_memory=1&lt;/p&gt;
+&lt;p&gt;cgroup_enable=memory: 启用Cgroup子系统中的内存控制
+cgroup_memory=1: 将内存控制子系统的版本设置为1&lt;/p&gt;
+&lt;p&gt;在某些特定的发行版中，可能会出于兼容性或其他原因而禁用了Cgroup子系统中的内存控制功能,所以需要手动开启&lt;/p&gt;
+&lt;h2 id=&#34;关闭swap&#34;&gt;关闭swap&lt;/h2&gt;
+&lt;p&gt;网上很多教程通过编辑&lt;code&gt;/etc/fstab&lt;/code&gt;编辑swap, 但是在树莓派系统中,并不使用fstab配置,正确的做法是&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编辑&lt;code&gt;/etc/dphys-swapfile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;找到配置项&lt;code&gt;CONF_SWAPSIZE&lt;/code&gt; (通过名称我们可以知道该配置项为swap大小)该值配置为0&lt;/li&gt;
+&lt;li&gt;使配置生效 &lt;code&gt;sudo /etc/init.d/dphys-swapfile restart&lt;/code&gt; 或者 &lt;code&gt;sudo reboot&lt;/code&gt; 重启&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过&lt;code&gt;free -h&lt;/code&gt;命令查看swap大小&lt;/p&gt;
+&lt;h2 id=&#34;系统模块加载&#34;&gt;系统模块加载&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 必要的模块加载&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# overlay 文件系统&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# br_netfilter 网桥网络包过滤&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/modules-load.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;overlay
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这个命令会将 &amp;#34;overlay&amp;#34; 和 &amp;#34;br_netfilter&amp;#34; 内核模块的名称添加到 /etc/modules-load.d/k8s.conf 文件中，以便在系统启动时自动加载这些模块&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo modprobe overlay
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo modprobe br_netfilter
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# sudo modprobe overlay：加载 overlay 的内核模块，该模块提供了用于 overlayfs 的文件系统类型。在使用容器化技术如 Docker 时，通常需要使用 overlayfs 进行容器镜像的存储和管理。因此，在启用容器化环境时，需要确保该模块已加载。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# sudo modprobe br_netfilter：加载 br_netfilter 的内核模块，该模块提供了用于 Linux 桥接网络的过滤和 NAT 功能。在使用 Kubernetes 集群时，通常需要将容器内部的网络流量转发到主机上的网络设备，以实现容器与外部网络的通信。因此，在启用 Kubernetes 集群时，需要确保该模块已加载。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 开启转发和流量可观测(开机启动)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# sysctl params required by setup, params persist across reboots&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# bridge-nf-call-iptables 让ip表可以看到桥接流量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# bridge-nf-call-ip6tables 让ip6表可以看到桥接流量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt;EOF | sudo tee /etc/sysctl.d/k8s.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;net.bridge.bridge-nf-call-iptables  = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;net.bridge.bridge-nf-call-ip6tables = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;net.ipv4.ip_forward                 = 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这个命令的作用是将其写入 /etc/sysctl.d/k8s.conf 文件中。在系统启动时，这些参数就会被自动设置。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# net.bridge.bridge-nf-call-iptables: 设置为 1，表示将 Linux 桥接网络中的 IP 数据包转发给 iptables 进行过滤。在使用 Kubernetes 时，需要启用此功能以实现网络策略等功能。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# net.bridge.bridge-nf-call-ip6tables: 设置为 1，表示将 Linux 桥接网络中的 IPv6 数据包转发给 ip6tables 进行过滤。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# net.ipv4.ip_forward: 设置为 1，表示启用 IPv4 数据包的转发功能。在使用 Kubernetes 时，需要启用此功能以实现跨节点的容器网络互通。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Apply sysctl params without reboot(不用开机立刻生效)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo sysctl --system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;cri安装&#34;&gt;CRI安装&lt;/h2&gt;
+&lt;p&gt;根据官方文档配置环境&lt;a href=&#34;https://kubernetes.io/docs/setup/production-environment/container-runtimes/&#34;&gt;doc&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -18,8 +18,9 @@
       <pubDate>Mon, 22 Apr 2024 16:42:34 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/linux/wine/</guid>
-      <description>使用flatpak安装wine后执行winecfg配置wine时出现乱码可以使用命令安装字体解决
-sudo apt-get install fonts-wqy-zenhei fonts-wqy-microhei </description>
+      <description>&lt;p&gt;使用flatpak安装wine后执行winecfg配置wine时出现乱码可以使用命令安装字体解决&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install fonts-wqy-zenhei fonts-wqy-microhei
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

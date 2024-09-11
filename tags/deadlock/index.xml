@@ -18,11 +18,17 @@
       <pubDate>Wed, 08 May 2024 17:52:55 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/go/deadlock/</guid>
-      <description>Go语言的运行时会在所有活跃的goroutine都无法继续执行时判定为死锁。这意味着，只要还有至少一个goroutine能够正常运行，Go运行时就不会触发死锁检测机制。死锁检测通常在以下情况下触发：
-所有goroutine都阻塞：如果所有的goroutine都在等待某些事件（如通道操作、锁获取等），而这些事件无法由其他goroutine触发（因为没有其他goroutine在运行或者能够解除阻塞状态），Go运行时就会判定程序为死锁状态。(这里不包括io等待，因为io等待是阻塞的，但是go的运行时并不会触发死锁检测机制)
-这种自动死锁检测主要是为了帮助开发者在开发阶段识别出潜在的并发问题。然而，它的能力是有限的，特别是在涉及网络I/O、系统调用或者复杂锁逻辑的情况下，Go的死锁检测可能不会触发。因此，即使Go运行时没有报告死锁，也不代表程序中不存在潜在的并发问题。
-为了避免死锁，推荐的做法包括：
-避免循环等待：设计系统时应确保资源的分配顺序一致，以避免循环等待的情况发生。 使用适当的同步原语：比如使用带缓冲的channel、正确使用锁（如sync.Mutex）、以及其他并发控制工具（如sync.WaitGroup、context.Context等）。 限制并发数：有时通过限制系统中并发执行的goroutine数量可以简化资源管理，减少死锁的风险。 彻底测试：并发程序应该经过详尽的测试，包括使用竞态检测工具（如Go的-race标志）来帮助识别并发错误。 这些措施可以帮助开发者构建更健壮、更可靠的并发程序。</description>
+      <description>&lt;p&gt;Go语言的运行时会在所有活跃的goroutine都无法继续执行时判定为死锁。这意味着，只要还有至少一个goroutine能够正常运行，Go运行时就不会触发死锁检测机制。死锁检测通常在以下情况下触发：&lt;/p&gt;
+&lt;p&gt;所有goroutine都阻塞：如果所有的goroutine都在等待某些事件（如通道操作、锁获取等），而这些事件无法由其他goroutine触发（因为没有其他goroutine在运行或者能够解除阻塞状态），Go运行时就会判定程序为死锁状态。(这里不包括io等待，因为io等待是阻塞的，但是go的运行时并不会触发死锁检测机制)&lt;/p&gt;
+&lt;p&gt;这种自动死锁检测主要是为了帮助开发者在开发阶段识别出潜在的并发问题。然而，它的能力是有限的，特别是在涉及网络I/O、系统调用或者复杂锁逻辑的情况下，Go的死锁检测可能不会触发。因此，即使Go运行时没有报告死锁，也不代表程序中不存在潜在的并发问题。&lt;/p&gt;
+&lt;p&gt;为了避免死锁，推荐的做法包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;避免循环等待&lt;/strong&gt;：设计系统时应确保资源的分配顺序一致，以避免循环等待的情况发生。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用适当的同步原语&lt;/strong&gt;：比如使用带缓冲的channel、正确使用锁（如&lt;code&gt;sync.Mutex&lt;/code&gt;）、以及其他并发控制工具（如&lt;code&gt;sync.WaitGroup&lt;/code&gt;、&lt;code&gt;context.Context&lt;/code&gt;等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;限制并发数&lt;/strong&gt;：有时通过限制系统中并发执行的goroutine数量可以简化资源管理，减少死锁的风险。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;彻底测试&lt;/strong&gt;：并发程序应该经过详尽的测试，包括使用竞态检测工具（如Go的&lt;code&gt;-race&lt;/code&gt;标志）来帮助识别并发错误。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些措施可以帮助开发者构建更健壮、更可靠的并发程序。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -21,7 +21,8 @@ AMQP是一个可编程的协议 AMQP是一种可编程协议，AMQP的实体和�
 交换机和交换机类型 交换机是向其发送消息的AMQP实体,交换机接收消息并将其路由到零个或多个队列中。使用的路由算法取决于交换机类型和绑定,AMQP协议提供四种交换机类型:
 交换机类型 默认名称 Direct exchange(直接交换机) (Empty string) and amq.direct Fanout exchange(扇出交换机) amq.fanout Topic exchange(主题交换机) amq.topic Headers exchange(头交换机) amq.match (and amq.headers in RabbitMQ) 除了交换机类型之外，交换机还使用许多属性来声明，其中最重要的是:
 Name (名称) Durability (中间件重启后持久化) Auto-delete (最后一个队列解除绑定自动删除) Arguments (参数,可选的, 由插件和中间件特定功能使用) 交换机可以是持久的或者是临时的,持久性交换机在中间件重启后仍能存在，而暂时性交换机则不能.并非所有场景和用例都要求交换机持久化.
-默认交换机 默认交换机是一个没有名称预定义在broker的直接交换机(direct exchange),它有一个特殊的特性，这使得它对于简单的应用程序非常有用:每个被创建的队列都会用和队列名称相同的路由键(routing key)自动绑定默认交换机....</p></div><footer class=entry-footer>&lt;span title='2022-08-02 11:06:49 +0800 +0800'>八月 2, 2022&lt;/span></footer><a class=entry-link aria-label="post link to AMQP 0-9-1协议" href=https://shifengbin.github.io/posts/net/amqp/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>计算机网络简要概述</h2></header><div class=entry-content><p>计算机网络分层 市面上对网络分层主要是有三种分层
+默认交换机 默认交换机是一个没有名称预定义在broker的直接交换机(direct exchange),它有一个特殊的特性，这使得它对于简单的应用程序非常有用:每个被创建的队列都会用和队列名称相同的路由键(routing key)自动绑定默认交换机.
+...</p></div><footer class=entry-footer>&lt;span title='2022-08-02 11:06:49 +0800 +0800'>八月 2, 2022&lt;/span></footer><a class=entry-link aria-label="post link to AMQP 0-9-1协议" href=https://shifengbin.github.io/posts/net/amqp/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>计算机网络简要概述</h2></header><div class=entry-content><p>计算机网络分层 市面上对网络分层主要是有三种分层
 七层 五层 四层 应用层 应用层 应用层 表示层 会话层 传输层 传输层 传输层 网络层 网络层 网络层 数据链路层 数据链路层 网络接口层 物理层 物理层 每层的职责 物理层 提供物理介质,电压信号等功能
 数据链路层 提供P2P传输 (点对点的, 比如一个路由器到另一个路由器)
 网络层 提供E2E传输 (Endpoint to Endpoint,两个端点的传输,中间可能经过若干个路由器,注意区别P2P, E2E > P2P)

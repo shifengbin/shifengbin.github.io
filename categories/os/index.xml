@@ -18,13 +18,14 @@
       <pubDate>Fri, 23 Sep 2022 16:31:24 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/os/qemu_gdb/</guid>
-      <description>假设我们有一个boot.bin裸机汇编程序 我们想用qemu进行调试
-我们可以使用qemu-system-x86_64 -s -S boot.bin
-参数说明:
--s 可以使qemu开启1234端口,方便我们使用gdb连接调试
--S 可以让qemu暂停执行,等待我们使用gdb发送调试命令
-gdb 连接:
-使用gdb命令,进入gdb后使用target remote 127.0.0.1:1234连接到qemu</description>
+      <description>&lt;p&gt;假设我们有一个boot.bin裸机汇编程序
+我们想用qemu进行调试&lt;/p&gt;
+&lt;p&gt;我们可以使用&lt;code&gt;qemu-system-x86_64 -s -S boot.bin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;参数说明:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-s&lt;/code&gt; 可以使qemu开启1234端口,方便我们使用gdb连接调试&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-S&lt;/code&gt; 可以让qemu暂停执行,等待我们使用gdb发送调试命令&lt;/p&gt;
+&lt;p&gt;gdb 连接:&lt;/p&gt;
+&lt;p&gt;使用gdb命令,进入gdb后使用&lt;code&gt;target remote 127.0.0.1:1234&lt;/code&gt;连接到qemu&lt;/p&gt;</description>
     </item>
     
   </channel>

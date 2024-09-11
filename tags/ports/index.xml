@@ -18,7 +18,14 @@
       <pubDate>Mon, 22 May 2023 15:00:31 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/k8s/service_ports/</guid>
-      <description> port : service暴露的端口,可以在集群内进行访问 nodePort : 可以在集群外访问service的端口 targetPort : pod内的container暴露的端口 一张图来理解 </description>
+      <description>&lt;ol&gt;
+&lt;li&gt;port : service暴露的端口,可以在集群内进行访问&lt;/li&gt;
+&lt;li&gt;nodePort : 可以在集群外访问service的端口&lt;/li&gt;
+&lt;li&gt;targetPort : pod内的container暴露的端口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一张图来理解
+&lt;img loading=&#34;lazy&#34; src=&#34;https://shifengbin.github.io/images/service_ports.png&#34; alt=&#34;ports&#34;  /&gt;
+&lt;/p&gt;</description>
     </item>
     
   </channel>
