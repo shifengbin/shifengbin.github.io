@@ -9,7 +9,7 @@ livenessProbe: httpGet: path: /healthz port: 8080 initialDelaySeconds: 5 periodS
 示例 YAML 配置：
 readinessProbe: tcpSocket: port: 8080 initialDelaySeconds: 5 periodSeconds: 10 该配置文件指示 Kubernetes 检查容器是否可以在 8080 端口接收 TCP 连接，并在容器启动后的 5 秒后开始检查容器的运行状况。检查频率为每隔 10 秒发送一次。
 启动探针（Startup Probe） 作用：检查容器内部应用程序是否已经启动,成功后会运行存活和就绪探针。与存活探针和就绪探针不同，它们在容器启动时运行，并在容器启动完成后禁用。 用法：建议在容器启动时需要启动较长时间的应用程序时使用启动探针。例如，可以配置一个启动探针来检查容器中的某个进程或 Web 服务器是否已经启动。
-...</p></div><footer class=entry-footer>&lt;span title='2023-05-12 11:03:18 +0800 +0800'>五月 12, 2023&lt;/span>&amp;nbsp;·&amp;nbsp;1 分钟&amp;nbsp;·&amp;nbsp;107 字&amp;nbsp;·&amp;nbsp;Fengbin</footer><a class=entry-link aria-label="post link to k8s 几种探针作用和用法" href=https://shifengbin.github.io/posts/k8s/probs/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+...</p></div><footer class=entry-footer>2023-05-12 11:03:18&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;107 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to k8s 几种探针作用和用法" href=https://shifengbin.github.io/posts/k8s/probs/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>

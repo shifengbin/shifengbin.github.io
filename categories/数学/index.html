@@ -4,7 +4,7 @@
 用白话说的话就是,在W时间内最多排多少人,能够让最后一个人也能在W时间内完成服务,也就是第一个人恰好出去,最后一个人恰好进来,这样最后一个人也能在W时间内出去
 案例 就是说L的最后一名也可以在W时间内完成服务,按图上例子来说,就是4分钟内能同时服务多少个顾客 因为顾客的进入速度是2, 所以4分钟内最多也就是8个
 如果进如速度是10那么4分钟就是40个
-类比服务请求 如果一个请求的响应时长是1s, 系统的QPS是10/s, 那么系统同时处理请求的最佳个数是 10/s * 1s = 10个 如果系统里同时请求数超过10个,那么就会造成响应时间延长</p></div><footer class=entry-footer>&lt;span title='2022-06-21 22:44:01 +0800 +0800'>六月 21, 2022&lt;/span>&amp;nbsp;·&amp;nbsp;1 分钟&amp;nbsp;·&amp;nbsp;20 字&amp;nbsp;·&amp;nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 利特尔法则(等候理论,排队理论)" href=https://shifengbin.github.io/posts/math/lite_rule/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>指数加权平均(EWA)</h2></header><div class=entry-content><p>EWA是什么 EWA是以指数式递减加权的移动平均, 是一种近似平均(也可以理解为一段时间的平均值,因为越久的数据对当前的影响越小,小到一定程度就可以忽略,可以理解为一段时间的平均值)
+类比服务请求 如果一个请求的响应时长是1s, 系统的QPS是10/s, 那么系统同时处理请求的最佳个数是 10/s * 1s = 10个 如果系统里同时请求数超过10个,那么就会造成响应时间延长</p></div><footer class=entry-footer>2022-06-21 22:44:01&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;20 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 利特尔法则(等候理论,排队理论)" href=https://shifengbin.github.io/posts/math/lite_rule/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>指数加权平均(EWA)</h2></header><div class=entry-content><p>EWA是什么 EWA是以指数式递减加权的移动平均, 是一种近似平均(也可以理解为一段时间的平均值,因为越久的数据对当前的影响越小,小到一定程度就可以忽略,可以理解为一段时间的平均值)
 基本公式 $V_t=βV_{t-1} + (1-β)R_t$
 $V_t$ 代表t时刻的平均值
 $βV_{t-1}$代表t-1时刻的平均值
@@ -13,7 +13,7 @@ $β$ 范围在0-1之间
 平均天数为 $N=\frac {1} {1-β}$
 $β=0.5$则平均个数N=2 $β=0.9$则平均个数N=$\frac{1}{1-0.9}=10$ 也就是平均最近10次的
 可以做什么 计算$\frac {1} {1-β}$个数据的平均值,减少噪声影响,平滑数据
-好处比其他平均的好处是 不需要保存最近N次的数据,只需要保存上次计算的平均值</p></div><footer class=entry-footer>&lt;span title='2022-06-20 17:44:00 +0800 +0800'>六月 20, 2022&lt;/span>&amp;nbsp;·&amp;nbsp;1 分钟&amp;nbsp;·&amp;nbsp;27 字&amp;nbsp;·&amp;nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 指数加权平均(EWA)" href=https://shifengbin.github.io/posts/math/ewa/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+好处比其他平均的好处是 不需要保存最近N次的数据,只需要保存上次计算的平均值</p></div><footer class=entry-footer>2022-06-20 17:44:00&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;27 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 指数加权平均(EWA)" href=https://shifengbin.github.io/posts/math/ewa/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
