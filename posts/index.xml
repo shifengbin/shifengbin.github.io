@@ -11,7 +11,44 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 30 Jun 2025 10:53:45 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jul 2025 11:09:03 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ESP32项目增加Menuconfig</title>
+      <link>https://shifengbin.github.io/posts/esp32/menuconfig/</link>
+      <pubDate>Tue, 01 Jul 2025 11:09:03 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/esp32/menuconfig/</guid>
+      <description>&lt;p&gt;ESP32使用Kconfig管理配置,想要在menuconfig中添加配置项需要如下操作&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在main目录下创建&lt;code&gt;Kconfig.projbuild&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在里面编辑类似内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-kconfig&#34; data-lang=&#34;kconfig&#34;&gt;menu &amp;#34;自定义菜单名称&amp;#34;
+    config YOUR_CONFIG_NAME    # 会生成CONFIG_YOUR_CONFIG_NAME的配置项
+        bool &amp;#34;布尔选项描述&amp;#34;     # 布尔类型（是/否）
+        default y              # 默认值
+        help                   # 帮助信息
+          &amp;#34;详细说明&amp;#34;
+
+    config LED_GPIO_NUM        # 示例：整数型配置
+        int &amp;#34;LED的GPIO引脚号&amp;#34;
+        range 0 39             # 取值范围
+        default 10              # 默认值
+
+    choice                     # 单选选项
+        prompt &amp;#34;选择模式&amp;#34;
+        default MODE_A   
+        config MODE_A          #如果选择这个则会生成CONFIG_MODE_A这个配置
+            bool &amp;#34;模式A&amp;#34;
+        config MODE_B          #没选择的不会生成CONFIG_MODE_B
+            bool &amp;#34;模式B&amp;#34;
+    endchoice
+endmenu
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;在代码中引用&lt;code&gt;#include &amp;quot;sdkconfig.h&amp;quot;&lt;/code&gt;就可以使用生成的相关配置了&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
     <item>
       <title>Spi</title>
       <link>https://shifengbin.github.io/posts/esp32/spi/</link>

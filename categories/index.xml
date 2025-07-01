@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 30 Jun 2025 10:53:45 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jul 2025 11:09:03 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Menuconfig</title>
+      <link>https://shifengbin.github.io/categories/menuconfig/</link>
+      <pubDate>Tue, 01 Jul 2025 11:09:03 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/categories/menuconfig/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Esp32</title>
       <link>https://shifengbin.github.io/categories/esp32/</link>
