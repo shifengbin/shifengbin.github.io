@@ -11,7 +11,16 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 01 Jul 2025 11:09:03 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Aug 2025 14:06:15 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>日常技巧</title>
+      <link>https://shifengbin.github.io/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Thu, 14 Aug 2025 14:06:15 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E5%B7%A7/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Menuconfig</title>
       <link>https://shifengbin.github.io/categories/menuconfig/</link>
