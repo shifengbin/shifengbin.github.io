@@ -18,7 +18,16 @@
       <pubDate>Mon, 14 Aug 2023 15:08:46 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/posts/linux/qa/</guid>
-      <description>&lt;h2 id=&#34;使用deb包安装软件时想要拆卸&#34;&gt;使用deb包安装软件时想要拆卸&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;添加监控cpu内存&#34;&gt;添加监控（cpu，内存&amp;hellip;）&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加gnome浏览器连接器&lt;code&gt;sudo apt-get install gnome-browser-connector&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;a href=&#34;https://extensions.gnome.org/extension/6682/astra-monitor/&#34;&gt;astra-monitor&lt;/a&gt;扩展，页面打开时安装浏览器插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用deb包安装软件时想要拆卸&#34;&gt;使用deb包安装软件时想要拆卸&lt;/h2&gt;
 &lt;p&gt;在使用dpkg -r拆卸软件需要知道包名，有的时候不好查，可以使用用&lt;code&gt;Ubuntu Software&lt;/code&gt;打开deb包，点删除&lt;/p&gt;
 &lt;h2 id=&#34;安装virtualbox启动虚拟机报-kernel-driver-not-installed-rc-1908&#34;&gt;安装virtualbox,启动虚拟机报 &lt;code&gt;Kernel driver not installed (rc=-1908)&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;可以使用&lt;code&gt;sudo apt install --reinstall linux-headers-$(uname -r) virtualbox-dkms dkms&lt;/code&gt;
@@ -26,25 +35,15 @@
 &lt;h2 id=&#34;使用clash-for-window时无法正常代理&#34;&gt;使用clash for window时，无法正常代理&lt;/h2&gt;
 &lt;p&gt;在ubuntu设置中，点击网络，设置网络代理配置好即可&lt;/p&gt;
 &lt;h2 id=&#34;使用拼音输入法&#34;&gt;使用拼音输入法&lt;/h2&gt;
-&lt;p&gt;安装fcitx5&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt install fcitx5 \
-fcitx5-chinese-addons \
-fcitx5-frontend-gtk4 fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 \
-fcitx5-frontend-qt5
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装词库&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases&lt;/code&gt;下载&lt;code&gt;.dict&lt;/code&gt;结尾的词库文件，放入
-&lt;code&gt;~/.local/share/fcitx5/pinyin/dictionaries/&lt;/code&gt;，没有创建即可。&lt;/p&gt;
-&lt;p&gt;设置默认输入法&lt;code&gt;im-config&lt;/code&gt;命令&lt;/p&gt;
-&lt;p&gt;配置环境变量&lt;code&gt;/etc/profile&lt;/code&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export XMODIFIERS=@im=fcitx
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在home目录&lt;code&gt;.pam_environment&lt;/code&gt;添加配置&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GTK_IM_MODULE DEFAULT=fcitx
-QT_IM_MODULE DEFAULT=fcitx
-XMODIFIERS DEFAULT=@im=fcitx
-SDL_IM_MODULE DEFAULT=fcitx
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;非root用户无法使用80端口&#34;&gt;非root用户无法使用80端口&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在设置里找到系统-&amp;gt;语言-&amp;gt;安装中文&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在键盘-&amp;gt;输入源-&amp;gt;中文-&amp;gt;添加pinyin等&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;非root用户无法使用80端口&#34;&gt;非root用户无法使用80端口&lt;/h2&gt;
 &lt;p&gt;通过执行&lt;code&gt;sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80&lt;/code&gt;命令，你在更改了系统配置文件，指定了非特权用户可以使用的TCP/UDP端口号的起始值为80。这意味着普通用户可以绑定和使用80端口，而无需特权身份（如root或管理员权限）。&lt;/p&gt;
 &lt;p&gt;不过这样重启后就无法使用80端口了，所以需要配置一个重启后也生效的配置文件，打开&lt;code&gt;/etc/sysctl.conf&lt;/code&gt;文件，在文件后面追加
 &lt;code&gt;net.ipv4.ip_unprivileged_port_start = 80&lt;/code&gt;，这样重启后也可以生效。&lt;/p&gt;</description>
