@@ -8,7 +8,11 @@
 使用拼音输入法 在设置里找到系统->语言->安装中文
 在键盘->输入源->中文->添加pinyin等
 非root用户无法使用80端口 通过执行sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80命令，你在更改了系统配置文件，指定了非特权用户可以使用的TCP/UDP端口号的起始值为80。这意味着普通用户可以绑定和使用80端口，而无需特权身份（如root或管理员权限）。
-不过这样重启后就无法使用80端口了，所以需要配置一个重启后也生效的配置文件，打开/etc/sysctl.conf文件，在文件后面追加 net.ipv4.ip_unprivileged_port_start = 80，这样重启后也可以生效。</p></div><footer class=entry-footer>2023-08-14 15:08:46&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;41 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to Ubuntu当开发过程中主力机遇到的问题" href=https://shifengbin.github.io/posts/linux/qa/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+不过这样重启后就无法使用80端口了，所以需要配置一个重启后也生效的配置文件，打开/etc/sysctl.conf文件，在文件后面追加 net.ipv4.ip_unprivileged_port_start = 80，这样重启后也可以生效。
+添加应用图标 添加路经：当前用户~/.local/share/applications或者全局 /usr/share/applications
+创建.desktop文件
+如：
+# datagrip.desktop [Desktop Entry] Name=DataGrip Exec=/home/shifengbin/softwares/datagrip-2025.2.3/DataGrip-2025.2.3/bin/datagrip Icon=/home/shifengbin/softwares/datagrip-2025.2.3/DataGrip-2025.2.3/bin/datagrip.png Terminal=false Type=Application StartupWMClass=jetbrains-datagrip #这个必须写，否则dock拦截图标不正确 Categories=Development; 获取VMClass的方法为执行xprop WM_CLASS命令， 然后点击应用窗口，会返回字符结果</p></div><footer class=entry-footer>2023-08-14 15:08:46&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;61 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to Ubuntu当开发过程中主力机遇到的问题" href=https://shifengbin.github.io/posts/linux/qa/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
