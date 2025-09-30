@@ -858,9 +858,10 @@ Exec=/home/shifengbin/softwares/datagrip-2025.2.3/DataGrip-2025.2.3/bin/datagrip
 Icon=/home/shifengbin/softwares/datagrip-2025.2.3/DataGrip-2025.2.3/bin/datagrip.png
 Terminal=false
 Type=Application
-StartupWMClass=jetbrains-datagrip  #这个必须写，否则dock拦截图标不正确
+StartupWMClass=jetbrains-datagrip  #这个如果是x11窗口就必须写，否则如果是x11窗口dock拦截图标不正确，但是不影响运行
 Categories=Development;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;获取VMClass的方法为执行&lt;code&gt;xprop WM_CLASS&lt;/code&gt;命令， 然后点击应用窗口，会返回字符结果&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;获取VMClass的方法为执行&lt;code&gt;xprop WM_CLASS&lt;/code&gt;命令， 然后点击x11应用窗口，会返回字符结果&lt;/p&gt;
+&lt;p&gt;如果不是x11就没反应&lt;/p&gt;</description>
     </item>
     
     <item>
