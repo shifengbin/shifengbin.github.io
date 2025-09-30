@@ -27,6 +27,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设置中文环境&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winetricks &lt;span class=&#34;nv&#34;&gt;setwinver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;win10
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winetricks fakechinese  &lt;span class=&#34;c1&#34;&gt;# 模拟中文系统&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;WINEPREFIX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;~/.wine winetricks riched20
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;未响应问题&#34;&gt;未响应问题&lt;/h2&gt;
 &lt;p&gt;运行：&lt;code&gt;winecfg&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在 Applications 页面将 Windows 版本改为程序要求的版本（如 Windows 7、Windows 10）。&lt;/p&gt;
