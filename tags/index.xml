@@ -11,7 +11,43 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 29 Sep 2025 15:31:13 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Dec 2025 12:18:36 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Minecraft</title>
+      <link>https://shifengbin.github.io/tags/minecraft/</link>
+      <pubDate>Wed, 03 Dec 2025 12:18:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/minecraft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://shifengbin.github.io/tags/python/</link>
+      <pubDate>Wed, 03 Dec 2025 12:18:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>树莓派</title>
+      <link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+      <pubDate>Wed, 03 Dec 2025 12:18:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>我的世界</title>
+      <link>https://shifengbin.github.io/tags/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/</link>
+      <pubDate>Wed, 03 Dec 2025 12:18:36 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/tags/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Flink</title>
       <link>https://shifengbin.github.io/tags/flink/</link>
@@ -477,15 +513,6 @@
       <pubDate>Wed, 19 Oct 2022 11:39:19 +0800</pubDate>
       
       <guid>https://shifengbin.github.io/tags/protobuf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>树莓派</title>
-      <link>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
-      <pubDate>Wed, 05 Oct 2022 20:49:13 +0800</pubDate>
-      
-      <guid>https://shifengbin.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
       <description></description>
     </item>
     
