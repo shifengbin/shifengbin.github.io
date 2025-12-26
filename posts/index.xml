@@ -11,7 +11,43 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 03 Dec 2025 12:18:36 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Dec 2025 17:40:49 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prompts</title>
+      <link>https://shifengbin.github.io/posts/ai/prompts/</link>
+      <pubDate>Fri, 26 Dec 2025 17:40:49 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/ai/prompts/</guid>
+      <description>&lt;h1 id=&#34;告别人工智障7个拿来即用的ai提示词prompt万能模板&#34;&gt;告别“人工智障”：7个拿来即用的AI提示词（Prompt）万能模板&lt;/h1&gt;
+&lt;p&gt;你是否觉得 AI 有时候很聪明，有时候又像个“人工智障”？其实，90% 的回答质量取决于你如何提问。&lt;/p&gt;
+&lt;p&gt;正如编程界的名言“Garbage In, Garbage Out”（垃圾输入，垃圾输出），对于 ChatGPT、Claude 或文心一言这类大模型来说，&lt;strong&gt;提示词（Prompt）就是你的源代码&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;为了帮你节省反复调试的时间，我总结了 7 个经过实战验证的 Prompt 模板。无论你是要写文案、做策划、学知识，还是单纯想找灵感，总有一款适合你。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-broke-框架通用的万金油&#34;&gt;1. BROKE 框架：通用的“万金油”&lt;/h2&gt;
+&lt;p&gt;这是最基础也最稳健的框架，适用于 80% 的日常工作场景，如策划、写报告、做方案。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;适用场景：&lt;/strong&gt; 任务明确，需要结构化输出的场景。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 背景(B) + 角色(R) + 目标(O) + 关键结果(K) + 演变/改进(E)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板内容：&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;**角色 (Role)：** 你是一位 [职业/身份]，擅长 [核心技能]。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gs&#34;&gt;**背景 (Background)：**&lt;/span&gt; [描述当前的情况、背景信息]。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gs&#34;&gt;**目标 (Objective)：**&lt;/span&gt; 请帮我 [具体的任务目标]。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gs&#34;&gt;**关键结果 (Key Results)：**&lt;/span&gt; 输出必须包含：[要素1]、[要素2]、[要素3]。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gs&#34;&gt;**风格与限制 (Style &amp;amp; Constraints)：**&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;1.&lt;/span&gt; [限制条件1，如：预算、字数]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;2.&lt;/span&gt; [限制条件2，如：语气、格式]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;**输出格式 (Format)：** 请使用 [表格/列表/Markdown] 格式。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例子：&lt;/strong&gt; 策划团建
+&lt;blockquote&gt;
+&lt;p&gt;“你是一位资深行政主管。背景是我们部门20人刚完成大项目，身心疲惫。目标是策划3个预算人均300元以内的北京近郊团建方案。输出必须包含主题、行程、预算。请用表格形式输出。”&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-co-star-框架精细化内容创作&#34;&gt;2. CO-STAR 框架：精细化内容创作&lt;/h2&gt;
+&lt;p&gt;当你需要 AI 模仿特定风格（如小红书、LinkedIn、公关稿）时，这个框架能精准控制语气和受众。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>利用Minecraft学习Python</title>
       <link>https://shifengbin.github.io/posts/pi/minecraft/</link>
