@@ -6,7 +6,7 @@
 查看当前的swap情况，使用命令： swapon -s 如果没有任何输出，则说明当前系统没有启用swap。
 如果系统启用了swap，需要先关闭swap，使用命令： swapoff -a 执行此命令会关闭所有swap分区。
 临时禁用swap，使用命令： echo 0 > /proc/sys/vm/swappiness 执行此命令可以临时禁用swap，即使系统启用了swap，也不会自动将数据交换到swap分区。
-永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行： #/dev/sda2 swap swap defaults 0 0</p></div><footer class=entry-footer>2023-02-23 15:37:31&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;60 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to Swap开启和关闭" href=https://shifengbin.github.io/posts/k8s/swap/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+永久禁用swap，可以修改/etc/fstab文件，注释掉swap分区的行，或者直接删除swap分区的行。例如，将以下行： #/dev/sda2 swap swap defaults 0 0</p></div><footer class=entry-footer>2023-02-23 15:37:31&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;60 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to Swap开启和关闭" href=https://shifengbin.github.io/posts/k8s/swap/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>

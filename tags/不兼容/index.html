@@ -5,7 +5,7 @@
 假设A表有字段id, bid, c, B表有id, d,业务中有这么一条语句
 select a.id, b.d from a join b on a.bid = b.id where c = 1; 那么现在我们给B表加字段c,那么现在这个语句就会错，因为a表有个c,b表有个c,现在where条件中的c已经有歧义了，所以这条语句就会报错，所以给表加字段会引发不兼容
 所以加字段的时候也要小心，sql如果是多表一定给字段加上别名，避免这种歧义就比如上面的语句就改为
-select a.id, b.d from a join b on a.bid = b.id where a.c = 1; 这只能说约束我们自己，历史的老系统中有什么样的写法都未可知</p></div><footer class=entry-footer>2024-01-12 12:37:19&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;40 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 添加字段引发的不兼容" href=https://shifengbin.github.io/posts/db/add_filed/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+select a.id, b.d from a join b on a.bid = b.id where a.c = 1; 这只能说约束我们自己，历史的老系统中有什么样的写法都未可知</p></div><footer class=entry-footer>2024-01-12 12:37:19&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;1 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;40 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to 添加字段引发的不兼容" href=https://shifengbin.github.io/posts/db/add_filed/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>

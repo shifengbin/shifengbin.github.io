@@ -67,7 +67,7 @@ w先发生于r 任何其他写入共享变量v都要先发生于w或者后发生
 Goroutine创建 启动新goroutine的go语句发生在goroutine开始执行之前。 举例
 var a string func f() { print(a) } func hello() { a = "hello, world" go f() } 调用hello将在将来hello, world,可能hello已经返回
 Goroutine销毁 goroutine的退出不能保证先发生于任何事件,例如:
-...</p></div><footer class=entry-footer>2022-06-23 10:33:29&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;319 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to go内存模型" href=https://shifengbin.github.io/posts/go/memorymodel/></a></article></main><footer class=footer><span>&copy; 2025 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
+...</p></div><footer class=entry-footer>2022-06-23 10:33:29&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;2 分钟&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;319 字&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Fengbin</footer><a class=entry-link aria-label="post link to go内存模型" href=https://shifengbin.github.io/posts/go/memorymodel/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://shifengbin.github.io/>Blog Zone</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
