@@ -11,7 +11,38 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 26 Jan 2026 11:12:34 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Feb 2026 10:10:22 +0800</lastBuildDate><atom:link href="https://shifengbin.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>长上下文窗口的 “甜蜜陷阱”</title>
+      <link>https://shifengbin.github.io/posts/ai/long-context/</link>
+      <pubDate>Thu, 26 Feb 2026 10:10:22 +0800</pubDate>
+      
+      <guid>https://shifengbin.github.io/posts/ai/long-context/</guid>
+      <description>&lt;h1 id=&#34;引言长上下文窗口的-甜蜜陷阱&#34;&gt;引言：长上下文窗口的 “甜蜜陷阱”&lt;/h1&gt;
+&lt;p&gt;随着大模型的上下文窗口从几千 token 飙升到百万级，我们似乎看到了 “全能智能体” 的曙光 —— 让 AI 处理超长文档、多轮对话、复杂工具调用，仿佛一切都能轻松搞定。但实际应用中，很多开发者和使用者都会遇到困惑：明明给的信息很全，AI 却频繁出错、答非所问，甚至做出荒谬的决策？
+问题的核心，不在于 “上下文不够长”，而在于 “上下文质量出了问题”。今天我们就来拆解大模型上下文的 4 种典型失效场景 —— &lt;strong&gt;污染、干扰、混淆、冲突&lt;/strong&gt;，用生活例子帮你秒懂，再结合实际应用案例说明危害，帮你避开这些隐形坑。&lt;/p&gt;
+&lt;h2 id=&#34;一上下文污染错误信息的-滚雪球效应&#34;&gt;一、上下文污染：错误信息的 “滚雪球效应”&lt;/h2&gt;
+&lt;p&gt;什么是上下文污染？&lt;/p&gt;
+&lt;p&gt;上下文污染是指错误信息、幻觉内容进入了模型的核心参考上下文，后续所有推理都基于这个错误展开，还会衍生出更多无依据的错误联想，形成 “错误滚雪球”，且很难纠正。&lt;/p&gt;
+&lt;p&gt;它的核心是：&lt;strong&gt;上下文里的信息是 “错” 的。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;生活例子：家庭桌游的 “口误灾难”&lt;/p&gt;
+&lt;p&gt;周末一家人玩闯关桌游，爸爸当主持人，规则是根据线索找隐藏道具。爸爸第一次描述时口误：“线索在红色书架下”（实际在蓝色书架），这个错误被记在闯关笔记里（进入 “上下文”）。&lt;/p&gt;
+&lt;p&gt;后续全家都围着红色书架找，哪怕爸爸 10 分钟后发现错误纠正，大家也会怀疑：“是不是还有隐藏的红色线索？” 孩子甚至脑补出 “红色书架旁边的抽屉也有线索” 的猜想，全家人围着错误信息反复推导，半小时都没解开关卡 —— 这就是典型的上下文污染，一个错误嵌入 “核心语境” 后，会持续带偏所有后续行动。&lt;/p&gt;
+&lt;h2 id=&#34;二上下文干扰海量信息的-能力淹没&#34;&gt;二、上下文干扰：海量信息的 “能力淹没”&lt;/h2&gt;
+&lt;p&gt;什么是上下文干扰？&lt;/p&gt;
+&lt;p&gt;上下文干扰是指上下文内容过多、过长，导致模型过度关注历史信息，反而忽略了自身训练时学到的核心知识和推理能力，最终行为僵化、无法生成新颖解决方案。&lt;/p&gt;
+&lt;p&gt;它的核心是：&lt;strong&gt;上下文里的信息是 “多” 的&lt;/strong&gt;，哪怕都是正确的，也会淹没模型的固有能力。&lt;/p&gt;
+&lt;p&gt;生活例子：做方案时的 “资料堆砌陷阱”
+策划小王要做一款新品推广方案，为了 “保险”，他收集了上百份竞品案例、行业报告、过往推广数据，把所有资料都摊在面前逐一参考。&lt;/p&gt;
+&lt;p&gt;结果做方案时，小王满脑子都是 “竞品这么做”“上次推广是这个流程”，完全忘了自己对产品的核心洞察 ——“这款产品的核心用户是 Z 世代，喜欢互动式内容”。最终方案全是过往案例的拼接，没有任何创新点，甚至偏离了 “提升新用户转化” 的核心目标 —— 这就是上下文干扰，过量的即时信息让执行者 “忘了自己本来会什么”。&lt;/p&gt;
+&lt;h2 id=&#34;三上下文混淆无关信息的-注意力绑架&#34;&gt;三、上下文混淆：无关信息的 “注意力绑架”&lt;/h2&gt;
+&lt;p&gt;什么是上下文混淆？&lt;/p&gt;
+&lt;p&gt;上下文混淆是指上下文里混入了冗余、无关的信息（比如多余的工具定义、无关的背景描述），模型会下意识对这些无用信息投入注意力，甚至错误参考它们进行推理，最终输出偏离目标的低质量结果。&lt;/p&gt;
+&lt;p&gt;它的核心是：&lt;strong&gt;上下文里的信息是 “无关” 的&lt;/strong&gt;，但模型硬要当成参考。&lt;/p&gt;
+&lt;p&gt;生活例子：点奶茶时的 “推荐轰炸”
+你走进奶茶店，明确要 “三分糖的珍珠奶茶”，结果店员一口气给你介绍了 20 多款新品、隐藏菜单、小料搭配，还说了充值活动、店铺周边。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Agent ReAct模式</title>
       <link>https://shifengbin.github.io/posts/ai/agent-react/</link>
