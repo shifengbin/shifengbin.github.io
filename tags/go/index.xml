@@ -20,11 +20,11 @@
       <guid>https://shifengbin.github.io/posts/go/go_mysql/</guid>
       <description>&lt;h2 id=&#34;mysql中time_zone的作用以及为什么要配置本地时区和db时区&#34;&gt;mysql中time_zone的作用，以及为什么要配置本地时区和db时区&lt;/h2&gt;
 &lt;h3 id=&#34;1-mysql中time_zone的作用&#34;&gt;1. mysql中time_zone的作用&lt;/h3&gt;
-&lt;p&gt;mysql中time_zone的作用，就是用来设置时区的（废话），time_zone影响TIMESTAMP类型和NOW等函数的值，但并&lt;em&gt;不影响DATETIME类型和DATE类型&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;因为TIMESTAMP存储的时时间戳，当用户发送过来一个时间如“2023-12-11 10:41:18”，那么mysql会将其时间戳,这个时间就是按time_zone设置的时区来解析的，然后转换成时间戳保存，&lt;/p&gt;
+&lt;p&gt;mysql中time_zone的作用，就是用来设置时区的（废话），time_zone影响&lt;code&gt;TIMESTAMP&lt;/code&gt;类型和NOW等函数的值，但并&lt;strong&gt;不影响DATETIME类型和DATE类型&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;因为&lt;code&gt;TIMESTAMP&lt;/code&gt;存储的时时间戳，当用户发送过来一个时间如“2023-12-11 10:41:18”，那么mysql会将其时间戳,这个时间就是按time_zone设置的时区来解析的，然后转换成时间戳保存，&lt;/p&gt;
 &lt;p&gt;在给用户查询时在通过时区转换会时间串。&lt;/p&gt;
-&lt;p&gt;DATETIME类型不是时间戳，存入时是“2023-12-11 10:41:18”，查询时也是“2023-12-11 10:41:18”，不会做转换，也和时区无关&lt;/p&gt;
-&lt;h3 id=&#34;2-为什么要配置本地时区和db时区&#34;&gt;2. 为什么要配置本地时区和db时区&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;DATETIME&lt;/code&gt;类型不是时间戳，存入时是“2023-12-11 10:41:18”，查询时也是“2023-12-11 10:41:18”，不会做转换，也和时区无关&lt;/p&gt;
+&lt;h3 id=&#34;2-为什么要配置本地loc参数时区和db时区&#34;&gt;2. 为什么要配置本地(loc参数)时区和db时区&lt;/h3&gt;
 &lt;p&gt;本地时区是给mysql驱动使用，并不会影响mysql的时区，只会影响mysql驱动的解析，&lt;/p&gt;
 &lt;p&gt;db时区是mysql的时区，会影响mysql的时区，会影响mysql的查询结果。&lt;/p&gt;
 &lt;h4 id=&#34;本地时区作用&#34;&gt;本地时区作用&lt;/h4&gt;
@@ -34,7 +34,43 @@
 &lt;/ol&gt;
 &lt;p&gt;比如设置本地时区为“Asia/Shanghai” &lt;code&gt;root:root@tcp(127.0.0.1:3306)/db?charset=utf8&amp;amp;loc=Asia%2FShanghai&amp;amp;parseTime=true&lt;/code&gt;通过loc参数来这设置&lt;/p&gt;
 &lt;p&gt;同时设置本地和数据库时区 &lt;code&gt;root:root@tcp(127.0.0.1:3306)/db?charset=utf8&amp;amp;loc=Asia%2FShanghai&amp;amp;parseTime=true&amp;amp;time_zone=%27%2B8%3A00%27&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;dsn上的参数有的是给数据库驱动使用，有的是给mysql使用，具体可参阅&lt;a href=&#34;https://github.com/go-sql-driver/mysql#dsn-data-source-name&#34;&gt;mysql驱动的DSN&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;em&gt;parseTime=true 这个参数需要配置，否则mysql驱动不会解析成time.Time 而是会收到原始字节数组&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;注意:
+DSN中时区是需要进行urlencode的，其中time_zone需要连同引号一块转义,比如&lt;code&gt;&#39;+8:00&#39;&lt;/code&gt;要转义成&lt;code&gt;%27%2B8%3A00%27&lt;/code&gt; 否则会报语法错误&lt;/p&gt;
+&lt;p&gt;dsn上的参数有的是给数据库驱动使用，有的是给mysql使用，具体可参阅&lt;a href=&#34;https://github.com/go-sql-driver/mysql#dsn-data-source-name&#34;&gt;mysql驱动的DSN&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;举例&#34;&gt;举例&lt;/h4&gt;
+&lt;p&gt;假如loc=Asia/Shanghai   time_zone=&amp;rsquo;+0:00&amp;rsquo;  parseTime=true
+程序中有个time.Time类型的时间&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;假如要更新一个timestampe字段那么会产生下面的几步&#34;&gt;假如要更新一个timestampe字段那么会产生下面的几步：&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先把时间转换成loc对应的时区时间&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; -&amp;gt; &lt;code&gt;2026-05-09 08:00:00&lt;/code&gt; 这个作为发送到mysql的时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mysql接收到&lt;code&gt;2026-05-09 08:00:00&lt;/code&gt;会按time_zone的时区解析并转换为时间戳，这时候会把这个时间当成UTC时间，这样就会导致时间多出8小时&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;如果更新的是datetime会怎么样&#34;&gt;如果更新的是datetime会怎么样？&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先把时间转换成loc对应的时区时间&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; -&amp;gt; &lt;code&gt;2026-05-09 08:00:00&lt;/code&gt; 这个作为发送到mysql的时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;mysql接收到&lt;code&gt;2026-05-09 08:00:00&lt;/code&gt;会直接保存这个数据，因为datetime没有时区&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;如果是读取数据会怎么样&#34;&gt;如果是读取数据会怎么样？&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;当读取一个datetime时&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; 那么会直接返回给客户端&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2.当客户端收到&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; 会把他当成loc对应时区的时间&lt;code&gt;2026-05-09 00:00:00 +0800 CST&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;如果读取一个timestamp会这样&#34;&gt;如果读取一个timestamp会这样&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;从数据里取出时间戳，按time_zone转换到对应时区，假设转换出来是&lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; 然后发送给客户端&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端接收到 &lt;code&gt;2026-05-09 00:00:00&lt;/code&gt; 会把这个时间当作loc对应的时区的时间&lt;/p&gt;</description>
     </item>
     
     <item>
